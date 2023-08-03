@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ValidateFromController;
 use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
 use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\Mail;
+
 class LoginController extends Controller
 {
     protected $_validateFormLogin ;
@@ -31,10 +33,19 @@ class LoginController extends Controller
                   if($acout->level == 0 ){
                     return redirect::to('/acout')->with('status', 'Đăng nhập thành công !');
                   }else{
+
+
+                    $user =Auth::user();
+                    dd($user);
+                    Mail::send('client.mail.resetpassword',compact('user'),function($email) use($user){
+                        $email->subject('Foody - Thông báo đăng nhập');
+                        $email->to($user->email,$user->name);
+                    });
+
                     return redirect::to('/admin/');
                   }
                 }else{
-     
+                    
                     return Redirect()->back()->withInput($request->input())->with('login', 'Đăng nhập thất bại vui lòng kiểm tra thông tin đăng nhập');
                 }
             }

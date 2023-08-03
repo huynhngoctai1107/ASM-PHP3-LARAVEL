@@ -34,7 +34,7 @@
                                                 @endphp
 
                                                 <div class="carousel-item {{$slider}}">
-                                                    <img src='{{asset("$url")}}' alt="{{$img}}" class="d-block" style="width:100%">
+                                                    <img width="500" height="500" src='{{asset("$url")}}' alt="{{$img}}" class="d-block" style="">
                                                 </div>
                                                 @php
                                                 $slider = '';

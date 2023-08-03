@@ -10,7 +10,7 @@ use App\Models\Products;
 use App\Http\Controllers\ValidateFromController;
 use DateTime;
 use Illuminate\Support\Facades\Redirect;
-
+use Intervention\Image\Facades\Image;
 class AddProductController extends Controller
 {
     public $validate;
@@ -68,11 +68,16 @@ class AddProductController extends Controller
                 $this->intermediary_products->AddCategoryProduct($dataCategory);
             }
 
+         
             for($i=0; $i<$countImg; $i ++ ){
-                    $fileName = time().$i.'-'.'imgProduct'.'.'.$request->uploadfile[$i]->extension() ;
-                    $request->uploadfile[$i]->move(public_path("img/products"), $fileName);
-                    $request->merge(['image'=>$fileName]);
-
+                  $fileName = time().$i.'-'.'imgProduct'.'.'.$request->uploadfile[$i]->extension() ;
+                  $request->uploadfile[$i]->move(public_path("img/products"), $fileName);
+                  $images =public_path('img/products/'.$fileName);
+                  $img = Image::make($images)->resize(400, 150, function($constraint) {
+                      $constraint->aspectRatio();
+                  });
+                  $img->save($images);
+                  $request->merge(['image'=>$fileName]);
                 $dataCategory = array(
                     "image" => $request->image,
                     "id_product"=> $idProduct,

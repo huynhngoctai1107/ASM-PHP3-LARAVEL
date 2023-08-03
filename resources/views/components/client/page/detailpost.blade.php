@@ -33,7 +33,7 @@
                                     @php
                                     $url = $detail['urlImg'].''.$imgPost[$i];
                                     @endphp
-                                     <img width="100%"  class="img-fluid "src='{{asset("$url")}}' alt="...."  style="height: auto !important">
+                                     <img width="500" height="500"   class="img-fluid "src='{{asset("$url")}}' alt="...."   >
                                     @break
                             @endfor
                           

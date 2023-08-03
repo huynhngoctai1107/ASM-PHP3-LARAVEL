@@ -89,7 +89,7 @@
                                                                         @php
                                                                             $url = $data['urlImg'].''.$img;
                                                                         @endphp
-                                                                        <img width="100" src='{{asset("$url")}}' alt="{{$img}}">
+                                                                        <img width="150" height="150"  src='{{asset("$url")}}' alt="{{$img}}">
                                                                     @endforeach
                                                                 @endif
                                                             @endforeach

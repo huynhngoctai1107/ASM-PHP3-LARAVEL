@@ -13,6 +13,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Auth\SessionGuard;
+use Illuminate\Support\Facades\Mail;
+
 class GoogleLoginController extends Controller
 {
     public function loginUsingGoogle()
@@ -38,7 +40,13 @@ class GoogleLoginController extends Controller
  
         return redirect()->back()->with('login', 'Đăng nhập thất bại email này đã tồn tại trong hệ thống. Xin vui lòng nhập Email và Mật khẩu để đăng nhập');
       }else{
-        Auth::attempt(['email' => $user->getEmail(),'password'=> '11072003Tai@' , 'status' => 1]);
+         Auth::attempt(['email' => $user->getEmail(),'password'=> '11072003Tai@' , 'status' => 1]);
+         $user =Auth::user();
+         dd($user);
+        Mail::send('client.mail.resetpassword',compact('user'),function($email) use($user){
+            $email->subject('Foody - Thông báo đăng nhập');
+            $email->to($user->email,$user->name);
+        });
         return redirect('acout')->with('status', 'Đăng nhập thành công !');
       }
     } else {
