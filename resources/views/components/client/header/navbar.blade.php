@@ -62,7 +62,7 @@
                 </a>
                 @endif
                 
-                <a class="btn-sm-square bg-white rounded-circle ms-3" href="">
+                <a class="btn-sm-square bg-white rounded-circle ms-3" href="/shopping-cart">
                     <small class="fa fa-shopping-bag text-body"></small>
                 </a>
             </div>

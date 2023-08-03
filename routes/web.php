@@ -42,8 +42,8 @@ use App\Http\Controllers\Client\Products\DetailProductController;
 // client post
 use App\Http\Controllers\Client\Categories\PostController;
 use App\Http\Controllers\Client\Posts\DetailPostController;
-//view get client
-
+// shopping cart 
+use App\Http\Controllers\Client\Cart\CartShoppingController;
 Route::group(['middleware'=>'clientAcout'],function(){
     Route::get('/acout',[ ViewController::class,'acout']);
 
@@ -133,6 +133,7 @@ Route::group(['middleware'=>'checkLogin'],function(){
     Route::get('/logout',[LoginController::class,'logout']);
     Route::get('/',[ViewController::class,'index']);
     Route::get('/index', [ViewController::class,'index']);
+    Route::get('/shopping-cart', [CartShoppingController::class,'shoppingCart']);
     Route::get('/resignter', [ViewController::class,'resignter'] );
     Route::get('/contact', [ViewController::class,'lienhe']);
     Route::get('/product',  [ViewController::class,'product']);
