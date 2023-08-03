@@ -22,13 +22,22 @@ Quản trị tối cao
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Dashboard v1</li>
+            
             </ol>
+         
           </div><!-- /.col -->
         </div><!-- /.row -->
+        @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+        @endif    
+      </div>
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
+    <div class="col-12">
+   
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">

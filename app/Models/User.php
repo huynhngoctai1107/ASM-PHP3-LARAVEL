@@ -86,9 +86,9 @@ class User extends Authenticatable
             ->where([['id','=',$id],['token','=',$token]])
             ->first();
     }
-    public function resetPassword($email){
+    public function resetPassword($condition){
         return $this
-            ->where([['email','=',$email],['social','=',0]])
+            ->where($condition)
             ->first();
     }
 

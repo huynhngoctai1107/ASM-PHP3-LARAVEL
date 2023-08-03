@@ -9,13 +9,14 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ValidateFromController;
 use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
-use Illuminate\Contracts\Session\Session;
-use Illuminate\Support\Facades\Mail;
-
+use App\Http\Controllers\MaillController;
 class LoginController extends Controller
 {
     protected $_validateFormLogin ;
+    protected $mail ; 
+
     public function __construct(){
+        $this->mail = new MaillController();
         $this->_validateFormLogin = new ValidateFromController();
     }
 
@@ -31,25 +32,26 @@ class LoginController extends Controller
                     $acout =Auth::user();
                
                   if($acout->level == 0 ){
-                    return redirect::to('/acout')->with('status', 'Đăng nhập thành công !');
-                  }else{
 
-
-                    $user =Auth::user();
-                    dd($user);
-                    Mail::send('client.mail.resetpassword',compact('user'),function($email) use($user){
-                        $email->subject('Foody - Thông báo đăng nhập');
-                        $email->to($user->email,$user->name);
-                    });
-
-                    return redirect::to('/admin/');
-                  }
-                }else{
+                        if($this->mail->notification()==true){
+                            return redirect('/acout')->with('status', 'Đăng nhập thành công và đã gửi email thông báo!');
+                        }else{
+                            return redirect('/acout')->with('status', 'Đăng nhập thành công email xác nhận đã lỗi!');
+                        }
                     
+                  }else{
+                    if($this->mail->notification()==true){
+                        return redirect('/admin/')->with('status', 'Đăng nhập thành công và đã gửi email thông báo!');
+                    }else{
+                        return redirect('/admin/')->with('status', 'Đăng nhập thành công email xác nhận đã lỗi!');
+                
+                    }
+ 
+                  }
+                }else{       
                     return Redirect()->back()->withInput($request->input())->with('login', 'Đăng nhập thất bại vui lòng kiểm tra thông tin đăng nhập');
                 }
             }
-       
         } else {
             return Redirect()->back()->with('login','Có thể bạn là robot, spam thì cút nhe');
         }
@@ -57,6 +59,7 @@ class LoginController extends Controller
        
        
     }
+ 
     public function logout()
     {
         Auth::logout();

@@ -29,8 +29,12 @@ class ResetPasswordController extends Controller
             if ($this->validate->validateFormForgetPassword($request)->fails()) {
                 return  redirect()->back()->withErrors( $this->validate->validateFormForgetPassword($request))->withInput($request->input());
             }else{
-                if($this->check->resetPassword($request->email)){
-                    $user = $this->check->resetPassword($request->email);
+                $condition= [
+                    'email'=>$request->email,
+                    'social'=>0
+                  ];
+                $user = $this->check->resetPassword($condition);
+                if($user){
                         Mail::send('client.mail.resetpassword',compact('user'),function($email) use($user){
                             $email->subject('Foody - Quên mật khẩu');
                             $email->to($user->email,$user->name);

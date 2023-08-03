@@ -11,12 +11,22 @@ use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
-
+ 
 use Illuminate\Auth\SessionGuard;
 use Illuminate\Support\Facades\Mail;
+use Jenssegers\Agent\Facades\Agent;
+use App\Http\Controllers\MaillController ;
 
 class GoogleLoginController extends Controller
 {
+
+    public $user; 
+    public $mail ;
+    public function __construct(){
+      $this->user = new User();
+      $this->mail = new MaillController();
+    }
+
     public function loginUsingGoogle()
     {
        return Socialite::driver('google')->redirect();
@@ -33,29 +43,38 @@ class GoogleLoginController extends Controller
     } catch (\Exception $e) {
         return redirect()->back();
     }
-    $existingUser = DB::table('users')->where([['email', $user->getEmail()],['social','=',1]])->first();
-    $checkUser = DB::table('users')->where([['email', $user->getEmail()],['social','=',0]])->first();
+    $condition= [
+      'email'=>$user->getEmail(),
+    ];
+    $condition1= [
+      'email'=>$user->getEmail(),
+      'social'=>0
+    ];
+    $existingUser = $this->user->resetPassword($condition);
+    $checkUser = $this->user->resetPassword($condition1);
     if ($existingUser) {
-      if($checkUser){
- 
-        return redirect()->back()->with('login', 'Đăng nhập thất bại email này đã tồn tại trong hệ thống. Xin vui lòng nhập Email và Mật khẩu để đăng nhập');
-      }else{
-         Auth::attempt(['email' => $user->getEmail(),'password'=> '11072003Tai@' , 'status' => 1]);
-         $user =Auth::user();
-         dd($user);
-        Mail::send('client.mail.resetpassword',compact('user'),function($email) use($user){
-            $email->subject('Foody - Thông báo đăng nhập');
-            $email->to($user->email,$user->name);
-        });
-        return redirect('acout')->with('status', 'Đăng nhập thành công !');
-      }
+
+        if($checkUser){
+  
+              return redirect()->back()->with('login', 'Đăng nhập thất bại email này đã tồn tại trong hệ thống. Xin vui lòng nhập Email và Mật khẩu để đăng nhập');
+        }else{
+              Auth::attempt(['email' => $user->getEmail(),'password'=> '11072003Tai@' , 'status' => 1]);
+        
+              if($this->mail->notification()==true){
+                return redirect('acout')->with('status', 'Đăng nhập thành công và đã gửi email thông báo!');
+
+              }else{
+
+                return redirect('acout')->with('status', 'Đăng nhập thành công email xác nhận đã lỗi!');
+
+              }
+          
+          }
     } else {
             if($checkUser){
               session()->flash('login', 'Đăng nhập thất bại email này đã tồn tại trong hệ thống. Xin vui lòng nhập Email và Mật khẩu để đăng nhập');
               return redirect()->back();
             }else{
-
-
                 $newUser                    = new User;
                 $newUser->social            = 1;
                 $newUser->password          = Hash::make('11072003Tai@') ;
@@ -67,8 +86,15 @@ class GoogleLoginController extends Controller
                 $newUser->email             = $user->getEmail();
                 $newUser->img               = $user->getAvatar();
                 $newUser->save();
+
                 auth()->login($newUser, true);
-                return redirect('acout')->with('status', 'Đăng nhập thành công !');
+              if($this->mail->notification()==true){
+                return redirect('acout')->with('status', 'Đăng nhập thành công và đã gửi email thông báo!');
+
+              }else{
+                return redirect('acout')->with('status', 'Đăng nhập thành công email xác nhận đã lỗi!');
+
+              }
               }
     }
 
