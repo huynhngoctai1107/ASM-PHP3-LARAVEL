@@ -11,9 +11,14 @@ class shoppingcart extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public $product ;
+    public $total; 
+    public $number ;
+    public function __construct($product,$number, $total)
     {
-        //
+        $this->total = $total ;
+       $this->product = $product;
+       $this->number = $number;
     }
 
     /**

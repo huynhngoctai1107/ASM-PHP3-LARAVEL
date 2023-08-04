@@ -1,3 +1,4 @@
+ 
 <div class="container mt-5 mb-5" >
 
     <div class="row d-flex justify-content-center">
@@ -88,28 +89,33 @@
                             <h5>Nội dung sản phẩm</h5>
                             <p class="about">    {!!$detail['product']->content!!}</p>
                           
-                        
+                            <form action="/add-cart/{{$detail['product']->id_product}}" method="post">
                             <div class="d-flex mb-4" style="max-width: 300px">
-                                <button class="btn btn-primary px-3 me-2 h-2" style="height: 50px"
-                                  onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                  <i class="fas fa-minus"></i>
-                                </button>
+                                    <p class="btn btn-primary px-3 me-2 h-2" style="height: 50px"
+                                    onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                    <i class="fas fa-minus"></i>
+                                    </p>
+                               
+                                    @csrf
+                                    <div class="form-outline">
+                                        <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
+                                        <label class="form-label" for="form1">Số lượng</label>
+                                      </div>
+                             
+                                   
               
-                                <div class="form-outline">
-                                  <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
-                                  <label class="form-label" for="form1">Số lượng</label>
-                                </div>
-              
-                                <button class="btn btn-primary px-3 ms-2" style="height: 50px"
-                                  onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                  <i class="fas fa-plus"></i>
-                                </button>
+                                    <p class="btn btn-primary px-3 ms-2" style="height: 50px"
+                                    onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                    <i class="fas fa-plus"></i>
+                                    </p>
                               </div>
-                         
-                            <div class="cart mt-3 align-items-center"> <button
-                                    class="btn btn-danger text-uppercase mr-2 px-4">Thêm giỏ hàng</button> <i
-                                    class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i>
-                            </div>
+                                
+                                    <div class="cart mt-3 align-items-center"> <button style="submit"
+                                            class="btn btn-danger text-uppercase mr-2 px-4">Thêm giỏ hàng</button> <i
+                                            class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i>
+                                    </div>
+                                </form>
+                            
                         </div>
                     </div>
 
