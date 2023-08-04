@@ -21,7 +21,7 @@ class ViewCartController extends Controller
         $user = Auth::user() ;
             $condition= [
                 ['status','=', 0],
-                ['id_user','=', $user->id] ,
+                ['id_user','=', $user->id],
                 ['quantity','>', 0],
             ];
 

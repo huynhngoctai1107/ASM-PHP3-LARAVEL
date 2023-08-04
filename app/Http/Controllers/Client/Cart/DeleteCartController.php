@@ -14,9 +14,7 @@ class DeleteCartController extends Controller
      function __construct(){
          $this->cart = new Cart();
          $this->product = new Products();
-      
      }
- 
     public function deleteCart($id){
         $condition= [
             'id' =>$id

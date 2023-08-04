@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('carts', function (Blueprint $table) {
+            $table->string('token');
             $table->string('name');
-            // $table->string('images');
-            // $table->string('date_input');
+            $table->string('images');
+            $table->string('date_input');
+            $table->unsignedBigInteger('total')->after('price');
            
         });
     }

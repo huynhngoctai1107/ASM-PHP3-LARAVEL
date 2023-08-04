@@ -1,18 +1,12 @@
-@if (session()->has('cart'))
- <script>
  
-  
- alert("{{session('cart')}}")
- </script>
-@endif
 <section class="h-100 gradient-custom mt-5">
   <div class="container py-5">
     <div class="row d-flex justify-content-center my-4">
-      <div class="col-md-8">
+      <div class="col-md-7">
         <div class="card mb-4">
           <div class="card-header py-3">
             
-            <h5 class="mb-0">Giỏ hàng - <strong>{{$number}}</strong> sản phẩm</h5>
+            <h5 class="mb-0">Hóa đơn - <strong>{{$number}}</strong> sản phẩm</h5>
           </div>
           <div class="card-body">
             <!-- Single item -->
@@ -27,48 +21,30 @@
                     <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
                   </a>
                 </div>
-                <!-- Image -->
+           
               </div>
 
-              <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+              <div class="col-lg-5 col-md-6 mb-4 mb-lg-0 d-flex align-items-center justify-content-center">
                 <!-- Data -->
                 <p><strong>{{$item->name}}</strong></p>
               
-                <a href="/delete-cart/{{$item->id}}" type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
-                  title="Remove item">
-                  <i class="fas fa-trash text-white"></i>
-                </a>
-                <a type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
-                  title="Move to the wish list">
-                  <i class="fas fa-heart text-white"></i>
-                </a>
-                <!-- Data -->
               </div>
               
-
-              <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                <!-- Quantity -->
-                <form action="/add-cart/{{$item->id_product}}" method="post">
-                  @csrf
-                  <x-client.button.quantity :value='$item->quantity' name='quantityUpdate' ></x-client.button.quantity>
-                </form>
-                <!-- Quantity -->
-
-                <!-- Price -->
+              <div class="col-lg-4 col-md-6 mb-4 mb-lg-0 d-flex align-items-center justify-content-center">
+              
                 <p class="text-start text-md-center">
-                  <strong>{{number_format($item->price)}} Đ</strong>
+                  <strong class="me-3">SL: {{$item->quantity}} </strong>
+                
+                    <strong>Giá: {{number_format($item->price)}} Đ</strong>
+             
                 </p>
-                <!-- Price -->
               </div>
             </div>
-            
-            <!-- Single item -->
+ 
 
             <hr class="my-4" />
             @endforeach
-            <!-- Single item -->
-           
-            <!-- Single item -->
+            
           </div>
         </div>
         <div class="card mb-4">
@@ -93,7 +69,52 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-5">
+        <div class="card mb-4">
+            <div class="card-header py-3">
+                <h5 class="mb-0">Thông tin khách hàng</h5>
+              </div>
+              <div class="card-body">
+                @php 
+                    $user = Auth::user() ;
+                @endphp
+                @foreach($product as $item)
+                <form action="/pay/{{$item->id_user}}/{{$item->token}}" method="post">  
+                @endforeach  
+                  @csrf
+ 
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form6Example3" name="name" class="form-control" />
+                      <label class="form-label" for="form6Example3">Tên khách hàng</label>
+                    </div>
+                    <div class="form-outline mb-4">
+                      <fieldset disabled>
+                        <input type="text"  id="form6Example3"  name="email" value="{{$user->email}}" class="form-control" />
+                        <label class="form-label" for="form6Example3">Email</label>
+                      </fieldset>
+                      <input type="hidden"  id="form6Example3"  name="email" value="{{$user->email}}" class="form-control" />
+
+                      </div>
+                    <!-- Text input -->
+                    <div class="form-outline mb-4">
+                      <input type="text" id="form6Example4" name="address"  class="form-control" />
+                      <label class="form-label" for="form6Example4">Địa chỉ nhận hàng</label>
+                    </div>
+                  
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                      <input type="email" id="form6Example5" name="phone" class="form-control" />
+                      <label class="form-label" for="form6Example5">Số điện thoại</label>
+                    </div>
+ 
+                    <div class="form-outline mb-4">
+                      <textarea class="form-control rounded-0" id="form6Example7" name="note" rows="4"></textarea>
+                      <label class="form-label" for="form6Example7">Ghi chú khi nhận hàng</label>
+                    </div>
+ 
+              </div>
+
+        </div>
         <div class="card mb-4">
           <div class="card-header py-3">
             <h5 class="mb-0">Tổng đơn hàng</h5>
@@ -120,20 +141,15 @@
                 <span><strong class="text-danger">{{number_format($total)}} VND</strong></span>
               </li>
             </ul>
-             
-            @foreach($product as $item)
-            <form action="/payment-confirmation/{{$item->id_user}}/{{$item->token}}" method="post">  
-            @endforeach  
-              @csrf
-              
               <input type="hidden" name="total" value="{{$total}}">
             <button type="submit" class="btn btn-primary btn-lg btn-block">
-              Tiếp tục thanh toán  
+              Thanh toán
             </button>
           </form>
         
           </div>
         </div>
+        
       </div>
     </div>
   </div>

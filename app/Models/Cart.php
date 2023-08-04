@@ -11,7 +11,7 @@ class Cart extends Model
     use HasFactory;
 
     public function getAllCart($condition){
-        return DB::table('carts')->select('id_product','id','name','id_user','quantity','price','images','date_input')
+        return DB::table('carts')
         ->where($condition)->orderBy('id','desc')->get();
     }
     public function count($condition,$value){
@@ -21,7 +21,7 @@ class Cart extends Model
         return DB::table('carts')->insert($value);
     }
     public function sumTotal($condition){
-        return DB::table('carts')->where($condition)->sum('quantity') * DB::table('carts')->where($condition)->sum('price');
+        return DB::table('carts')->where($condition)->sum('total');
 
     }
     public function getCart($condition){

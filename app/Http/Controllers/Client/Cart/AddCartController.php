@@ -23,6 +23,7 @@ class AddCartController extends Controller
     function addCart($id, Request $request){
         
         $product = $this->product->getProduct($id) ; 
+   
         $productimg = $this->product->getProductImg($id);
         $user = Auth::user() ;
         // cắt hình trong chuỗi kí tự 
@@ -34,6 +35,7 @@ class AddCartController extends Controller
         
         $condition= [
             'id_product' =>$id , 
+            'id_user' =>$user->id , 
             'status' => 0,
         ]; 
        $getProduct = $this->cart->getCart($condition) ;
@@ -41,9 +43,9 @@ class AddCartController extends Controller
         if($getProduct){
             
             if($request->has('quantity')){
- 
                  $addCart = [
                     'quantity' =>$getProduct->quantity + (int)$request->quantity ,
+                    'total' =>$product->price * ($getProduct->quantity + (int)$request->quantity) ,
                 ];
             
                 $this->cart->updateCart($condition,$addCart);
@@ -52,13 +54,14 @@ class AddCartController extends Controller
             }else if($request->has('quantityUpdate')){  
                   $addCart = [
                         'quantity' =>((int)$request->quantityUpdate-$getProduct->quantity)+$getProduct->quantity,
-                    ];
-                        
+                        'total' => $product->price * (((int)$request->quantityUpdate-$getProduct->quantity)+$getProduct->quantity)
+                    ];    
                 $this->cart->updateCart($condition,$addCart);
                 return Redirect()->back()->with('cart','Cập nhật thành công !') ;
             }else{
                 $addCart = [
-                    'quantity' => $getProduct->quantity + 1 
+                    'quantity' => $getProduct->quantity + 1 ,
+                    'total' =>$product->price * ($getProduct->quantity + 1) ,
                 ];
                 $this->cart->updateCart($condition,$addCart);
                 return Redirect()->back()->with('cart','Đặt hàng thành công !') ;
@@ -70,9 +73,11 @@ class AddCartController extends Controller
                 'id_product' => $id,
                 'quantity'=> 1 , 
                 'price'=>$product->price ,
+                'total' =>$product->price * 1 ,
                 'date_input'=> date('Y-m-d H:i:s'),
                 'images'=>$images ,
                 'name'=>$product->nameproduct,
+                'token'=>$user->remember_token,
             ];
             $this->cart->addCart($addCart);
            return Redirect()->back()->with('cart','Đặt hàng thành công !') ;

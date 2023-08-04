@@ -45,13 +45,20 @@ use App\Http\Controllers\Client\Posts\DetailPostController;
 // shopping cart 
 use App\Http\Controllers\Client\Cart\AddCartController;
 use App\Http\Controllers\Client\Cart\ViewCartController;
+use App\Http\Controllers\Client\Cart\PayCartController;
 use App\Http\Controllers\Client\Cart\DeleteCartController;
+ 
 Route::group(['middleware'=>'clientAcout'],function(){
     Route::get('/acout',[ ViewController::class,'acout']);
     Route::get('/shopping-cart', [ViewCartController::class,'shoppingCart']);
     Route::get('/add-cart/{id}',[ AddCartController::class,'addCart']);
     Route::post('/add-cart/{id}',[ AddCartController::class,'addCart']);
     Route::get('/delete-cart/{id}',[ DeleteCartController::class,'deleteCart']);
+    Route::post('/payment-confirmation/{id}/{token}',[ PayCartController::class,'paymentConfirmation']);
+    Route::get('/payment-confirmation/{id}/{token}',[ PayCartController::class,'paymentConfirmation']);
+    Route::post('/pay/{id}/{token}',[ PayCartController::class,'payCart']);
+
+
 });
 
 
