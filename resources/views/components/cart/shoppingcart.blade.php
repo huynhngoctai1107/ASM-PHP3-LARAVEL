@@ -1,7 +1,5 @@
 @if (session()->has('cart'))
  <script>
- 
-  
  alert("{{session('cart')}}")
  </script>
 @endif

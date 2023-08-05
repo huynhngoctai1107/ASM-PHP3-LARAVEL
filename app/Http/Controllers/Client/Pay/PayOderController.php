@@ -10,6 +10,7 @@ use App\Models\Oders;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class PayOderController extends Controller
@@ -64,7 +65,21 @@ class PayOderController extends Controller
                        ];
                        $valueUpdate = [
                            'status'=>1
-                       ];
+                       ]; 
+                       $getAllOderCondition= [
+                        'oders.id'=>$oder,  
+                        ];  
+                   
+
+                      $oder = $this->oder->getAll($getAllOderCondition);
+                     
+                       if($oder){
+                        Mail::send('client.mail.oder',compact('oder'),function($email) use($oder){
+                            $email->subject('Foody - Đơn hàng');
+                            $email->to($oder[0]->email,$oder[0]->fullname);
+        
+                        });
+                         }
                        $this->cart->updateCart($conditionUpdate,$valueUpdate);
                        return Redirect('/acout')->with('status','Đặt hàng thành công ');
   
