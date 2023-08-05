@@ -9,18 +9,14 @@ use Illuminate\Support\Facades\DB;
 class MediaProducts extends Model
 {
     use HasFactory;
+    protected $table = "media_products";
     public function AddMediaProduct($value){
-        return DB::table('media_products')
+        return $this
         ->insert($value);
     }
-//    public function EditMediaProduct($idProduct,$idMedia,$value){
-//        return DB::table('media_products')->where([
-//            ['id_product','=',$idProduct],
-//            ['id','=',$idMedia],
-//        ])->update($value);
-//    }
+ 
     public function DeleteMediaProduct($id){
-        return DB::table('media_products')
+        return $this
             ->where('id_product', '=', $id)->delete();
     }
 

@@ -21,7 +21,8 @@ class AddCartController extends Controller
 
 
     function addCart($id, Request $request){
-        
+         
+       
         $product = $this->product->getProduct($id) ; 
    
         $productimg = $this->product->getProductImg($id);
@@ -77,7 +78,7 @@ class AddCartController extends Controller
                 'date_input'=> date('Y-m-d H:i:s'),
                 'images'=>$images ,
                 'name'=>$product->nameproduct,
-                'token'=>$user->remember_token,
+                'token'=>$user->token,
             ];
             $this->cart->addCart($addCart);
            return Redirect()->back()->with('cart','Đặt hàng thành công !') ;

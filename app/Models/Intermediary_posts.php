@@ -8,13 +8,12 @@ use Illuminate\Support\Facades\DB;
  
 class Intermediary_posts extends Model
 {
+    protected $table = 'intermediary_posts';
     use HasFactory;
     public function AddCategoryPost($value){
-        return DB::table('intermediary_posts')
-        ->insert($value);
+        return $this->insert($value);
     }
     public function DeletePost($id){
-        return DB::table('intermediary_posts')
-            ->where('id_posts', '=', $id)->delete();
+        return $this->where('id_posts', '=', $id)->delete();
     }
 }

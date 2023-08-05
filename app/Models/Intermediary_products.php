@@ -9,14 +9,12 @@ use Illuminate\Support\Facades\DB;
 class Intermediary_products extends Model
 {
     use HasFactory;
-
+    protected $table = 'intermediary_posts';
     public function AddCategoryProduct($value){
-        return DB::table('intermediary_products')
-        ->insert($value);
+        return $this->insert($value);
     }
     public function DeleteProduct($id){
-        return DB::table('intermediary_products')
-            ->where('id_product', '=', $id)->delete();
+        return $this->where('id_product', '=', $id)->delete();
     }
 
 

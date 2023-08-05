@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Products extends Model
 {
     use HasFactory;
-
-    public function getProduct($id){
+     public function getProduct($id){
 
         return  $this->select('products.id as id_product','products.name as nameproduct','content','describe','price','date_input','products.status as statusproduct',DB::raw("GROUP_CONCAT(categories_product.slug) AS slugcategory"),DB::raw("GROUP_CONCAT(categories_product.id) AS idcategory"))
         ->leftJoin('intermediary_products','products.id','=','intermediary_products.id_product')
@@ -55,7 +54,7 @@ class Products extends Model
 
     }
     public function addProduct($value){
-            return DB::table('products')
+            return $this
             ->insertGetId($value);
     }
 
@@ -85,10 +84,10 @@ class Products extends Model
     ->groupby('id_product')->get();
     }
     public function deleteProduct($id){
-        return  DB::table('products')->where('id','=',$id)->update(['status' => 1]);
+        return  $this->where('id','=',$id)->update(['status' => 1]);
     }
     public function editProduct($id,$value){
-        return DB::table('products')->where('id','=',$id)->update($value);
+        return $this->where('id','=',$id)->update($value);
     }
 
 }

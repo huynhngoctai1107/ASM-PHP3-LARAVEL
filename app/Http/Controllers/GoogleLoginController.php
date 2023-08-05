@@ -35,7 +35,7 @@ class GoogleLoginController extends Controller
 
         }
 
-    public function callbackFromGoogle()
+    public function callbackFromGoogle(Request $request)
     {
 
       try {
@@ -60,7 +60,7 @@ class GoogleLoginController extends Controller
         }else{
               Auth::attempt(['email' => $user->getEmail(),'password'=> '11072003Tai@' , 'status' => 1]);
         
-              if($this->mail->notification()==true){
+              if($this->mail->notification($request)==true){
                 return redirect('acout')->with('status', 'Đăng nhập thành công và đã gửi email thông báo!');
 
               }else{
@@ -88,7 +88,7 @@ class GoogleLoginController extends Controller
                 $newUser->save();
 
                 auth()->login($newUser, true);
-              if($this->mail->notification()==true){
+              if($this->mail->notification($request)==true){
                 return redirect('acout')->with('status', 'Đăng nhập thành công và đã gửi email thông báo!');
 
               }else{

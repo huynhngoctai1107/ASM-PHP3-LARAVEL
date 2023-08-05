@@ -70,7 +70,11 @@
         </div>
       </div>
       <div class="col-md-5">
+        @foreach ($errors->all() as $error)
+        <div class="alert alert-danger" role="alert">{{ $error }}</div>
+        @endforeach
         <div class="card mb-4">
+         
             <div class="card-header py-3">
                 <h5 class="mb-0">Thông tin khách hàng</h5>
               </div>
@@ -78,13 +82,15 @@
                 @php 
                     $user = Auth::user() ;
                 @endphp
+             
                 @foreach($product as $item)
+                
                 <form action="/pay/{{$item->id_user}}/{{$item->token}}" method="post">  
                 @endforeach  
                   @csrf
  
                     <div class="form-outline mb-4">
-                      <input type="text" id="form6Example3" name="name" class="form-control" />
+                      <input type="text" id="form6Example3" name="name"  value="{{old('name')}}"class="form-control" />
                       <label class="form-label" for="form6Example3">Tên khách hàng</label>
                     </div>
                     <div class="form-outline mb-4">
@@ -97,54 +103,54 @@
                       </div>
                     <!-- Text input -->
                     <div class="form-outline mb-4">
-                      <input type="text" id="form6Example4" name="address"  class="form-control" />
+                      <input type="text" id="form6Example4" name="address" value="{{old('address')}}"  class="form-control" />
                       <label class="form-label" for="form6Example4">Địa chỉ nhận hàng</label>
                     </div>
                   
                     <!-- Email input -->
                     <div class="form-outline mb-4">
-                      <input type="email" id="form6Example5" name="phone" class="form-control" />
+                      <input type="te" id="form6Example5" name="phone" value="{{old('phone')}}" class="form-control" />
                       <label class="form-label" for="form6Example5">Số điện thoại</label>
                     </div>
  
                     <div class="form-outline mb-4">
-                      <textarea class="form-control rounded-0" id="form6Example7" name="note" rows="4"></textarea>
+                      <textarea class="form-control rounded-0" id="form6Example7"  name="note" rows="4">{{old('note')}}</textarea>
                       <label class="form-label" for="form6Example7">Ghi chú khi nhận hàng</label>
                     </div>
  
               </div>
 
-        </div>
-        <div class="card mb-4">
-          <div class="card-header py-3">
-            <h5 class="mb-0">Tổng đơn hàng</h5>
-          </div>
-          <div class="card-body">
-            <ul class="list-group list-group-flush">
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
-                Các sản phẩm
-                <span><strong>{{number_format($total)}} VND</strong></span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center px-0">
-                Giao hàng
-                <span>Miễn phí</span>
-              </li>
-              <li
-                class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                <div>
-                  <strong>Tổng đơn hàng</strong>
-                  <strong>
-                    <p class="mb-0">(Đã bao gồm thuê VAT)</p>
-                  </strong>
-                </div>
-                <span><strong class="text-danger">{{number_format($total)}} VND</strong></span>
-              </li>
-            </ul>
-              <input type="hidden" name="total" value="{{$total}}">
-            <button type="submit" class="btn btn-primary btn-lg btn-block">
-              Thanh toán
-            </button>
+            </div>
+            <div class="card mb-4">
+              <div class="card-header py-3">
+                <h5 class="mb-0">Tổng đơn hàng</h5>
+              </div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  <li
+                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                    Các sản phẩm
+                    <span><strong>{{number_format($total)}} VND</strong></span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                    Giao hàng
+                    <span>Miễn phí</span>
+                  </li>
+                  <li
+                    class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                    <div>
+                      <strong>Tổng đơn hàng</strong>
+                      <strong>
+                        <p class="mb-0">(Đã bao gồm thuê VAT)</p>
+                      </strong>
+                    </div>
+                    <span><strong class="text-danger">{{number_format($total)}} VND</strong></span>
+                  </li>
+                </ul>
+                  <input type="hidden" name="total" value="{{$total}}">
+              <button type="submit" class="btn btn-primary btn-lg btn-block">
+                Thanh toán
+              </button>
           </form>
         
           </div>

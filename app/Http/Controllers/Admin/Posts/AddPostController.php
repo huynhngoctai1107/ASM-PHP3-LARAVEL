@@ -43,7 +43,7 @@ class AddPostController extends Controller
                     'page' =>''
 
                 ];
-                  return Redirect::to('/admin/add-post')->withErrors($this->validate->validateFormAddPost($request))->withInput($request->input())->with(['data'=>$data]);
+                  return Redirect()->back()->withErrors($this->validate->validateFormAddPost($request))->withInput($request->input())->with(['data'=>$data]);
               }else{
 
 

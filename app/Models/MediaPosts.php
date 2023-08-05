@@ -9,14 +9,14 @@ use Illuminate\Support\Facades\DB;
 class MediaPosts extends Model
 {
     use HasFactory;
-
+    protected $table = "media_posts";
     public function AddMediaPost($value){
-        return DB::table('media_posts')
+        return $this
         ->insert($value);
     }
  
     public function DeleteMediaPost($id){
-        return DB::table('media_posts')
+        return $this
             ->where('id_post', '=', $id)->delete();
     }
 }

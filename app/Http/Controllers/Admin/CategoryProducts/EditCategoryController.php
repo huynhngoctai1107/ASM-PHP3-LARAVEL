@@ -29,7 +29,7 @@ class EditCategoryController extends Controller
     {
         $list= $this->listCategories->getCategory($slug); 
         if ($this->validate->validateFormEditCategoryProduct($request,$list->id)->fails()) {
-            return Redirect::to("/admin/edit-category-product/$slug")->withErrors($this->validate->validateFormEditCategoryProduct($request,$list->id))->withInput($request->input());
+            return Redirect()->back()->withErrors($this->validate->validateFormEditCategoryProduct($request,$list->id))->withInput($request->input());
         }else{
 
             $dataArray = [

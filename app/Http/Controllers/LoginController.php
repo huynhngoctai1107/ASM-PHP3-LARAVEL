@@ -33,14 +33,14 @@ class LoginController extends Controller
                
                   if($acout->level == 0 ){
 
-                        if($this->mail->notification()==true){
+                        if($this->mail->notification($request)==true){
                             return redirect('/acout')->with('status', 'Đăng nhập thành công và đã gửi email thông báo!');
                         }else{
                             return redirect('/acout')->with('status', 'Đăng nhập thành công email xác nhận đã lỗi!');
                         }
                     
                   }else{
-                    if($this->mail->notification()==true){
+                    if($this->mail->notification($request)==true){
                         return redirect('/admin/')->with('status', 'Đăng nhập thành công và đã gửi email thông báo!');
                     }else{
                         return redirect('/admin/')->with('status', 'Đăng nhập thành công email xác nhận đã lỗi!');

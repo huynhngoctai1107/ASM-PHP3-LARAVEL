@@ -122,15 +122,15 @@
             </ul>
              
             @foreach($product as $item)
-            <form action="/payment-confirmation/{{$item->id_user}}/{{$item->token}}" method="post">  
+            <a href="/payment-confirmation/{{$item->id_user}}/{{$item->token}}" >  
             @endforeach  
-              @csrf
+           
               
-              <input type="hidden" name="total" value="{{$total}}">
-            <button type="submit" class="btn btn-primary btn-lg btn-block">
+            
+            <button  class="btn btn-primary btn-lg btn-block">
               Tiếp tục thanh toán  
             </button>
-          </form>
+          </a>
         
           </div>
         </div>

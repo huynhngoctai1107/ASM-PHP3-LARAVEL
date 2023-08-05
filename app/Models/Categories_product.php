@@ -9,20 +9,21 @@ use Illuminate\Support\Facades\DB;
 class Categories_product extends Model
 {
     use HasFactory;
+    protected $table ="Categories_product";
     public function getAllCategories()
     {
-        return $list = DB::table('Categories_product')
+        return $this
             ->where('status',0)
             ->orderBy('id', 'desc')
             ->paginate(3);
 
     }
     public function addCategory($value){
-        return $add = DB::table('Categories_product')
+        return $this
             ->insert($value);
     }
     public function getCategory($slug){
-        return $edit = DB::table('Categories_product')
+        return $this
             ->where([
                 ['slug',$slug],
                 ['status',0]
@@ -30,14 +31,14 @@ class Categories_product extends Model
 
     }
     public function editCategory($slug,$value){
-        return $edit = DB::table('Categories_product')->where([
+        return $this->where([
             ['slug',$slug],
             ['status',0]])->update($value);
 
     }
     public function deletePost($slug)
     {
-        return $edit = DB::table('Categories_product')->where('slug','=',$slug)->update(['status' => 1]);
+        return $this->where('slug','=',$slug)->update(['status' => 1]);
 
 
     }

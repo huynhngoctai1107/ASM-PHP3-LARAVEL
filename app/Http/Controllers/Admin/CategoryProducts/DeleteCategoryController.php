@@ -12,10 +12,10 @@ class DeleteCategoryController extends Controller
     function deleteCategoryProduct($slug){
         $delete = new Categories_product();
         if( $delete->deletePost($slug) !=false){
-            return redirect('/admin/list-categories-product')->with('delete-category', "Xóa danh mục thành công");
+            return redirect()->back()->with('delete-category', "Xóa danh mục thành công");
         }else
         {
-            return redirect('/admin/list-categories-product')->with('error-category-user', "Xóa danh mục thất bại, danh mục hiện tại đang có đơn hàng ");
+            return redirect()->back()->with('error-category-user', "Xóa danh mục thất bại, danh mục hiện tại đang có đơn hàng ");
 
         }
     }

@@ -23,7 +23,7 @@ class AddCategoryController extends Controller
     }
     function addCategory(Request $request){
         if ($this->validate->validateFormAddCategoryPost($request)->fails()) {
-            return Redirect::to('/admin/add-category-post')->withErrors($this->validate->validateFormAddCategoryPost($request))->withInput($request->input())->with(['data'=>'']);
+            return Redirect()->back()->withErrors($this->validate->validateFormAddCategoryPost($request))->withInput($request->input())->with(['data'=>'']);
         }else{
 
             $dataArray = [

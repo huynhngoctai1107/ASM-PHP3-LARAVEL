@@ -24,7 +24,7 @@ class AddCategoryController extends Controller
     }
     function addCategory(Request $request){
         if ($this->validate->validateFormAddCategoryProduct($request)->fails()) {
-            return Redirect::to('/admin/add-category-product')->withErrors($this->validate->validateFormAddCategoryProduct($request))->withInput($request->input())->with(['data'=>'']);
+            return Redirect()->back()->withErrors($this->validate->validateFormAddCategoryProduct($request))->withInput($request->input())->with(['data'=>'']);
         }else{
 
             $dataArray = [
@@ -37,7 +37,7 @@ class AddCategoryController extends Controller
             $add = new Categories_product();
             $add->addCategory($dataArray);
 
-            return redirect('/admin/add-category-product')->with('add-post', "Thêm danh mục thành công !");
+            return redirect()->back()->with('add-post', "Thêm danh mục thành công !");
 
         }
     }

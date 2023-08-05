@@ -8,13 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Oders extends Model
 {
     use HasFactory;
-    public function getOders($id)
+    protected $table = "oders";
+    public function getOrders($condition)
     {
         return $this
-            ->where('id_user','=',$id)
+            ->where($condition)
             ->orderBy('oders.id', 'desc')
             ->get();
 
+    }
+
+    public function addOrder($condition,$values){
+        return $this->where($condition)->insertGetId($values);
+    }
+    public function getAllOrder($condition){
+        return $this->where($condition) ->paginate(3);
+    
+    }
+    public function updateOrder($condition,$value){
+        return $this->where($condition)->update($value);
     }
 
 }

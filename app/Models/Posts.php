@@ -9,16 +9,17 @@ use Illuminate\Support\Facades\DB;
 class Posts extends Model
 {
     use HasFactory;
+    protected $table = "posts";
     public function getAllCategories()
     {
-        return $list = DB::table('Categories_post')
+        return $this
             ->where('status',0)
             ->orderBy('id', 'desc')
             ->get();
 
     }
     public function addPost($value){
-        return DB::table('posts')
+        return $this
         ->insertGetId($value);
 }
 public function getPost($id){
@@ -71,10 +72,10 @@ public function getPostImg($id){
     }
     public function deletePost($id){
 
-        return  DB::table('posts')->where('id','=',$id)->update(['status' => 1]);
+        return  $this->where('id','=',$id)->update(['status' => 1]);
 
     }
     public function editPost($id,$value){
-        return DB::table('posts')->where('id','=',$id)->update($value);
+        return $this->where('id','=',$id)->update($value);
     }
 }

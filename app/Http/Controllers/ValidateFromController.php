@@ -428,4 +428,34 @@ class ValidateFromController extends Controller
         );
         return $validator ;
     }
+
+
+    public function validateFormOder(Request $request){
+        $messages = [
+            'name.required' => 'Tên khách hàng không được bỏ trống ! ',
+            'name.min' => 'Tên khách hàng phải lớn hơn 10 ký tự',
+            'name.max' => 'Tên khách hàng tối đa 255 kí tự ',
+            'email.required' => 'Email không được bỏ trống',
+            'email.email' => 'Email sai định dạng',
+            'phone.required' => 'Số điện thoại không được để trống',
+            'phone.regex' => 'Số điện thoại sai định dạng',
+            'address.regex'=>'Địa chỉ không đúng định dạng', 
+            'address.required'=>'Địa chỉ không được bỏ trống', 
+
+
+        ];
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name'=>'bail|required|min:10|max:255',
+                'email'=>'bail|required|email',
+                'address' => 'required',
+                'phone'=>'bail|required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:9',
+            
+            ],
+            $messages
+        );
+        return $validator ;
+    }
 }

@@ -10,10 +10,10 @@ use Jenssegers\Agent\Facades\Agent;
 
 class MaillController extends Controller
 {
-  function notification(){
+  function notification(Request $request){
     $browser = [
         'browser' => Agent::browser(),
-        'version' => Agent::version(Agent::browser()),
+        'version' => $request->schemeAndHttpHost(),
         'platform' => Agent::platform(),
         'time'=>date('Y-m-d H:i:s'),
         'method'=>'Google',
