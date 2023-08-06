@@ -8,7 +8,13 @@ use Illuminate\Support\Facades\DB;
 
 class Products extends Model
 {
+    
     use HasFactory;
+
+    protected $table = 'products';
+
+
+
      public function getProduct($id){
 
         return  $this->select('products.id as id_product','products.name as nameproduct','content','describe','price','date_input','products.status as statusproduct',DB::raw("GROUP_CONCAT(categories_product.slug) AS slugcategory"),DB::raw("GROUP_CONCAT(categories_product.id) AS idcategory"))
@@ -84,10 +90,10 @@ class Products extends Model
     ->groupby('id_product')->get();
     }
     public function deleteProduct($id){
-        return  $this->where('id','=',$id)->update(['status' => 1]);
+        return DB::table('products')->where('id','=',$id)->update(['status' => 1]);
     }
     public function editProduct($id,$value){
-        return $this->where('id','=',$id)->update($value);
+        return DB::table('products')->where('id','=',$id)->update($value);
     }
 
 }

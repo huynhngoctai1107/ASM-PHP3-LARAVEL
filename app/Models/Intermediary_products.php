@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Intermediary_products extends Model
 {
     use HasFactory;
-    protected $table = 'intermediary_posts';
+    protected $table = 'intermediary_products';
     public function AddCategoryProduct($value){
         return $this->insert($value);
     }

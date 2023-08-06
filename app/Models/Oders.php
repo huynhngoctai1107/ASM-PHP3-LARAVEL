@@ -28,7 +28,7 @@ class Oders extends Model
     public function updateOrder($condition,$value){
         return $this->where($condition)->update($value);
     }
-    public function getAll($condition ){
+    public function getAll($condition){
         return $this->select()->join('users','oders.id_user','=','users.id')->join('bills','bills.id_oder','=','oders.id')->join('products','bills.id_product','=','products.id')->where($condition)->get();
     }
 

@@ -27,6 +27,7 @@
 <body>
 
      <div class="container-fluid fixed-top px-0 wow fadeIn " data-wow-delay="0.1s">
+ 
       <x-client.header.navbar>
       </x-client.header.navbar>
 

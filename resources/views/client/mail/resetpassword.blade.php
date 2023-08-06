@@ -31,7 +31,7 @@
             <tr>
                 <td class="pad">
                     <div align="center" class="alignment">
-                        <a href="http://127.0.0.1:8000/reset-password/{{$user->token}}/{{$user->id}}" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#feac04;border-radius:4px;width:auto;border-top:2px solid #FFFFFF;border-right:2px solid #FFFFFF;border-bottom:2px solid #FFFFFF;border-left:2px solid #FFFFFF;padding-top:10px;padding-bottom:10px;font-family:Varela Round, Trebuchet MS, Helvetica, sans-serif;font-size:18px;text-align:center;mso-border-alt:none;word-break:keep-all;"       
+                        <a href="{{env('APP_LINK_EAMIL')/$user->token/$user->id}}" style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#feac04;border-radius:4px;width:auto;border-top:2px solid #FFFFFF;border-right:2px solid #FFFFFF;border-bottom:2px solid #FFFFFF;border-left:2px solid #FFFFFF;padding-top:10px;padding-bottom:10px;font-family:Varela Round, Trebuchet MS, Helvetica, sans-serif;font-size:18px;text-align:center;mso-border-alt:none;word-break:keep-all;"       
                             target="_blank"><span style="padding-left:30px;padding-right:30px;font-size:18px;display:inline-block;letter-spacing:normal;"><span dir="ltr" style="word-break: break-word; line-height: 21.6px;"><strong>RESET PASSWORD !</strong></span></span></a>
               
                     </div>

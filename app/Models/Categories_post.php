@@ -10,12 +10,12 @@ use mysql_xdevapi\Table;
 class Categories_post extends Model
 {
     use HasFactory;
-    protected $table = 'Categories_post';
+    protected $table = 'categories_post';
     public function getAllCategories()
     {
         return $this->select('id','slug','name','note',DB::raw("COUNT(intermediary_posts.id_category) AS quantity"))
             ->where('status',0)
-            ->rightJoin('intermediary_posts','intermediary_posts.id_category','=','Categories_post.id')
+            ->rightJoin('intermediary_posts','intermediary_posts.id_category','=','categories_post.id')
              ->orderBy('id', 'desc')
             ->groupBy('id_category')
             ->get();

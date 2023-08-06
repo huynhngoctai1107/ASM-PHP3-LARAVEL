@@ -12,7 +12,7 @@ class Posts extends Model
     protected $table = "posts";
     public function getAllCategories()
     {
-        return $this
+        return  DB::table('categories_post')
             ->where('status',0)
             ->orderBy('id', 'desc')
             ->get();
@@ -46,7 +46,7 @@ public function getPostImg($id){
         ->groupby('id_posts')->paginate(2);
     }
     public function getCategoryPost($slug){
-        return  $this->select('posts.id as id_posts','main_title','subtitles','compolation','content','posts.status as statuspost','date_input',DB::raw("GROUP_CONCAT(categories_post.slug) AS slugcategory"))
+        return  DB::table('categories_post')->select('posts.id as id_posts','main_title','subtitles','compolation','content','posts.status as statuspost','date_input',DB::raw("GROUP_CONCAT(categories_post.slug) AS slugcategory"))
             ->leftJoin('intermediary_posts','posts.id','=','intermediary_posts.id_posts')
             ->join('categories_post','intermediary_posts.id_category','=','categories_post.id')
             ->where([
