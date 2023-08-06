@@ -13,7 +13,7 @@ class Oders extends Model
     {
         return $this
             ->where($condition)
-            ->orderBy('oders.id', 'desc')
+            ->orderBy('oders.id', 'ASC')
             ->get();
 
     }
@@ -22,14 +22,18 @@ class Oders extends Model
         return $this->where($condition)->insertGetId($values);
     }
     public function getAllOrder($condition){
-        return $this->where($condition) ->paginate(3);
+        return $this->where($condition)->paginate(5);
+    
+    }
+    public function coutOder($condition,$value){
+        return $this->where($condition)->count($value);
     
     }
     public function updateOrder($condition,$value){
         return $this->where($condition)->update($value);
     }
     public function getAll($condition){
-        return $this->select()->join('users','oders.id_user','=','users.id')->join('bills','bills.id_oder','=','oders.id')->join('products','bills.id_product','=','products.id')->where($condition)->get();
+        return $this->join('users','oders.id_user','=','users.id')->join('bills','bills.id_oder','=','oders.id')->join('products','bills.id_product','=','products.id')->where($condition)->get();
     }
 
 }

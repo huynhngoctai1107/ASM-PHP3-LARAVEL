@@ -49,9 +49,12 @@ use App\Http\Controllers\Client\Cart\PayCartController;
 use App\Http\Controllers\Client\Cart\DeleteCartController;
 use App\Http\Controllers\Client\Pay\PaymentConfirmationController;
 use App\Http\Controllers\Client\Pay\PayOderController;
+//oder
+use App\Http\Controllers\Client\Order\ViewOderAcoutController;
+use App\Http\Controllers\Client\Order\DeleteOderController;
  
 Route::group(['middleware'=>'clientAcout'],function(){
-    Route::get('/acout',[ ViewController::class,'acout']);
+    Route::get('/acout',[ ViewOderAcoutController::class,'oderAcout']);
     Route::get('/shopping-cart', [ViewCartController::class,'shoppingCart']);
     Route::get('/add-cart/{id}',[AddCartController::class,'addCart']);
     Route::post('/add-cart/{id}',[AddCartController::class,'addCart']);
@@ -59,6 +62,7 @@ Route::group(['middleware'=>'clientAcout'],function(){
     Route::get('/payment-confirmation/{id}/{token}',[ PaymentConfirmationController::class,'paymentConfirmation']);
     Route::post('/pay/{id}/{token}',[PayOderController::class,'payCart']);
     Route::get('/pay/{id}/{token}',[PayOderController::class,'error']);
+    Route::get('/delete-order/{id_user}/{id_order}',[DeleteOderController::class,'deleteOder']);
 
 
 });

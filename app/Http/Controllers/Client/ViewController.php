@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers\Client;
 
-
+use App\Http\Controllers\Client\Order\ViewOderAcoutController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Client\Posts\ViewPostController;
 use App\Http\Controllers\Client\Products\ViewProductController;
+ 
 class ViewController extends Controller
 {
     public $product ;
     public $post ;
+    public $oder ; 
     function __construct(){
         $this->post = new ViewPostController();
-        $this->product = new ViewProductController() ;
+        $this->oder = new ViewOderAcoutController();
+        $this->product = new ViewProductController();
     }
     function index(){
         $post = $this->post->getAllPost();
@@ -75,8 +78,8 @@ class ViewController extends Controller
     }
     public function acout()
     {
-        return view('client.page.acout');
-
+        $this->oder->oderAcout();
+ 
     }
 
 

@@ -84,7 +84,7 @@
                                     <table border="0" cellpadding="0" cellspacing="0" class="image_block block-6" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
                                         <tr>
                                             <td class="pad" style="width:100%;padding-right:0px;padding-left:0px;">
-                                                <div align="center" class="alignment" style="line-height:10px"><img alt="Emoji Animation" class="big" src="https://d1j8pt39hxlh3d.cloudfront.net/uploads/face_throwing_a_kiss_256_1.gif" style="display: block; height: auto; border: 0; width: 340px; max-width: 100%;" title="Emoji Animation" width="340"
+                                                <div align="center" class="alignment" style="line-height:10px"><img alt="Emoji Animation" class="big" src=" " style="display: block; height: auto; border: 0; width: 340px; max-width: 100%;" title="Emoji Animation" width="340"
                                                     /></div>
                                             </td>
                                         </tr>
