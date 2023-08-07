@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use Illuminate\Auth\Authenticatable;
+use App\Http\Controllers\Mail\ActiveMailController;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ValidateFromController;
@@ -19,8 +20,9 @@ class ResignterController extends Controller
 {
 
     protected $_validateFormResignter ;
-
+    protected $mail ;
     public function __construct(){
+        $this->mail= new ActiveMailController();
         $this->_validateFormResignter = new ValidateFromController();
     }
 
@@ -44,16 +46,8 @@ class ResignterController extends Controller
                    "social" => 0,
                    "token" => strtoupper(Str::random(10)),
                );
-   
                $user = User::create($dataArray);
-   
-               if($user){
-                   Mail::send('client.mail.mail_active',compact('user'),function($email) use($user){
-                       $email->subject('Foody - Kích hoạt tài khoản');
-                       $email->to($user->email,$user->name);
-   
-                   });
-               }
+               $this->mail->ativeUser($user);
                return redirect('/login')->with('resignter', "Đăng ký tài khoản thành công! Xin vui lòng kiểm tra email để kích hoạt tài khoản để tiếp tục sử dụng.");
            }
    

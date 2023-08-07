@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client\Pay;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Mail\OderController;
 use App\Http\Controllers\ValidateFromController;
 use App\Models\Bill;
 use App\Models\Cart;
@@ -20,13 +21,14 @@ class PayOderController extends Controller
     public $validate ;
     public $oder; 
     public $bill ; 
+    public $mail;
     function __construct(){
         $this->validate = new ValidateFromController();
         $this->oder = new Oders();
         $this->bill = new Bill() ;
         $this->cart = new Cart();
         $this->product = new Products();
-     
+         $this->mail = new OderController();
     }
     public function payCart($id,$token, Request $request){
         $user = Auth::user() ;
@@ -70,16 +72,7 @@ class PayOderController extends Controller
                         'oders.id'=>$oder,  
                         ];  
                    
-
-                      $oder = $this->oder->getAll($getAllOderCondition);
-                     
-                       if($oder){
-                        Mail::send('client.mail.oder',compact('oder'),function($email) use($oder){
-                            $email->subject('Foody - Đơn hàng');
-                            $email->to($oder[0]->email,$oder[0]->fullname);
-        
-                        });
-                         }
+                    $this->mail->oder( $this->oder->getAll($getAllOderCondition));
                        $this->cart->updateCart($conditionUpdate,$valueUpdate);
                        return Redirect('/acout')->with('status','Đặt hàng thành công ');
   

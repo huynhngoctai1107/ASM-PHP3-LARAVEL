@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Mail\MaillController ;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\ValidateFromController;
 use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
-use App\Http\Controllers\MaillController;
+
 class LoginController extends Controller
 {
     protected $_validateFormLogin ;

@@ -6,8 +6,7 @@
     style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;"
     width="100%">
     <tr>
- 
-        <td class="pad"
+         <td class="pad"
             style="padding-bottom:10px;padding-left:20px;padding-right:10px;padding-top:30px;">
             <div style="font-family: sans-serif">
                 <div class=""

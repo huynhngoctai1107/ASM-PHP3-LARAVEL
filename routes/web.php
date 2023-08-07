@@ -52,18 +52,26 @@ use App\Http\Controllers\Client\Pay\PayOderController;
 //oder
 use App\Http\Controllers\Client\Order\ViewOderAcoutController;
 use App\Http\Controllers\Client\Order\DeleteOderController;
+use App\Http\Controllers\Client\Order\DetailOderController;
  
 Route::group(['middleware'=>'clientAcout'],function(){
     Route::get('/acout',[ ViewOderAcoutController::class,'oderAcout']);
     Route::get('/shopping-cart', [ViewCartController::class,'shoppingCart']);
-    Route::get('/add-cart/{id}',[AddCartController::class,'addCart']);
-    Route::post('/add-cart/{id}',[AddCartController::class,'addCart']);
+
+    Route::prefix('add-cart')->group(function () {
+        Route::get('/{id}',[AddCartController::class,'addCart']);
+        Route::post('/{id}',[AddCartController::class,'addCart']);
+    });
+    Route::prefix('pay')->group(function () {
+        Route::post('/{id}/{token}',[PayOderController::class,'payCart']);
+        Route::get('/{id}/{token}',[PayOderController::class,'error']);
+    });
+  
     Route::get('/delete-cart/{id}',[DeleteCartController::class,'deleteCart']);
     Route::get('/payment-confirmation/{id}/{token}',[ PaymentConfirmationController::class,'paymentConfirmation']);
-    Route::post('/pay/{id}/{token}',[PayOderController::class,'payCart']);
-    Route::get('/pay/{id}/{token}',[PayOderController::class,'error']);
     Route::get('/delete-order/{id_user}/{id_order}',[DeleteOderController::class,'deleteOder']);
-
+    Route::get('/detail-order/{id_user}/{id_order}',[DetailOderController::class,'detailOder']);
+  
 
 });
 

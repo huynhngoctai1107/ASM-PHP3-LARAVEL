@@ -9,13 +9,14 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Mail\MaillController;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
  
 use Illuminate\Auth\SessionGuard;
 use Illuminate\Support\Facades\Mail;
 use Jenssegers\Agent\Facades\Agent;
-use App\Http\Controllers\MaillController ;
+ 
 
 class GoogleLoginController extends Controller
 {

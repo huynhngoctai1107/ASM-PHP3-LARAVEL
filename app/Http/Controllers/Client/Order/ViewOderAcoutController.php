@@ -29,7 +29,9 @@ class ViewOderAcoutController extends Controller
         ] ;
         $countOder = $this->oder->coutOder($condition,'id_user');
         return view('client.page.acout',['oder'=>$oderOfUser,
-                                        'count'=>$countOder                     
+                                        'count'=>$countOder,
+                                        'product'=>'',
+                                                     
                     ]);
 
     }

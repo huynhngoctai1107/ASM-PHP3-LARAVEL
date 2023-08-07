@@ -23,9 +23,15 @@ class DetailProductController extends Controller
     function detailProduct($id){
 
 
+        $condition=[
+            'products.id' => $id, 
+            'products.status'=>0 ,
+
+        ];
+        if($product =$this->product->getProduct($condition)){
         $data= [
             'urlImg'=> 'img/products/',
-            'product' => $this->product->getProduct($id),
+            'product' => $product,
             'images'=>$this->product->getProductImg($id),
         ];
 
@@ -45,5 +51,9 @@ class DetailProductController extends Controller
             'data'=>$data,
             'similarProducts'=>$similarProducts
             ]);
+
+        }else{
+            return view('client.page.404')  ;
+        }
     }
 }

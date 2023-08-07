@@ -35,5 +35,8 @@ class Oders extends Model
     public function getAll($condition){
         return $this->join('users','oders.id_user','=','users.id')->join('bills','bills.id_oder','=','oders.id')->join('products','bills.id_product','=','products.id')->where($condition)->get();
     }
-
+    public function getOneOder($condition){
+        return $this->join('users','oders.id_user','=','users.id')->join('bills','bills.id_oder','=','oders.id')->join('products','bills.id_product','=','products.id')->where($condition)->get();
+    }
+ 
 }

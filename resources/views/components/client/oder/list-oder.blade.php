@@ -1,13 +1,13 @@
 <section class="intro p-0 ">
-    <div class="bg-image h-100" style="background-color: #f5f7fa;">
-        <div class="mask d-flex align-items-center h-100">
+    <div class="bg-image " style="background-color: #f5f7fa;">
+        <div class="mask d-flex align-items-center ">
             <div class="container p-0 m-0">
                 <div class="row justify-content-center">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body p-0">
                                 <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true"
-                                    style="position: relative; height: 700px">
+                                    style="position: relative; height: auto">
                                     <table class="table table-striped mb-0">
                                         <thead style="background-color: #002d72; border: none; border-radius: 0; z-index:100;">
                                             <tr>
@@ -20,9 +20,9 @@
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="mx-1">
                                       
-                                         
+                                       
                                             @foreach($oder as $item)
                                             <tr>
                                                 <td class="text-center">{{$item->phone}}</td>

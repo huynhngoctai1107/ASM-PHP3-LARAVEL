@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Mail\ActiveMailController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ValidateFromController;
 use Illuminate\Support\Facades\Hash;
@@ -15,9 +16,11 @@ class ResetPasswordController extends Controller
 {
     public $validate;
     public $check ;
+    public $mail;
     public function __construct(){
         $this->validate = new ValidateFromController();
         $this->check = new User();
+        $this->mail= new ActiveMailController();
     }
     function viewreset(){
         return view('client.page.forgetpassword');
@@ -34,12 +37,10 @@ class ResetPasswordController extends Controller
                     'social'=>0
                   ];
                 $user = $this->check->resetPassword($condition);
+                
                 if($user){
-                        Mail::send('client.mail.resetpassword',compact('user'),function($email) use($user){
-                            $email->subject('Foody - Quên mật khẩu');
-                            $email->to($user->email,$user->name);
-                        });
-                return  redirect()->back()->with('success','Đã gửi email Reset mật khẩu thành công. Xin vui lòng kiểm tra email của bạn ');
+                     $this->mail->resetPassword($user) ;
+                      return  redirect()->back()->with('success','Đã gửi email Reset mật khẩu thành công. Xin vui lòng kiểm tra email của bạn ');
                 }else{
                     return  redirect()->back()->withInput($request->input())->with('error','Email không tồn tại trong hệ thống! Xin vui lòng kiểm tra lại');
                 }

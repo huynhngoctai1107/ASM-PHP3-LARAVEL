@@ -349,9 +349,10 @@
                                                         width="100%">
                                                         <tr>
                                                             <td class="pad">
+ 
                                                                 <div align="center" class="alignment">
                                                                     <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#" style="height:46px;width:211px;v-text-anchor:middle;" arcsize="33%" stroke="false" fillcolor="#fc7318"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:Tahoma, Verdana, sans-serif; font-size:18px"><![endif]--><a
-                                                                        href="{{env('APP_LINK_EAMIL').'/view-oder/'.$oder[0]->id_user.'/'.$oder[0]->id}}"
+                                                                        href="{{env('APP_LINK_EAMIL').'/detail-order/'.$oder[0]->id_user.'/'.$oder[0]->id_oder}}"
                                                                         style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#fc7318;border-radius:15px;width:auto;border-top:0px solid transparent;font-weight:undefined;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:5px;padding-bottom:5px;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;font-size:18px;text-align:center;mso-border-alt:none;word-break:keep-all;"
                                                                         target="_blank"><span
                                                                             style="padding-left:20px;padding-right:20px;font-size:18px;display:inline-block;letter-spacing:normal;"><span
@@ -682,7 +683,7 @@
                                                                         <p
                                                                             style="margin: 0; font-size: 12px; text-align: right; mso-line-height-alt: 14.399999999999999px;">
                                                                             <span style="font-size:16px;"><span
-                                                                                    style="font-size:16px;"><strong>1{{number_format($oder[0]->total_money)}} VND</strong></span></span>
+                                                                                    style="font-size:16px;"><strong>{{number_format($oder[0]->total_money)}} VND</strong></span></span>
                                                                         </p>
                                                                     </div>
                                                                 </div>
