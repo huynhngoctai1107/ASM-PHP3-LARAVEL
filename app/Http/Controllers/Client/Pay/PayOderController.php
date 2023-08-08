@@ -59,22 +59,22 @@ class PayOderController extends Controller
                                'id_product' => $item->id_product ,
                                'quantity' => $item->quantity ,
                                'price'=>$item->price,
-                           ];
+                           ]; 
+
+                           $condition=[  
+                            ['id','=', $item->id],
+                         ];
+                        $this->cart->deleteCart($condition);
+
                        }
                        $this->bill->addBill($bills);
-                       $conditionUpdate= [
-                           'id_user'=> $user->id,
-                       ];
-                       $valueUpdate = [
-                           'status'=>1
-                       ]; 
-                       $getAllOderCondition= [
-                        'oders.id'=>$oder,  
-                        ];  
+                    
+                        $getAllOderCondition= [
+                            'oders.id'=>$oder,  
+                            ];  
                    
                     $this->mail->oder( $this->oder->getAll($getAllOderCondition));
-                       $this->cart->updateCart($conditionUpdate,$valueUpdate);
-                       return Redirect('/acout')->with('status','Đặt hàng thành công ');
+                        return Redirect('/acout')->with('status','Đặt hàng thành công ');
   
                    }else{
                        return view('client.page.404')  ;

@@ -32,5 +32,8 @@ class Cart extends Model
         return $this->where($condition)->update($value) ;
 
     }
+    public function deleteCart($condition){
+        return $this->where($condition)->delete();
+     }
 
 }

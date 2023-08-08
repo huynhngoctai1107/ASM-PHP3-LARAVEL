@@ -72,11 +72,11 @@ class AddProductController extends Controller
             for($i=0; $i<$countImg; $i ++ ){
                   $fileName = time().$i.'-'.'imgProduct'.'.'.$request->uploadfile[$i]->extension() ;
                   $request->uploadfile[$i]->move(public_path("img/products"), $fileName);
-                  $images =public_path('img/products/'.$fileName);
-                  $img = Image::make($images)->resize(400, 150, function($constraint) {
-                      $constraint->aspectRatio();
-                  });
-                  $img->save($images);
+                //   $images =public_path('img/products/'.$fileName);
+                //   $img = Image::make($images)->resize(400, 150, function($constraint) {
+                //       $constraint->aspectRatio();
+                //   });
+                //   $img->save($images);
                   $request->merge(['image'=>$fileName]);
                 $dataCategory = array(
                     "image" => $request->image,

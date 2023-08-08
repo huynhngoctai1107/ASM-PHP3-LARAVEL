@@ -37,7 +37,7 @@ class ViewController extends Controller
     }
     public function lienhe()
     {
-        return view('client.mail.oder');
+        return view('client.page.contact');
     }
     public function about()
     {

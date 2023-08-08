@@ -19,10 +19,7 @@ class DeleteCartController extends Controller
         $condition= [
             'id' =>$id
         ];  
-        $value = [
-            'status' => 1 ,
-        ];
-        $this->cart->updateCart($condition,$value);
+        $this->cart->deleteCart($condition);
         return Redirect()->back()->with('cart','Xóa sản phẩm thành công !') ;
         
     }

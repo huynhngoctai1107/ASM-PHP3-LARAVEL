@@ -26,7 +26,7 @@
                         <a class="btn btn-outline-primary border-2 active"  href="/{{$url}}">Tất cả sản phẩm</a>
                     </li>
                     @foreach($product['categoryProduct'] as $category)
-                    <li class="nav-item me-2">
+                    <li class="nav-item m-2">
                         <a class="btn btn-outline-primary border-2 active"  href="/product/danh-muc/{{$category->slug}}">{{$category->name}}</a>
                     </li>
                         @endforeach
