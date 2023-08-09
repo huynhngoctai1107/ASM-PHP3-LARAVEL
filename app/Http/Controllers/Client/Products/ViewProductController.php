@@ -20,7 +20,7 @@ class ViewProductController extends Controller
         $this->categoryProduct = new ProductController();
 
     }
-    public function getAllproduct(){
+    public function product(){
     $data=[
 
         'product'=>$this->product->ClientProductAll(),
@@ -29,6 +29,8 @@ class ViewProductController extends Controller
         "categoryProduct" => $this->categoryProduct->categoryProduct(),
     ];
 
-         return $data ;
+       
+             return view('client.page.product',['data'=>$data]);
+       
     }
 }

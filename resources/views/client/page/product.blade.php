@@ -5,7 +5,7 @@ active
  @section('main')
 
     <!-- Product Start -->
- <x-client.page.product :product="$data ??''" category="product"></x-client.page.product>
+ <x-client.page.product :product="$data??''" category="product"></x-client.page.product>
     <!-- Product End -->
 
 

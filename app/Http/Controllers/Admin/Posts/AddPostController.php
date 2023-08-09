@@ -45,9 +45,6 @@ class AddPostController extends Controller
                 ];
                   return Redirect()->back()->withErrors($this->validate->validateFormAddPost($request))->withInput($request->input())->with(['data'=>$data]);
               }else{
-
-
-
                   $datapost = array(
                       "main_title" => $request->main_title,
                       "subtitles" => $request->subtitles,

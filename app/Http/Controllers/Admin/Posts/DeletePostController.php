@@ -10,7 +10,14 @@ class DeletePostController extends Controller
 {
     function deletePost($id){
         $delete = new Posts();
-        if( $delete->deletePost($id) !=false){
+
+        $condition = [
+            ['id','=',$id]
+        ];
+        $value = [
+            'status'=>1,
+        ];
+        if( $delete->editPost($condition,$value) !=false){
             return redirect('/admin/list-posts')->with('delete-post', "Xóa bài viết thành công");
         }else
         {

@@ -17,7 +17,7 @@ active
 
 </x-client.about.index>
 <!-- About End -->
-<x-client.page.product :product="$data ?? '' "  category="product"></x-client.page.product>
+<x-client.page.product :product="$product ?? '' "  category="product"></x-client.page.product>
 
 <!-- Feature Start -->
 <x-client.page.feature>

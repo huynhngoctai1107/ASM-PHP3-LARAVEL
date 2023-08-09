@@ -25,6 +25,10 @@ class ResignterController extends Controller
         $this->mail= new ActiveMailController();
         $this->_validateFormResignter = new ValidateFromController();
     }
+    public function resignterView()
+    {
+        return view('client.page.resignter');
+    }
 
     public function  resignter(Request $request)
     {

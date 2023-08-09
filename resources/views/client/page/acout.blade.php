@@ -55,7 +55,10 @@ thead th {
 }
 
 .table-scroll table thead th {
-  font-size: 1.25rem;
+  font-size: 15px !imponent;
+}
+td{
+  font-size: 15px !imponent;
 }
 thead {
   top: 0;

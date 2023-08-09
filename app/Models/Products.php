@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class Products extends Model
 {
-    
+
     use HasFactory;
 
     protected $table = 'products';
@@ -73,27 +73,24 @@ class Products extends Model
         ->orderBy('id_product','desc')
         ->groupby('id_product')->get();
     }
-    
+
     public function productAll(){
         return  $this->select('products.id as id_product','products.name as nameproduct','compolation','content','describe','price','date_input','products.status as statusproduct',DB::raw("GROUP_CONCAT(categories_product.slug) AS slugcategory"))
         ->leftJoin('intermediary_products','products.id','=','intermediary_products.id_product')
         ->join('categories_product','intermediary_products.id_category','=','categories_product.id')
         ->where('products.status','=',0)
         ->orderBy('id_product','desc')
-        ->groupby('id_product')->paginate(2);
+        ->groupby('id_product')->paginate(3);
     }
-    
+
     public function productImg(){
     return $this->select('products.id as id_product',DB::raw("GROUP_CONCAT(media_products.image) AS img"))
     ->join('media_products','media_products.id_product','=','products.id')
     ->where('products.status','=',0)
     ->groupby('id_product')->get();
     }
-    public function deleteProduct($id){
-        return DB::table('products')->where('id','=',$id)->update(['status' => 1]);
-    }
-    public function editProduct($id,$value){
-        return DB::table('products')->where('id','=',$id)->update($value);
+    public function editProduct($condition,$value){
+        return DB::table('products')->where($condition)->update($value);
     }
 
 }

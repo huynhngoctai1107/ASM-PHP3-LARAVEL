@@ -441,7 +441,8 @@ class ValidateFromController extends Controller
             'phone.regex' => 'Số điện thoại sai định dạng',
             'address.regex'=>'Địa chỉ không đúng định dạng', 
             'address.required'=>'Địa chỉ không được bỏ trống', 
-
+            'note.required'=>'Ghi chú không được bỏ trống',
+            'pay.required'=>'Phương thức thanh toán không được bỏ trống',
 
         ];
 
@@ -452,7 +453,8 @@ class ValidateFromController extends Controller
                 'email'=>'bail|required|email',
                 'address' => 'required',
                 'phone'=>'bail|required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:9',
-            
+                'pay'=>'required',
+                'note'=>'required'
             ],
             $messages
         );

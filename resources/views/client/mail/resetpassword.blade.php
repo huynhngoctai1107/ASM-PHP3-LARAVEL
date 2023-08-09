@@ -17,7 +17,7 @@
 <body style="margin: 0; background-color: #eb5a59; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
 
  
-<x-client.mail.mail>
+<x-mail.mail>
     <x-slot name="active">
         <table border="0" cellpadding="0" cellspacing="0" class="heading_block block-8" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
             <tr>
@@ -39,7 +39,7 @@
             </tr>
         </table>
     </x-slot>
-</x-client.mail.mail>
+</x-mail.mail>
 
 </body>
 

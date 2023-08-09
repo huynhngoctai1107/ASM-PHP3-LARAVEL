@@ -30,7 +30,7 @@ $title = "Tin tức";
 
     </div>
     <div class="col-md-9 col-12 mt-2 p-0">
-        <x-client.page.blog :post="$data" class="images-blog"  >
+        <x-client.page.blog :post="$data??''" class="images-blog"  >
 
         </x-client.page.blog>
     </div>

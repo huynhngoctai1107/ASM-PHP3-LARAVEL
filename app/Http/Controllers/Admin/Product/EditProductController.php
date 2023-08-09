@@ -58,9 +58,12 @@ class EditProductController extends Controller
                 "date_input"=>$request->date_input,
                 "compolation"=>auth()->user()->email,
             );
+            $condition = [
+                'id' =>$id
+            ];
 
 
-                    $this->product->editProduct($id,$dataProduct);
+                    $this->product->editProduct($condition,$dataProduct);
                     $this->intermediary_products->DeleteProduct($id);
                     $countCategory=count($request->category);
                     for($i=0; $i<$countCategory; $i ++ ){

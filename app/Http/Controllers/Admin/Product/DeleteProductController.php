@@ -9,7 +9,14 @@ class DeleteProductController extends Controller
 {
     function deleteProduct($id){
         $delete = new Products();
-        if( $delete->deleteProduct($id) !=false){
+
+        $condition= [
+            'id' =>$id
+        ];
+        $value=[
+            'status'=>1,
+        ];
+        if( $delete->editProduct($condition,$value) !=false){
             return redirect('/admin/list-products')->with('delete-product', "Xóa sản phẩm thành công");
         }else
         {

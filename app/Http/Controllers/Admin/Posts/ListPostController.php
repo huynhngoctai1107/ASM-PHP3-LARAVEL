@@ -14,9 +14,12 @@ class ListPostController extends Controller
         $this->post  = new Posts();
     }
     function listPosts(){
+        $condition=[
+            ['posts.status','=',0]
+         ];
         $data=[
 
-            'post'=>$this->post->postAll(),
+            'post'=>$this->post->postAll($condition),
             'img'=>$this->post->postImg(),
             'urlImg'=> 'img/Posts/',
         ];

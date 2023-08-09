@@ -55,16 +55,16 @@
         </div>
         <div class="card mb-4 mb-lg-0">
           <div class="card-body">
-            <p><strong>We accept</strong></p>
+            <p><strong>Chúng tôi đồng ý</strong></p>
             <img class="me-2" width="45px"
               src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
               alt="Visa" />
             <img class="me-2" width="45px"
-              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+              src="https://wiki.soulcams.com/images/9/9a/Paypal-logo.png"
               alt="American Express" />
-            <img class="me-2" width="45px"
-              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
-              alt="Mastercard" />
+              <img class="me-2" width="25px"
+              src="https://cdn-icons-png.flaticon.com/128/814/814245.png"
+              alt="American Express" />
             
           </div>
         </div>
@@ -126,6 +126,61 @@
                 <h5 class="mb-0">Tổng đơn hàng</h5>
               </div>
               <div class="card-body">
+                <div class="d-flex pb-3 justify-content-center">
+                  <div class="  ms-4 d-flex align-items-center ">
+                    <input class="form-check-input " class="checked"  value="1" {{old('pay')==1 ? 'checked':''}} type="radio" name="pay" id="radioNoLabel1"
+                      value="" aria-label="..."   />
+                  </div>
+                  <label class="form-check-label col-12" for="radioNoLabel1">
+                    <div class="rounded border d-flex w-100 p-3 align-items-center">
+                    <p class="mb-0">
+              
+                      <img class="me-2" width="35px"
+                      src="https://cdn-icons-png.flaticon.com/128/888/888870.png"
+                      alt="American Express" /></i> Thanh toán Paypal
+                    
+                    </p>
+                   </div>
+                  </label>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                  <div class=" ms-4 d-flex align-items-center ">
+                    <input class="form-check-input" type="radio" value="2" {{old('pay')==2 ? 'checked':''}} name="pay" id="radioNoLabel2"
+                      value="" aria-label="..." />
+                   
+                  </div>
+                  <label class="form-check-label col-12" for="radioNoLabel2">
+                    <div class="rounded border d-flex w-100 p-3 align-items-center">
+                      <p class="mb-0">
+                        <img class="me-2" width="35px"
+                        src="https://cdn-icons-png.flaticon.com/128/10605/10605892.png"
+                        alt="American Express" />
+                        
+                       Thanh toán  qua Visa
+                      </p>
+                     </div>
+                  </label>
+                 
+                </div>
+                <div class="d-flex my-3 justify-content-center">
+                  <div class="  ms-4 d-flex align-items-center ">
+                    <input class="form-check-input " class="checked" value="3" {{old('pay')==3 ? 'checked':''}} type="radio" name="pay" id="radioNoLabel3"
+                      value="" aria-label="..."  />
+                  </div>
+                  <label class="form-check-label col-12" for="radioNoLabel3">
+                    <div class="rounded border d-flex w-100 p-3 align-items-center">
+                    <p class="mb-0">
+                      <img class="me-2" width="35px"
+                      src="https://cdn-icons-png.flaticon.com/128/814/814245.png"
+                      alt="American Express" />
+                      Thanh toán khi nhận hàng
+                    
+                    </p>
+                   </div>
+                  </label>
+                </div>
+                
                 <ul class="list-group list-group-flush">
                   <li
                     class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">

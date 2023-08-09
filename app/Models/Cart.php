@@ -20,8 +20,8 @@ class Cart extends Model
     public function addCart($value){
         return $this->insert($value);
     }
-    public function sumTotal($condition){
-        return $this->where($condition)->sum('total');
+    public function sumTotal($condition,$value){
+        return $this->where($condition)->sum($value);
 
     }
     public function getCart($condition){

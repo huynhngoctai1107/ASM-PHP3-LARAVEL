@@ -52,16 +52,20 @@ class EditPostController extends Controller
             return Redirect::to("/admin/edit-post/$id")->withErrors($this->validate->validateFormEditPost($request))->withInput($request->input())->with(['data'=>$data]);
         }
         else{
-            $dataPost = array(
+            $condition = [
+                ['id','=',$id]
+            ];
+            $dataPost =[
                 "main_title" => $request->main_title,
                 "subtitles" => $request->subtitles,
                 "content" => $request->contents,
                 "date_input"=>$request->date_input,
                 "compolation"=>auth()->user()->email,
-            );
+            ];
+          
+          
 
-
-                $this->post->editPost($id,$dataPost) ;
+                $this->post->editPost($condition,$dataPost) ;
                 $this->intermediary_posts->DeletePost($id);
                 $countCategory=count($request->category)  ;
                 for($i=0; $i<$countCategory; $i ++ ){

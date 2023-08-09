@@ -15,22 +15,28 @@ class ViewPostController extends Controller
     public function __construct(){
         $this->post  = new Posts();
         $this->categorypost = new Categories_post();
-
     }
    
- 
-    public function getAllPost(){
-        $data=[
 
-            'post'=>$this->post->postlimit(),
+    public function blog(){
+        $condition=[
+           ['posts.status','=',0]
+        ];
+        $data=[
+            'post'=>$this->post->postAll($condition),
             'img'=>$this->post->postImg(),
             'urlImg'=> 'img/posts/',
 
         ];
+          
+            return view('client.page.blog',[
+                'data'=> $data,
+                'category'=>$this->categorypost->getAllCategories()]);
+        }
 
-        return $data ;
+
+        
+ 
     }
-    public function categoryPost(){
-        return $this->categorypost->getAllCategories();
-    }
-}
+
+ 

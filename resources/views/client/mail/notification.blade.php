@@ -1,4 +1,4 @@
-<x-client.mail.notification>
+<x-mail.notification>
 
 <x-slot name="content">
     <table border="0" cellpadding="0" cellspacing="0"
@@ -46,4 +46,4 @@
 </x-slot>
 
 
-</x-client.mail.notification>
+</x-mail.notification>

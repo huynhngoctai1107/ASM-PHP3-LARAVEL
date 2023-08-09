@@ -37,6 +37,8 @@ class PayOderController extends Controller
            if ($this->validate->validateFormOder($request)->fails()) {
                return Redirect()->back()->withErrors($this->validate->validateFormOder($request))->withInput($request->input());
            }else{
+        
+            dd($request->all());
                    $values =[
                        'id_user'=>$user->id, 
                        'fullname'=>$request->name , 
@@ -44,41 +46,49 @@ class PayOderController extends Controller
                        'total_money'=>$request->total, 
                        'phone'=>$request->phone,
                        'note'=>$request->note,    
+                       'pay'=>$request->pay,
                        'date_oder' => date('Y-m-d H:i:s'),
                    ]; 
                    $condition= [
-                       ['status','=', 0],
                        ['id_user','=', $user->id],
-                       ['quantity','>', 0],
                    ];
+                   if($request->pay == 3){
+        
+                        if($oder = $this->oder->addOrder($condition,$values)){
+                            foreach($this->cart->getAllCart($condition) as $item){
+                                $bills[]=[
+                                    'id_oder'=> $oder, 
+                                    'id_product' => $item->id_product ,
+                                    'quantity' => $item->quantity ,
+                                    'price'=>$item->price,
+                                ]; 
 
-                   if($oder = $this->oder->addOrder($condition,$values)){
-                       foreach($this->cart->getAllCart($condition) as $item){
-                           $bills[]=[
-                               'id_oder'=> $oder, 
-                               'id_product' => $item->id_product ,
-                               'quantity' => $item->quantity ,
-                               'price'=>$item->price,
-                           ]; 
+                                $condition=[  
+                                    ['id','=', $item->id],
+                                ];
+                                $this->cart->deleteCart($condition);
 
-                           $condition=[  
-                            ['id','=', $item->id],
-                         ];
-                        $this->cart->deleteCart($condition);
+                            }
+                            $this->bill->addBill($bills);
+                            
+                                $getAllOderCondition= [
+                                    'oders.id'=>$oder,  
+                                    ];  
+                        
+                            $this->mail->oder( $this->oder->getAll($getAllOderCondition));
+                                return Redirect('/acout')->with('status','Đặt hàng thành công ');
+        
+                        }else{
+                            return view('client.page.404')  ;
+                        }
 
-                       }
-                       $this->bill->addBill($bills);
-                    
-                        $getAllOderCondition= [
-                            'oders.id'=>$oder,  
-                            ];  
-                   
-                    $this->mail->oder( $this->oder->getAll($getAllOderCondition));
-                        return Redirect('/acout')->with('status','Đặt hàng thành công ');
-  
-                   }else{
-                       return view('client.page.404')  ;
-                   }
+                      }elseif($request->pay==1){
+                      // thanh toan paypal  
+                      }else{
+                        return view('client.page.404')  ;   
+                        // thanh toan visa
+                      }
+
                   
            }
        }else{

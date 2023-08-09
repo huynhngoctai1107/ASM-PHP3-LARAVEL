@@ -77,16 +77,16 @@
         </div>
         <div class="card mb-4 mb-lg-0">
           <div class="card-body">
-            <p><strong>We accept</strong></p>
+            <p><strong>Chúng tôi đồng ý</strong></p>
             <img class="me-2" width="45px"
               src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
               alt="Visa" />
             <img class="me-2" width="45px"
-              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+              src="https://wiki.soulcams.com/images/9/9a/Paypal-logo.png"
               alt="American Express" />
-            <img class="me-2" width="45px"
-              src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
-              alt="Mastercard" />
+              <img class="me-2" width="25px"
+              src="https://cdn-icons-png.flaticon.com/128/814/814245.png"
+              alt="American Express" />
             
           </div>
         </div>

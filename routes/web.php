@@ -42,7 +42,7 @@ use App\Http\Controllers\Client\Products\DetailProductController;
 // client post
 use App\Http\Controllers\Client\Categories\PostController;
 use App\Http\Controllers\Client\Posts\DetailPostController;
-// shopping cart 
+// shopping cart
 use App\Http\Controllers\Client\Cart\AddCartController;
 use App\Http\Controllers\Client\Cart\ViewCartController;
 use App\Http\Controllers\Client\Cart\PayCartController;
@@ -53,7 +53,13 @@ use App\Http\Controllers\Client\Pay\PayOderController;
 use App\Http\Controllers\Client\Order\ViewOderAcoutController;
 use App\Http\Controllers\Client\Order\DeleteOderController;
 use App\Http\Controllers\Client\Order\DetailOderController;
- 
+ // error
+use App\Http\Controllers\ErrorController;
+// 
+use App\Http\Controllers\Client\Products\ViewProductController;
+// post 
+use App\Http\Controllers\Client\Posts\ViewPostController;
+
 Route::group(['middleware'=>'clientAcout'],function(){
     Route::get('/acout',[ ViewOderAcoutController::class,'oderAcout']);
     Route::get('/shopping-cart', [ViewCartController::class,'shoppingCart']);
@@ -66,12 +72,12 @@ Route::group(['middleware'=>'clientAcout'],function(){
         Route::post('/{id}/{token}',[PayOderController::class,'payCart']);
         Route::get('/{id}/{token}',[PayOderController::class,'error']);
     });
-  
+
     Route::get('/delete-cart/{id}',[DeleteCartController::class,'deleteCart']);
     Route::get('/payment-confirmation/{id}/{token}',[ PaymentConfirmationController::class,'paymentConfirmation']);
     Route::get('/delete-order/{id_user}/{id_order}',[DeleteOderController::class,'deleteOder']);
     Route::get('/detail-order/{id_user}/{id_order}',[DetailOderController::class,'detailOder']);
-  
+
 
 });
 
@@ -129,12 +135,12 @@ Route::group(['prefix' => 'admin','middleware'=>['adminLogin']],function(){
 
 
 Route::group(['middleware'=>'checkLogin'],function(){
-    Route::get('/login', [ViewController::class,'login'] );
+    Route::get('/login', [LoginController::class,'loginView'] );
     Route::post('/login',[LoginController::class,'login']);
     Route::get('/privacy-policy',[FaceBookLoginController::class,'check']);
     Route::get('/facebook/callback',[FaceBookLoginController::class,'callbackFromFacebook']);
     Route::get('/facebook',[FaceBookLoginController::class,'loginUsingFacebook']);
-   
+
     Route::group(['middleware'=>'spam'],function(){
     Route::get('/google',[GoogleLoginController::class,'loginUsingGoogle']);
     Route::get('/google/callback',[GoogleLoginController::class,'callbackFromGoogle']);
@@ -147,6 +153,7 @@ Route::group(['middleware'=>'checkLogin'],function(){
 
     Route::get('/active-now/{token}/{id}', [ResignterController::class,'active'] );
     //view post client
+    Route::get('/resignter', [ResignterController::class,'resignterView'] );
 
     Route::post('/resignter', [ResignterController::class,'resignter'] );
     Route::get('/forget-password',[ResetPasswordController::class,'viewreset']);
@@ -159,20 +166,20 @@ Route::group(['middleware'=>'checkLogin'],function(){
     Route::get('/logout',[LoginController::class,'logout']);
     Route::get('/',[ViewController::class,'index']);
     Route::get('/index', [ViewController::class,'index']);
-  
-    Route::get('/resignter', [ViewController::class,'resignter'] );
+
+
     Route::get('/contact', [ViewController::class,'lienhe']);
-    Route::get('/product',  [ViewController::class,'product']);
+    Route::get('/product',  [ViewProductController::class,'product']);
     Route::get('/about', [ViewController::class,'about']);
-    Route::get('/blog',  [ViewController::class,'blog']);
+    Route::get('/blog',  [ViewPostController::class,'blog']);
     Route::get('/feature', [ViewController::class,'feature']);
     Route::get('/testimonial',  [ViewController::class,'testimonial']);
-    Route::get('/404', [ViewController::class,'fix']);
+    Route::get('/404', [ErrorController::class,'fix']);
     Route::get('/successlogin',[LoginController::class,'successlogin']);
     Route::get('/product/danh-muc/{slug}',[ProductController::class,'getProduct']);
     Route::get('/blog/danh-muc/{slug}',[PostController::class,'getPost']);
     // RESET PASSWORD
-  
+
     //detail
     Route::get('/xem-chi-tiet-san-pham/{id}',[DetailProductController::class,'detailProduct']);
     Route::get('/chi-tiet-bai-viet/{id}',[DetailPostController::class,'detailPost']);

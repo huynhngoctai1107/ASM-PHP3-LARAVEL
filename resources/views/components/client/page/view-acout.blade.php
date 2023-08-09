@@ -103,9 +103,9 @@
            
           <div class="card mb-4">
             @if(empty($product))
-            <x-client.oder.list-oder :oder="$oder"></x-client.oder.list-oder>
+            <x-oder.list-oder :oder="$oder"></x-oder.list-oder>
             @else
-            <x-client.oder.detail-oder :oder="$oder" :product="$product"></x-client.oder.detail-oder>
+            <x-oder.detail-oder :oder="$oder" :product="$product"></x-oder.detail-oder>
 
             @endif
           </div>

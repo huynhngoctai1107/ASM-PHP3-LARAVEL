@@ -30,15 +30,13 @@ class PaymentConfirmationController extends Controller
         
         $user = Auth::user() ;
             if($id == $user->id && $token == $user->token){
-              $condition= [
-                            ['status','=', 0],
+              $condition= [             
                             ['id_user','=', $user->id],
-                            ['quantity','>', 0],
                         ];
-                if($this->cart->sumTotal($condition)>0){
+                if($this->cart->sumTotal($condition,'total')>0){
                     return view('client.page.paycart',[ 'data'=>$this->cart->getAllCart($condition),
                     'number'=>$this->cart->count($condition,'id_user'),
-                    'total'=>$this->cart->sumTotal($condition)]);
+                    'total'=>$this->cart->sumTotal($condition,'total')]);
                 }else{
                     return view('client.page.404')  ;
                 }

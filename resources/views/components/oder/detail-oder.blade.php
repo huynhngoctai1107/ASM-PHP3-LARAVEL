@@ -15,7 +15,7 @@
                                     style="position: relative; height: auto">
                                 
                                     <table class="table table-striped mb-0">
-                                        <thead style="background-color: #002d72; border: none; border-radius: 0; z-index:100;">
+                                        <thead style="    background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB); border: none; border-radius: 0; z-index:100;">
                                             <tr>
                                                 <th class="text-center align-items-center" scope="col">Tên sản phẩm</th>
                                                  <th class="text-center align-items-center" scope="col">Hình ảnh</th>

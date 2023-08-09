@@ -21,11 +21,10 @@ class ViewCartController extends Controller
         $user = Auth::user() ;
             $condition= [
                 ['id_user','=', $user->id],
-                ['quantity','>', 0],
             ];
 
         return view('client.page.shoppingcart',['data'=>$this->cart->getAllCart($condition),
                                                 'number'=>$this->cart->count($condition,'id_user'),
-                                                   'total'=>$this->cart->sumTotal($condition)]);
+                                                'total'=>$this->cart->sumTotal($condition,'total')]);
     }
 }

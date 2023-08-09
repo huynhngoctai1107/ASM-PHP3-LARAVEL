@@ -20,6 +20,10 @@ class LoginController extends Controller
         $this->mail = new MaillController();
         $this->_validateFormLogin = new ValidateFromController();
     }
+    public function loginView()
+    {
+        return view('client.page.login');
+    }
 
     public function login(Request $request)
     {
