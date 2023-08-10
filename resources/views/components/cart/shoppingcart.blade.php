@@ -46,7 +46,7 @@
 
               <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                 <!-- Quantity -->
-                <form action="/add-cart/{{$item->id_product}}" method="post">
+                <form action="/add-cart/{{Str::slug($item->name)}}" method="post">
                   @csrf
                   <x-client.button.quantity :value='$item->quantity' name='quantityUpdate' ></x-client.button.quantity>
                 </form>

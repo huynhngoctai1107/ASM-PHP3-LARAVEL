@@ -58,6 +58,7 @@ use App\Http\Controllers\ErrorController;
 // 
 use App\Http\Controllers\Client\Products\ViewProductController;
 // post 
+use App\Http\Controllers\Client\Pay\StatusPaypalController;
 use App\Http\Controllers\Client\Posts\ViewPostController;
 
 Route::group(['middleware'=>'clientAcout'],function(){
@@ -66,7 +67,7 @@ Route::group(['middleware'=>'clientAcout'],function(){
 
     Route::prefix('add-cart')->group(function () {
         Route::get('/{slug}',[AddCartController::class,'addCart']);
-        Route::post('/{id}',[AddCartController::class,'addCart']);
+        Route::post('/{slug}',[AddCartController::class,'addCart']);
     });
     Route::prefix('pay')->group(function () {
         Route::post('/{id}/{token}',[PayOderController::class,'payCart']);
@@ -75,6 +76,9 @@ Route::group(['middleware'=>'clientAcout'],function(){
 
     Route::get('/delete-cart/{id}',[DeleteCartController::class,'deleteCart']);
     Route::get('/payment-confirmation/{id}/{token}',[ PaymentConfirmationController::class,'paymentConfirmation']);
+    Route::get('/paypal}',[ StatusPaypalController::class,'sussess'])->name('paypal_success');
+    Route::get('/paypal-cancel',[ StatusPaypalController::class,'cancel'])->name('paypal_canel');
+
     Route::get('/delete-order/{id_user}/{id_order}',[DeleteOderController::class,'deleteOder']);
     Route::get('/detail-order/{id_user}/{id_order}',[DetailOderController::class,'detailOder']);
 

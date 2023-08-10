@@ -11,9 +11,9 @@ use App\Models\Oders;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
-
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
+ 
 class PayOderController extends Controller
 {
     public $cart ;
@@ -22,13 +22,15 @@ class PayOderController extends Controller
     public $oder; 
     public $bill ; 
     public $mail;
+      
     function __construct(){
         $this->validate = new ValidateFromController();
         $this->oder = new Oders();
         $this->bill = new Bill() ;
         $this->cart = new Cart();
         $this->product = new Products();
-         $this->mail = new OderController();
+        $this->mail = new OderController();
+ 
     }
     public function payCart($id,$token, Request $request){
         $user = Auth::user() ;
@@ -82,12 +84,52 @@ class PayOderController extends Controller
                             return view('client.page.404')  ;
                         }
 
-                      }elseif($request->pay==1){
-                            $usd = $request->total / 23200;
-                            dd(round($usd,2));
-                      }else{
-                        return view('client.page.404')  ;   
-                        // thanh toan visa
+                      }elseif($request->pay==1 ||$request->pay==2){
+                        $request->session()->forget('oder');
+                        
+                            $values =[
+                                'id_user'=>$user->id, 
+                                'fullname'=>$request->name , 
+                                'address'=>$request->address,
+                                'total_money'=>$request->total, 
+                                'phone'=>$request->phone,
+                                'note'=>$request->note,    
+                                'pay'=>$request->pay,
+                                'date_oder' => date('Y-m-d H:i:s'),
+                            ]; 
+                        session()->push('oder', $values);
+                        $usd = (round($request->total / 23200,2));
+                        $provider = new PayPalClient;
+
+                       $provider->setApiCredentials(config('paypal'));
+                       $paypalToken =$provider->getAccessToken();
+                        $response =$provider->createOrder([
+                        
+                            "intent" => "CAPTURE",
+                            "application_context"=>[
+                                "return_url"=>route('paypal_success'),
+                                "cancel_url"=>route('paypal_canel')
+                            ],   
+                            "purchase_units" => [
+                               [ 
+                                  "amount" => [
+                                    "currency_code" => "USD",
+                                    "value" => $usd
+                                  ]
+                               ]
+                            ]
+                         ]);
+                      
+                                if(isset($response['id']) && !empty($response['id'])){
+                                    foreach($response['links'] as $link){
+                                        if($link['rel'] ==='approve'){
+                                            return Redirect()->away($link['href']);
+                                        }
+                                    }
+                                }else{
+                                    return Redirect()->back()->withErrors($this->validate->validateFormOder($request))->withInput($request->input());
+                                }
+   
                       }
 
                   
@@ -105,4 +147,6 @@ class PayOderController extends Controller
    public function error(){
        return view('client.page.404');
    }
+
+ 
 }

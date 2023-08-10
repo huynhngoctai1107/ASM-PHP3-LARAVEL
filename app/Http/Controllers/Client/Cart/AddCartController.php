@@ -29,10 +29,8 @@ class AddCartController extends Controller
       
         $user = Auth::user() ;
         // cắt hình trong chuỗi kí tự 
-       
-        
-        $condition= [
-            'id_product' =>$product->id_product , 
+         $condition= [
+            'id_product' =>$product->id_product, 
             'id_user' =>$user->id , 
         ]; 
        $getProduct = $this->cart->getCart($condition) ;
@@ -75,8 +73,8 @@ class AddCartController extends Controller
          
         }else{
             $condition = [
-                ['products.slug','=',$slug]
-            ];
+            ['products.slug','=',$slug]
+        ];
             $productimg = $this->product->getProductImg($condition);
             $imgProduct = explode(',', $productimg->img);
              for($i=0 ; $i <count( $imgProduct); $i++){
