@@ -13,13 +13,12 @@ class Categories_post extends Model
     protected $table = 'categories_post';
     public function getAllCategories()
     {
-        return $this->select('id','slug','name','note',DB::raw("COUNT(intermediary_posts.id_category) AS quantity"))
-            ->where('status',0)
-            ->rightJoin('intermediary_posts','intermediary_posts.id_category','=','categories_post.id')
-             ->orderBy('id', 'desc')
-            ->groupBy('id_category')
-            ->get();
-
+        return  $this->select('categories_post.id as id_category','categories_post.slug','categories_post.name','categories_post.note',DB::raw("COUNT(intermediary_posts.id_category) AS quantity"))
+        ->leftJoin('intermediary_posts','categories_post.id','=','intermediary_posts.id_category')
+        ->join('posts','intermediary_posts.id_posts','=','posts.id')
+        ->where([['posts.status','=',0],['categories_post.status','=',0]])
+        ->orderBy('id_category','desc')
+        ->groupby('id_category')->get();
     }
     public function getAllCategory()
     {

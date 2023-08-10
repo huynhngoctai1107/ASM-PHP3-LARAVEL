@@ -8,7 +8,7 @@ use App\Models\Intermediary_products;
 use App\Models\MediaProducts;
 use App\Models\Products;
 use App\Http\Controllers\ValidateFromController;
-
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 
 class EditProductController extends Controller
@@ -24,59 +24,68 @@ class EditProductController extends Controller
         $this->media = new MediaProducts();
         $this->intermediary_products = new Intermediary_products();
     }
-    function viewEdit($id){
+    function viewEdit($slug){
 
+        $condition=[
+            'products.slug' => $slug, 
+            'products.status'=>0 ,
 
+        ];
         $data= [
             'categoryProduct'=> $this->product->getAllCategories(),
             'page' =>'edit',
-            'product' => $this->product->getProduct($id),
-            'images'=>$this->product->getProductImg($id),
+            'product' => $this->product->getProduct($condition),
+            'images'=>$this->product->getProductImg( $condition),
 
         ];
         return view('admin.page.addEdit.product',['data'=>$data]);
     }
-    function editProduct($id,Request $request){
+    function editProduct($slug,Request $request){
 
+        $condition=[
+            'products.slug' => $slug, 
+            'products.status'=>0 ,
 
+        ];
         $data= [
             'categoryProduct'=> $this->product->getAllCategories(),
             'page' =>'edit',
-            'product' => $this->product->getProduct($id),
-            'images'=>$this->product->getProductImg($id),
+            'product' => $this->product->getProduct($condition),
+            'images'=>$this->product->getProductImg( $condition),
 
         ];
         if ($this->validate->validateFormEditProducts($request)->fails()) {
-            return Redirect::to("/admin/edit-product/$id")->withErrors($this->validate->validateFormEditProducts($request))->withInput($request->input())->with(['data'=>$data]);
+            return Redirect()->back()->withErrors($this->validate->validateFormEditProducts($request))->withInput($request->input())->with(['data'=>$data]);
         }
         else{
             $dataProduct = array(
-                "name" => $request->nameProduct,
+                "name" => $request->name,
                 "content" => $request->content,
                 "describe" => $request->describe,
+                "slug"=>Str::slug($request->name),
                 "price"=>$request->price,
                 "date_input"=>$request->date_input,
                 "compolation"=>auth()->user()->email,
             );
             $condition = [
-                'id' =>$id
+                'slug' =>$slug
             ];
-
+            
 
                     $this->product->editProduct($condition,$dataProduct);
-                    $this->intermediary_products->DeleteProduct($id);
+                    $this->intermediary_products->DeleteProduct( $request->id);
                     $countCategory=count($request->category);
                     for($i=0; $i<$countCategory; $i ++ ){
                         $dataCategory = array(
                             "id_category" => $request->category[$i],
-                            "id_product"=> $id,
+                            "id_product"=>  $request->id,
                         );
                         $this->intermediary_products->AddCategoryProduct($dataCategory);
                     }
                     if(empty($request->uploadfile)){
 
                     }else{
-                        $this->media->DeleteMediaProduct($id);
+                        $this->media->DeleteMediaProduct($request->id);
                         $countImg=count($request->uploadfile)  ;
                         for($i=0; $i<$countImg; $i ++ ){
                             $fileName = time().$i.'-'.'imgProduct'.'.'.$request->uploadfile[$i]->extension() ;
@@ -84,7 +93,7 @@ class EditProductController extends Controller
                             $request->merge(['image'=>$fileName]);
                             $dataCategory = array(
                                 "image" => $request->image,
-                                "id_product"=> $id,
+                                "id_product"=>$request->id,
                             );
                             $this->media->AddMediaProduct($dataCategory);
                         }

@@ -25,7 +25,7 @@
 
                         @if (!empty($check['page']))
                             <form class="col-12" method="post"
-                                  action="/admin/edit-post/{{$check['post']->id_posts}}"
+                                  action="/admin/edit-post/{{$check['post']->slug}}"
                                   enctype="multipart/form-data">
                                 @else
                                     <form action="/admin/add-post" method="post" class="col-12"
@@ -56,7 +56,7 @@
                                                     </div>
                                                 </div>
 
-
+                                                <input type="hidden" name="id" value="{{$check['post']->id_posts ??''}}">
 
                                                 <div class="form-group bg-title p-0">
                                                     <div class="col-md-12 p-0">

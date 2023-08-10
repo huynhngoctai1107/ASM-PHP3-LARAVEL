@@ -65,7 +65,7 @@ Route::group(['middleware'=>'clientAcout'],function(){
     Route::get('/shopping-cart', [ViewCartController::class,'shoppingCart']);
 
     Route::prefix('add-cart')->group(function () {
-        Route::get('/{id}',[AddCartController::class,'addCart']);
+        Route::get('/{slug}',[AddCartController::class,'addCart']);
         Route::post('/{id}',[AddCartController::class,'addCart']);
     });
     Route::prefix('pay')->group(function () {
@@ -100,14 +100,14 @@ Route::group(['prefix' => 'admin','middleware'=>['adminLogin']],function(){
             Route::get('/edit-category-post/{slug}',[ EditCategoryController::class,'viewCategoryPost']);
             Route::get('/edit-category-product/{slug}',[ EditCategoryProductController::class,'viewCategoryProduct']);
 
-            Route::get('/edit-product/{id}',[ EditProductController::class,'viewEdit']);
-            Route::get('/edit-post/{id}',[ EditPostController::class,'viewEdit']);
+            Route::get('/edit-product/{slug}',[ EditProductController::class,'viewEdit']);
+            Route::get('/edit-post/{slug}',[ EditPostController::class,'viewEdit']);
             //edit form method post
 
             Route::post('/edit-category-post/{slug}',[ EditCategoryController::class,'editCategoryPost']);
             Route::post('/edit-category-product/{slug}',[ EditCategoryProductController::class,'editCategoryProduct']);
-            Route::post('/edit-product/{id}',[ EditProductController::class,'editProduct']);
-            Route::post('/edit-post/{id}',[ EditPostController::class,'editPost']);
+            Route::post('/edit-product/{slug}',[ EditProductController::class,'editProduct']);
+            Route::post('/edit-post/{slug}',[ EditPostController::class,'editPost']);
             // add method post
             Route::post('/add-category-post',[ AddCategoryController::class,'addCategory']);
             Route::post('/add-category-product',[ AddCategoryProductController::class,'addCategory']);
@@ -117,8 +117,8 @@ Route::group(['prefix' => 'admin','middleware'=>['adminLogin']],function(){
             // delect
             Route::get('/delete-category-post/{slug}',[ DeleteCategoryController::class,'deleteCategoryPost']);
             Route::get('/delete-category-product/{slug}',[ DeleteCategoryProductController::class,'deleteCategoryProduct']);
-            Route::get('/delete-product/{id}',[ DeleteProductController::class,'deleteProduct']);
-            Route::get('/delete-post/{id}',[ DeletePostController::class,'deletePost']);
+            Route::get('/delete-product/{slug}',[ DeleteProductController::class,'deleteProduct']);
+            Route::get('/delete-post/{slug}',[ DeletePostController::class,'deletePost']);
 
            //list
            Route::get('/list-categories-post',[ ListCategoryController::class,'listCategoryPost']);
@@ -181,8 +181,8 @@ Route::group(['middleware'=>'checkLogin'],function(){
     // RESET PASSWORD
 
     //detail
-    Route::get('/xem-chi-tiet-san-pham/{id}',[DetailProductController::class,'detailProduct']);
-    Route::get('/chi-tiet-bai-viet/{id}',[DetailPostController::class,'detailPost']);
+    Route::get('/xem-chi-tiet-san-pham/{slug}',[DetailProductController::class,'detailProduct']);
+    Route::get('/chi-tiet-bai-viet/{slug}',[DetailPostController::class,'detailPost']);
 
 
 

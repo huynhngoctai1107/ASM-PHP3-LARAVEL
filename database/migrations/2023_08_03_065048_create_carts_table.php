@@ -17,7 +17,13 @@ return new class extends Migration
             $table->foreignId('id_product')->constrained('products');
             $table->integer('quantity');
             $table->integer('price');
+            $table->unsignedBigInteger('total');
+
             $table->integer('status')->default('0');
+            $table->string('token');
+            $table->string('name');
+            $table->string('images');
+            $table->string('date_input');
             $table->timestamps();
         });
     }

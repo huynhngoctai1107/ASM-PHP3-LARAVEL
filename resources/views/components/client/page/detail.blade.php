@@ -87,11 +87,11 @@
                                 </div>
                             </div>
                             <h5>Nội dung sản phẩm</h5>
-                            <p class="about">    {!!$detail['product']->content!!}</p>
+                            <p class="about">{!!$detail['product']->content!!}</p>
                           
-                            <form action="/add-cart/{{$detail['product']->id_product}}" method="post">
+                            <form action="/add-cart/{{$detail['product']->slug}}" method="post">
                             <div class="d-flex mb-4" style="max-width: 300px">
-                                    <p class="btn btn-primary px-3 me-2 h-2" style="height: 50px"
+                                    <p class="btn btn-primary px-3 me-2 h-2 justify-content-center align-items-center d-flex" style="height: 50px"
                                     onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
                                     <i class="fas fa-minus"></i>
                                     </p>
@@ -104,7 +104,7 @@
                              
                                    
               
-                                    <p class="btn btn-primary px-3 ms-2" style="height: 50px"
+                                    <p class="btn btn-primary px-3 ms-2 justify-content-center align-items-center d-flex" style="height: 50px"
                                     onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
                                     <i class="fas fa-plus"></i>
                                     </p>

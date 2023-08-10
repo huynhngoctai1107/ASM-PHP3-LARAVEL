@@ -19,23 +19,34 @@ class DetailPostController extends Controller
         $this->media = new MediaPosts();
 
     }
-    function detailPost($id){
+    function detailPost($slug){
+   
 
+        $condition=[
+            'posts.slug' => $slug, 
+            'posts.status'=>0 ,
 
+        ];
         $data= [
             'urlImg'=> 'img/posts/',
-            'post' => $this->post->getPost($id),
-            'images'=>$this->post->getPostImg($id),
+            'post' => $this->post->getPost($condition),
+            'images'=>$this->post->getPostImg($condition),
         ];
+      
+       $slugCategories = explode(',',$data['post']->slugcategory);
 
-       $slugCategory = explode(',',$data['post']->slugcategory);
 
-        foreach($slugCategory as $slug){
-            $values[]= $slug;
+
+         foreach($slugCategories as $slugCategory){
+            $values[]= $slugCategory;
         }
-
+        $condition=[
+            ['posts.status','=',0],
+            ['categories_post.slug','=',[$values]]
+        ];
+         
         $similarPosts=[
-            'post'=>$this->post->getCategoryPost($values),
+            'post'=>$this->post->getCategoryPost($condition),
             'img'=>$this->post->PostImg(),
             'urlImg'=> 'img/posts/',
         ];

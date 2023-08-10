@@ -20,9 +20,14 @@ class PostController extends Controller
         return $this->categorypost->getAllCategories();
     }
     public function getPost($slug){
+        $condition=[
+            'categories_post.slug' => $slug, 
+            'posts.status'=>0 ,
+
+        ];
          $data=[
 
-            'post'=>$this->post->getCategoryPost($slug),
+            'post'=>$this->post->getCategoryPost($condition),
             'img'=>$this->post->postImg(),
             'urlImg'=> 'img/posts/',
         

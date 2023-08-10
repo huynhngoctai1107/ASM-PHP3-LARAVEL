@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 
 class DeletePostController extends Controller
 {
-    function deletePost($id){
+    function deletePost($slug){
         $delete = new Posts();
 
         $condition = [
-            ['id','=',$id]
+            ['slug','=',$slug]
         ];
         $value = [
             'status'=>1,

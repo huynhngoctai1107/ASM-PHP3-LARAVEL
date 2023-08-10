@@ -20,11 +20,11 @@ class DetailProductController extends Controller
         $this->media = new MediaProducts();
 
     }
-    function detailProduct($id){
+    function detailProduct($slug){
 
 
         $condition=[
-            'products.id' => $id, 
+            'products.slug' => $slug, 
             'products.status'=>0 ,
 
         ];
@@ -32,7 +32,7 @@ class DetailProductController extends Controller
         $data= [
             'urlImg'=> 'img/products/',
             'product' => $product,
-            'images'=>$this->product->getProductImg($id),
+            'images'=>$this->product->getProductImg($condition),
         ];
 
        $slugCategory = explode(',',$data['product']->slugcategory);

@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 class DeleteProductController extends Controller
 {
-    function deleteProduct($id){
+    function deleteProduct($slug){
         $delete = new Products();
 
-        $condition= [
-            'id' =>$id
+        $condition = [
+            ['slug','=',$slug]
         ];
         $value=[
             'status'=>1,

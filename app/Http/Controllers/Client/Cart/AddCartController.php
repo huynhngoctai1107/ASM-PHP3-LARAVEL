@@ -20,22 +20,19 @@ class AddCartController extends Controller
     }
 
 
-    function addCart($id, Request $request){
+    function addCart($slug, Request $request){
          
-       
-        $product = $this->product->getProduct($id) ; 
-   
-        $productimg = $this->product->getProductImg($id);
+        $condition = [
+            ['products.slug','=',$slug]
+        ];
+        $product = $this->product->getProduct($condition) ; 
+      
         $user = Auth::user() ;
         // cắt hình trong chuỗi kí tự 
-        $imgProduct = explode(',', $productimg->img);
-         for($i=0 ; $i <count( $imgProduct); $i++){
-            $images =   $imgProduct[$i] ;
-            break;
-         }
+       
         
         $condition= [
-            'id_product' =>$id , 
+            'id_product' =>$product->id_product , 
             'id_user' =>$user->id , 
         ]; 
        $getProduct = $this->cart->getCart($condition) ;
@@ -59,7 +56,7 @@ class AddCartController extends Controller
                         
                 if( $addCart['quantity']==0){
                     $condition= [
-                        'id_product' =>$id
+                        'id_product' =>$product->id_product
                     ];  
                     $this->cart->deleteCart($condition);
                     return Redirect()->back()->with('cart','Sản phẩm đã bị xóa!') ;
@@ -77,6 +74,15 @@ class AddCartController extends Controller
             }
          
         }else{
+            $condition = [
+                ['products.slug','=',$slug]
+            ];
+            $productimg = $this->product->getProductImg($condition);
+            $imgProduct = explode(',', $productimg->img);
+             for($i=0 ; $i <count( $imgProduct); $i++){
+                $images =   $imgProduct[$i] ;
+                break;
+             }
             if($request->has('quantity')){
             $quantity = (int)$request->quantity;
             }else{
@@ -84,7 +90,7 @@ class AddCartController extends Controller
             }
             $addCart = [
                 'id_user'=> $user->id,
-                'id_product' => $id,
+                'id_product' => $product->id_product,
                 'quantity'=>$quantity , 
                 'price'=>$product->price ,
                 'total' =>$product->price * $quantity ,

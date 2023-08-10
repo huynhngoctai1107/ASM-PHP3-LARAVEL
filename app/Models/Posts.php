@@ -18,46 +18,43 @@ class Posts extends Model
             ->get();
 
     }
-                public function addPost($value){
+    public function addPost($value){
                     return $this
-                    ->insertGetId($value);
+                ->insertGetId($value);
             }
-        public function getPost($id){
-            return  $this->select('posts.id as id_posts','main_title','subtitles','content','posts.status as statuspost','date_input','compolation',DB::raw("GROUP_CONCAT(categories_post.slug) AS slugcategory"),DB::raw("GROUP_CONCAT(categories_post.id) AS idcategory"))
+        public function getPost($condition){
+            return  $this->select('posts.id as id_posts','posts.slug','main_title','subtitles','content','posts.status as statuspost','date_input','compolation',DB::raw("GROUP_CONCAT(categories_post.slug) AS slugcategory"),DB::raw("GROUP_CONCAT(categories_post.id) AS idcategory"))
             ->leftJoin('intermediary_posts','posts.id','=','intermediary_posts.id_posts')
             ->join('categories_post','intermediary_posts.id_category','=','categories_post.id')
-            ->where('posts.id','=',$id)
+            ->where($condition)
             ->orderBy('id_posts','desc')
             ->groupby('id_posts')->first();
         }
-    public function getPostImg($id){
+    public function getPostImg($slug){
         return $this->select('posts.id as id_post',DB::raw("GROUP_CONCAT(media_posts.image) AS img"))
         ->join('media_posts','media_posts.id_post','=','posts.id')
-        ->where('posts.id','=', $id)
+        ->where('posts.slug','=', $slug)
         ->groupby('id_post')->first();
         }
 
     public function postAll($condition){
-        return  $this->select('posts.id as id_posts','main_title','subtitles','compolation','content','posts.status as statuspost','date_input',DB::raw("GROUP_CONCAT(categories_post.slug) AS slugcategory"))
+        return  $this->select('posts.id as id_posts','main_title','posts.slug','subtitles','compolation','content','posts.status as statuspost','date_input',DB::raw("GROUP_CONCAT(categories_post.slug) AS slugcategory"))
         ->leftJoin('intermediary_posts','posts.id','=','intermediary_posts.id_posts')
         ->join('categories_post','intermediary_posts.id_category','=','categories_post.id')
         ->where($condition)
         ->orderBy('id_posts','desc')
         ->groupby('id_posts')->paginate(5);
     }
-    public function getCategoryPost($slug){
-        return  DB::table('categories_post')->select('posts.id as id_posts','main_title','subtitles','compolation','content','posts.status as statuspost','date_input',DB::raw("GROUP_CONCAT(categories_post.slug) AS slugcategory"))
+    public function getCategoryPost($condition){
+        return  DB::table('posts')->select('posts.id as id_posts','posts.slug','main_title','subtitles','compolation','content','posts.status as statuspost','date_input',DB::raw("GROUP_CONCAT(categories_post.slug) AS slugcategory"))
             ->leftJoin('intermediary_posts','posts.id','=','intermediary_posts.id_posts')
             ->join('categories_post','intermediary_posts.id_category','=','categories_post.id')
-            ->where([
-                ['posts.status','=',0],
-                ['categories_post.slug','=',[$slug]]
-                ])
+            ->where($condition)
             ->orderBy('id_posts','desc')
             ->groupby('id_posts')->get();
     }
     public function postlimit(){
-        return  $this->select('posts.id as id_posts','main_title','subtitles','compolation','content','posts.status as statuspost','date_input',DB::raw("GROUP_CONCAT(categories_post.slug) AS slugcategory"))
+        return  $this->select('posts.id as id_posts','main_title','subtitles','posts.slug','compolation','content','posts.status as statuspost','date_input',DB::raw("GROUP_CONCAT(categories_post.slug) AS slugcategory"))
             ->leftJoin('intermediary_posts','posts.id','=','intermediary_posts.id_posts')
             ->join('categories_post','intermediary_posts.id_category','=','categories_post.id')
             ->where('posts.status','=',0)

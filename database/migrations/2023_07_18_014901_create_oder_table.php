@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('address');
             $table->bigInteger('total_money');
             $table->timestamp('date_oder');
-         
+            $table->text('note');
+            $table->text('fullname');
             $table->timestamps();
         });
     }

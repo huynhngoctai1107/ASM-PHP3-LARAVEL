@@ -24,7 +24,7 @@
                     <div class="card-body">
 
                         @if (!empty($check['page']))
-                            <form class="col-12" method="post" action="/admin/edit-product/{{ $check['product']->id_product }}" enctype="multipart/form-data">
+                            <form class="col-12" method="post" action="/admin/edit-product/{{ $check['product']->slug }}" enctype="multipart/form-data">
                             @else
                                 <form action="/admin/add-product" method="post" class="col-12" enctype="multipart/form-data">
                         @endif
@@ -38,12 +38,13 @@
                                     <label class="card-header bg-title col-12">Tên sản phẩm</label>
                                     <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                         <input
-                                            value="@if (!empty($check['page'])) {{ $check['product']->nameproduct }} @else{{ old('nameProduct') }} @endif"
+                                            value="@if (!empty($check['page'])) {{ $check['product']->nameproduct }} @else{{ old('name') }} @endif"
                                             type="text" class="form-control" data-target="#reservationdatetime"
-                                            name="nameProduct" placeholder="Tên sản phẩm" />
+                                            name="name" placeholder="Tên sản phẩm" />
                                     </div>
                                 </div>
-
+                               
+                                <input type="hidden" name="id" value="{{$check['product']->id_product ?? ''}}">
 
                                 <div class="form-group bg-title">
                                     <div class="col-md-12 p-0">

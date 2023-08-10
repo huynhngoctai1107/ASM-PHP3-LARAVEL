@@ -38,7 +38,7 @@ class PayOderController extends Controller
                return Redirect()->back()->withErrors($this->validate->validateFormOder($request))->withInput($request->input());
            }else{
         
-            dd($request->all());
+         
                    $values =[
                        'id_user'=>$user->id, 
                        'fullname'=>$request->name , 
@@ -83,7 +83,8 @@ class PayOderController extends Controller
                         }
 
                       }elseif($request->pay==1){
-                      // thanh toan paypal  
+                            $usd = $request->total / 23200;
+                            dd(round($usd,2));
                       }else{
                         return view('client.page.404')  ;   
                         // thanh toan visa

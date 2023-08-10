@@ -18,10 +18,14 @@ class ProductController extends Controller
         $this->categoryProduct = new Categories_product() ;
     }
     public function getProduct($slug){
+        $condition=[
+            'categories_product.slug' => $slug, 
+            'categories_product.status'=>0 ,
 
+        ];
         $data=[
 
-            'product'=>$this->product->getCategoryProduct($slug),
+            'product'=>$this->product->getCategoryProduct($condition),
             'img'=>$this->product->productImg(),
             'urlImg'=> 'img/products/',
             "categoryProduct" => $this->product->getAllCategories(),

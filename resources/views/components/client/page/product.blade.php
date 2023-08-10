@@ -91,10 +91,10 @@
                             </div>
                             <div class="d-flex border-top">
                                 <small class="w-50 text-center border-end py-2">
-                                    <a class="text-body" href="/xem-chi-tiet-san-pham/{{$item->id_product}}"><i class="fa fa-eye text-primary me-2"></i>Xem chi tiết</a>
+                                    <a class="text-body" href="/xem-chi-tiet-san-pham/{{$item->slug}}"><i class="fa fa-eye text-primary me-2"></i>Xem chi tiết</a>
                                 </small>
                                 <small class="w-50 text-center py-2">
-                                    <a class="text-body" href="/add-cart/{{$item->id_product}}"><i class="fa fa-shopping-bag text-primary me-2"></i>Thêm vào giỏ hàng</a>
+                                    <a class="text-body" href="/add-cart/{{$item->slug}}"><i class="fa fa-shopping-bag text-primary me-2"></i>Thêm giỏ hàng</a>
                                 </small>
                             </div>
                         </div>

@@ -17,7 +17,8 @@
                                 @php
                                     $slugCategory = explode(',',$detail['post']->slugcategory)
                                 @endphp
-                                    @foreach($slugCategory as $slug)
+                                    @foreach($slugCategory as $slug
+                                    )
                                         <a class="badge bg-secondary text-decoration-none link-light" href="/blog/danh-muc/{{$slug}}"> {{strtolower($slug)}}</a>
                                     @endforeach
                            

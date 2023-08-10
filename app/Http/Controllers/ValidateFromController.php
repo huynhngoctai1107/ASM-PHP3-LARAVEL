@@ -253,7 +253,8 @@ class ValidateFromController extends Controller
   
     public function validateFormAddProducts(Request $request){
         $messages = [
-            'nameProduct.required' => 'Vui lòng nhập vào tên sản phẩm',
+            'name.required' => 'Vui lòng nhập vào tên sản phẩm',
+            'name.unique'=>'Tên sản phẩm đã bị trùng khớp với sản phẩm khác !',
             'describe.required' => ' Mô tả không được để trống',
             'content.required'=>'Nội dung không được để trống',
             'slug.required'=>'Đường dẫn không được để trống',
@@ -269,7 +270,7 @@ class ValidateFromController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'nameProduct' => 'required',
+                'name' => 'required|unique:products,name',
                 'content' => 'required',
                 'describe' => 'required',
                 'uploadfile' => 'required',
@@ -284,7 +285,8 @@ class ValidateFromController extends Controller
     }
     public function validateFormEditProducts(Request $request){
         $messages = [
-            'nameProduct.required' => 'Vui lòng nhập vào tên sản phẩm',
+            'name.required' => 'Vui lòng nhập vào tên sản phẩm',
+            'name.unique'=>'Tên sản phẩm đã bị trùng khớp với sản phẩm khác !',
             'describe.required' => ' Mô tả không được để trống',
             'content.required'=>'Nội dung không được để trống',
             'slug.required'=>'Đường dẫn không được để trống',
@@ -300,8 +302,11 @@ class ValidateFromController extends Controller
 
         $validator = Validator::make(
             $request->all(),
-            [
-                'nameProduct' => 'required',
+            [   
+                'name' => [ 
+                    'required',
+                      Rule ::unique('products')->ignore((int)$request->id),
+                ],
                 'content' => 'required',
                 'describe' => 'required',
 
@@ -318,11 +323,11 @@ class ValidateFromController extends Controller
     public function validateFormAddPost(Request $request){
         $messages = [
             'main_title.required' => 'Vui lòng nhập vào tiêu đề chính',
+            'main_title.unique'=>'Tên bài viết đã bị trùng khớp với bài viết trước đó !',
             'subtitles.min'=>'Nội dung tiêu đề phụ phải lớn hơn 20 kí tự',
             'main_title.min'=>'Nội dung tiêu đề chính phải lớn hơn 20 kí tự',
             'contents.min'=>'Nội dung chính phải lớn hơn 20 kí tự',
             'subtitles.required'=>' Vui lòng nhập vào tiêu đề phụ',
-
             'contents.required'=>'Vui lòng nhập vào nội dung',
             'uploadfile.required'=>'Hình ảnh không được để trống',
             'category.required'=>'Loại không được bỏ trống',
@@ -333,7 +338,7 @@ class ValidateFromController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'main_title' => 'required|min:20',
+                'main_title' => 'required|min:20||unique:posts,main_title',
                 'subtitles' => 'required|min:20',
                 'contents' => 'required|min:20',
                 'uploadfile' => 'required',
@@ -352,6 +357,7 @@ class ValidateFromController extends Controller
             'main_title.required' => 'Vui lòng nhập vào tiêu đề chính',
             'subtitles.min'=>'Nội dung tiêu đề phụ phải lớn hơn 20 kí tự',
             'main_title.min'=>'Nội dung tiêu đề chính phải lớn hơn 20 kí tự',
+            'main_title.unique'=>'Tên bài viết đã bị trùng khớp với bài viết trước đó !',
             'contents.min'=>'Nội dung chính phải lớn hơn 20 kí tự',
             'subtitles.required'=>' Vui lòng nhập vào tiêu đề phụ',
             'date_input'=>'Ngày tháng năm không được để trống',
@@ -363,8 +369,13 @@ class ValidateFromController extends Controller
 
         $validator = Validator::make(
             $request->all(),
-            [
-                'main_title' => 'required|min:20',
+            [   
+                'main_title' => [ 
+                    'required',
+                      Rule ::unique('posts')->ignore((int)$request->id),
+                      'min:20'
+                ],
+               
                 'subtitles' => 'required|min:20',
                 'contents' => 'required|min:20',
                 'category'=>'required',

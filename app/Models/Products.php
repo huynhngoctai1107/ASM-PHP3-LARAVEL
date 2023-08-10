@@ -15,18 +15,18 @@ class Products extends Model
 
 
 
-     public function getProduct($id){
+     public function getProduct($condition){
 
-        return  DB::table('products')->select('products.id as id_product','products.name as nameproduct','content','describe','price','date_input','products.status as statusproduct',DB::raw("GROUP_CONCAT(categories_product.slug) AS slugcategory"),DB::raw("GROUP_CONCAT(categories_product.id) AS idcategory"))
+        return  DB::table('products')->select('products.id as id_product','products.name as nameproduct','products.slug','content','describe','price','date_input','products.status as statusproduct',DB::raw("GROUP_CONCAT(categories_product.slug) AS slugcategory"),DB::raw("GROUP_CONCAT(categories_product.id) AS idcategory"))
         ->leftJoin('intermediary_products','products.id','=','intermediary_products.id_product')
         ->join('categories_product','intermediary_products.id_category','=','categories_product.id')
-        ->where('products.id','=',$id)
+        ->where($condition)
         ->orderBy('id_product','desc')
         ->groupby('id_product')->first();
     }
     public function getCategoryProduct($slug){
 
-        return  $this->select('products.id as id_product','products.name as nameproduct','content','describe','price','date_input','products.status as statusproduct',DB::raw("GROUP_CONCAT(categories_product.slug) AS slugcategory"),DB::raw("GROUP_CONCAT(categories_product.id) AS idcategory"))
+        return  $this->select('products.id as id_product','products.name as nameproduct','content','products.slug','describe','price','date_input','products.status as statusproduct',DB::raw("GROUP_CONCAT(categories_product.slug) AS slugcategory"),DB::raw("GROUP_CONCAT(categories_product.id) AS idcategory"))
             ->leftJoin('intermediary_products','products.id','=','intermediary_products.id_product')
             ->join('categories_product','intermediary_products.id_category','=','categories_product.id')
             ->where([
@@ -45,10 +45,10 @@ class Products extends Model
             ->orderBy('id_product','desc')
             ->groupby('id_product')->get();
     }
-    public function getProductImg($id){
+    public function getProductImg( $condition){
         return $this->select('products.id as id_product',DB::raw("GROUP_CONCAT(media_products.image) AS img"))
         ->join('media_products','media_products.id_product','=','products.id')
-        ->where('products.id','=',$id)
+        ->where($condition)
         ->groupby('id_product')->first();
         }
     public function getAllCategories()
@@ -66,7 +66,7 @@ class Products extends Model
 
 
     public function ClientProductAll(){
-        return  $this->select('products.id as id_product','products.name as nameproduct','compolation','content','describe','price','date_input','products.status as statusproduct',DB::raw("GROUP_CONCAT(categories_product.slug) AS slugcategory"))
+        return  $this->select('products.id as id_product','products.slug','products.name as nameproduct','compolation','content','describe','price','date_input','products.status as statusproduct',DB::raw("GROUP_CONCAT(categories_product.slug) AS slugcategory"))
         ->leftJoin('intermediary_products','products.id','=','intermediary_products.id_product')
         ->join('categories_product','intermediary_products.id_category','=','categories_product.id')
         ->where('products.status','=',0)
@@ -75,7 +75,7 @@ class Products extends Model
     }
 
     public function productAll(){
-        return  $this->select('products.id as id_product','products.name as nameproduct','compolation','content','describe','price','date_input','products.status as statusproduct',DB::raw("GROUP_CONCAT(categories_product.slug) AS slugcategory"))
+        return  $this->select('products.id as id_product','products.name as nameproduct','compolation','products.slug','content','describe','price','date_input','products.status as statusproduct',DB::raw("GROUP_CONCAT(categories_product.slug) AS slugcategory"))
         ->leftJoin('intermediary_products','products.id','=','intermediary_products.id_product')
         ->join('categories_product','intermediary_products.id_category','=','categories_product.id')
         ->where('products.status','=',0)

@@ -8,6 +8,7 @@ use App\Models\Intermediary_posts;
 use App\Models\MediaPosts;
 use App\Models\Posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 
 class AddPostController extends Controller
@@ -50,6 +51,8 @@ class AddPostController extends Controller
                       "subtitles" => $request->subtitles,
                       "content" => $request->contents,
                       "date_input"=>date('Y-m-d'),
+                      "slug"=>Str::slug($request->main_title),
+
                       "compolation"=>auth()->user()->email,
                   );
                   $idpost=  $this->post->addPost($datapost);

@@ -7,6 +7,7 @@ use App\Http\Controllers\ValidateFromController;
 use App\Models\Intermediary_posts;
 use App\Models\MediaPosts;
 use App\Models\Posts;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -25,60 +26,72 @@ class EditPostController extends Controller
         $this->intermediary_posts = new Intermediary_posts();
     }
 
-    function viewEdit($id){
+    function viewEdit($slug){
 
+        $condition=[
+            'posts.slug' => $slug, 
+            'posts.status'=>0 ,
 
+        ];
         $data= [
             'categoryPost'=> $this->post->getAllCategories(),
             'page' =>'edit',
-            'post' => $this->post->getPost($id),
-            'images'=>$this->post->getPostImg($id),
+            'post' => $this->post->getPost($condition),
+            'images'=>$this->post->getPostImg($condition),
 
         ];
         return view('admin.page.addEdit.post',['data'=>$data]);
     }
-    function editPost($id,Request $request){
+    function editPost($slug,Request $request){
+       
+        $condition=[
+            'posts.slug' => $slug, 
+            'posts.status'=>0 ,
 
-
+        ];
         if ($this->validate->validateFormEditPost($request)->fails()) {
 
             $data= [
                 'categoryPost'=> $this->post->getAllCategories(),
                 'page' =>'edit',
-                'post' => $this->post->getPost($id),
-                'images'=>$this->post->getPostImg($id),
+                'post' => $this->post->getPost($condition),
+                'images'=>$this->post->getPostImg($condition),
 
             ];
-            return Redirect::to("/admin/edit-post/$id")->withErrors($this->validate->validateFormEditPost($request))->withInput($request->input())->with(['data'=>$data]);
+            return Redirect()->back()->withErrors($this->validate->validateFormEditPost($request))->withInput($request->input())->with(['data'=>$data]);
         }
         else{
-            $condition = [
-                ['id','=',$id]
-            ];
+           
             $dataPost =[
                 "main_title" => $request->main_title,
                 "subtitles" => $request->subtitles,
                 "content" => $request->contents,
+                "slug"=>Str::slug($request->main_title),
                 "date_input"=>$request->date_input,
                 "compolation"=>auth()->user()->email,
             ];
-          
+            
+
+            $condition = [
+                ['posts.slug','=',$slug]
+            ];
+       
           
 
                 $this->post->editPost($condition,$dataPost) ;
-                $this->intermediary_posts->DeletePost($id);
+                $this->intermediary_posts->DeletePost($request->id);
                 $countCategory=count($request->category)  ;
                 for($i=0; $i<$countCategory; $i ++ ){
                     $dataCategory = array(
                         "id_category" => $request->category[$i],
-                        "id_posts"=> $id,
+                        "id_posts"=> $request->id,
                     );
                     $this->intermediary_posts->AddCategoryPost($dataCategory);
                 }
             if(empty($request->uploadfile)){
 
             }else {
-                $this->media->DeleteMediaPost($id);
+                $this->media->DeleteMediaPost($request->id);
                 $countImg=count($request->uploadfile)  ;
                 for ($i = 0; $i < $countImg; $i++) {
                     $fileName = time() . $i . '-' . 'imgPost' . '.' . $request->uploadfile[$i]->extension();
@@ -86,7 +99,7 @@ class EditPostController extends Controller
                     $request->merge(['image' => $fileName]);
                     $dataCategory = array(
                         "image" => $request->image,
-                        "id_post" => $id,
+                        "id_post" => $request->id,
                     );
                     $this->media->AddMediaPost($dataCategory);
                 }
