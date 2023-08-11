@@ -87,18 +87,18 @@ Danh sách người dùng
                                                         @php
                                                             $url = $data['urlImg'].''.$item->img;
                                                         @endphp
-                                                             @if($item->social==0)
+                                                            @if($item->social==0)
                                                                 <img width="100" src='{{"$url"}}' alt="hình ảnh user">
                                                             @else
-                                                                             @if(@is_array(getimagesize($item->img)))
+                                                                   @if(file_exists($item->img))
 
                                                                                 <img width="100"
                                                                                      src="{{$item->img}}"
                                                                                      alt="hình ảnh user">
-                                                                                 @else
+                                                                    @else
                                                                                 <img width="100" src='{{asset("$url")}}' alt="hình ảnh user">
 
-                                                                                 @endif
+                                                                    @endif
 
                                                             @endif
                                                     @else

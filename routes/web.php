@@ -36,6 +36,10 @@ use App\Http\Controllers\Admin\Posts\AddPostController;
 use App\Http\Controllers\Admin\Posts\DeletePostController;
 use App\Http\Controllers\Admin\Posts\EditPostController;
 use App\Http\Controllers\Admin\Posts\ListPostController;
+// admin oder 
+use App\Http\Controllers\Admin\Order\ListOrderController;
+use App\Http\Controllers\Admin\Order\DetailOrderController;
+use App\Http\Controllers\Admin\Order\DeleteOrderController;
 //client product
 use App\Http\Controllers\Client\Categories\ProductController;
 use App\Http\Controllers\Client\Products\DetailProductController;
@@ -123,15 +127,17 @@ Route::group(['prefix' => 'admin','middleware'=>['adminLogin']],function(){
             Route::get('/delete-category-product/{slug}',[ DeleteCategoryProductController::class,'deleteCategoryProduct']);
             Route::get('/delete-product/{slug}',[ DeleteProductController::class,'deleteProduct']);
             Route::get('/delete-post/{slug}',[ DeletePostController::class,'deletePost']);
+            Route::get('/delete-order/{id}',[ DeleteOrderController::class,'deleteOder']);
 
+            
            //list
            Route::get('/list-categories-post',[ ListCategoryController::class,'listCategoryPost']);
            Route::get('/list-categories-product',[ ListCategoryProductController::class,'listCategoryProducts']);
            Route::get('/list-posts',[ ListPostController::class,'listPosts']);
            Route::get('/list-products',[ ListProductController::class,'listProducts']);
            Route::get('/list-users',[ ListsUserController::class,'listUsers']);
-           Route::get('/list-oders',[ ViewAdminController::class,'listOders']);
-           Route::get('/bill/{id}',[ ViewAdminController::class,'bill']);
+           Route::get('/list-oders',[ ListOrderController::class,'listOrder']);
+           Route::get('/chi-tiet-hoa-don/{id}',[ DetailOrderController::class,'detailOrder']);
            //edit form method get
 
 

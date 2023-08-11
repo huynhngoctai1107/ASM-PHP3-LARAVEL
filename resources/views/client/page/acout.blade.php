@@ -18,6 +18,11 @@
                 {{ session('status') }}
             </div>
              @endif  
+             @if (session('error'))
+             <div class="alert alert-danger">
+                 {{ session('error') }}
+             </div>
+              @endif 
         </div>
  
         <x-client.page.view-acout :oder="$oder" :product='$product' :count="$count"></x-client.page.view-acout>

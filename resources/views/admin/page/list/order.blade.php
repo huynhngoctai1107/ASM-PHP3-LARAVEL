@@ -12,7 +12,7 @@ Danh sách đơn hàng
     <div class="content-wrapper  bg-white mt-5">
         <!-- Content Header (Page header) -->
 
-
+         
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
@@ -26,41 +26,43 @@ Danh sách đơn hàng
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-
-
+                                @if (session()->has('order'))
+                                <div class="alert alert-success" role="alert">{{session('order')}}</div>
+                            @endif
+                            @if (session()->has('order-error'))
+                            <div class="alert alert-danger" role="alert">{{session('order-error')}}</div>
+                        @endif
+                            
                                 <table class="table table-bordered table-hover">
                                     <thead>
                                       <tr>
-                                        <th class="text-center"></th>
-                                        <th class="text-center">Id</th>
-                                        <th class="text-center">Email khách hàng</th>
-
-
+                                        <th class="text-center">Tên khách hàng</th>
+                                        <th class="text-center">Số điện thoại khách hàng</th>
+                                        <th class="text-center">Giá tiền sản phẩm</th>
                                         <th class="text-center">Nhiệp vụ</th>
                                       </tr>
                                     </thead>
+    
                                     <tbody>
-                                      <tr data-widget="expandable-table" aria-expanded="false">
-                                        <td class="">
-                                            <svg onclick="showhiden()" xmlns="http://www.w3.org/2000/svg" width="25" height="25"
-                                                style="margin-left: 20px" fill="currentColor"
-                                                class="bi bi-plus-circle-fill" viewBox="0 0 16 16 ">
-                                                <path
-                                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
-                                            </svg>
+                                        @foreach($order as $item)
+                                      <tr data-widget="expandable-table" aria-expanded="false"  style=" @if($item->status == 4 ) background-color: #FCAEAE ; color:white !important @endif"> <a href="/admin/edit-order/{{$item->id}}">
+                                       
+                                        <td class="text-center"> {{$item->fullname}}
                                         </td>
-                                        <td class="text-center">1</td>
-                                        <td class="text-center">htai67934@gmail.com
+                                        <td class="text-center"> {{$item->phone}}
                                         </td>
 
-                                        <td class="text-center"> <a href=""><svg
+                                        <td class="text-center"><strong class="text-danger"  style=" @if($item->status == 4 )  color:white !important @endif">{{number_format($item->total_money)}} VND</strong>
+                                        </td>
+
+                                        <td class="text-center" ><svg 
                                                     xmlns="http://www.w3.org/2000/svg" width="30px" height="30px"
                                                     fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                     <path
                                                         d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                                     <path fill-rule="evenodd"
                                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                                                </svg>|<a href=""><svg xmlns="http://www.w3.org/2000/svg"
+                                                </svg>|<a href="/admin/delete-order/{{$item->id}}"><svg xmlns="http://www.w3.org/2000/svg"
                                                         width="30px" height="30px" fill="currentColor"
                                                         class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                         <path
@@ -70,35 +72,29 @@ Danh sách đơn hàng
                                         </td>
                                       </tr>
                                       <tr class="expandable-body">
-                                        <td colspan="8" class="col-12" style="padding-left: 20px !important; padding-top: 20px !important">
+                                        <td colspan="8" class="col-12" style="padding-left: 20px !important; padding-top: 20px !important;">
 
-                                            <h6 class="text-uppercase font-weight-bold">Thanh toán: <span class="text-black font-weight-normal  text-capitalize">Thanh toán khi nhận hàng</span></h6>
-                                            <h6 class="text-uppercase font-weight-bold">Địa chỉ: <span class=" font-weight-normal  text-capitalize">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora culpa quas beatae commodi eos nulla, soluta officia qui architecto praesentium! Provident est nostrum corporis tempore nam. Voluptatibus porro earum nisi?</span></h6>
-                                            <h6 class="text-uppercase font-weight-bold">Số điện thoại: <span class="text-black font-weight-normal  text-capitalize">0949615859</span></h6>
-                                            <h6 class="text-uppercase font-weight-bold">Tổng tiền: <span class=" font-weight-normal  text-capitalize text-red">500.000 VND</span></h6>
-                                            <h6 class="text-uppercase font-weight-bold">Ngày đặt hàng: <span class=" font-weight-normal  text-capitalize text-black">11/07/2003</span></h6>
-                                            <h6 class="text-uppercase font-weight-bold">Trạng thái: <span class=" font-weight-normal  text-capitalize text-success">Đang xử lí</span></h6>
-                                            <h6 class="text-uppercase font-weight-bold">Thông tin chi tiết: <a href="/admin/bill/1" class=" font-weight-normal  text-capitalize text-red">Xem tại đây !</a></h6>
+                                            <h6 class="text-uppercase font-weight-bold">Thanh toán: <span class="text-green font-weight-normal  text-capitalize">@if($item->pay==3)Thanh toán khi nhận hàng @else Đã thanh toán @endif</span></h6>
+                                            <h6 class="text-uppercase font-weight-bold">Địa chỉ: <span class=" font-weight-normal  text-capitalize">{{$item->address}}</span></h6>
+                                            <h6 class="text-uppercase font-weight-bold">Số điện thoại: <span class="text-black font-weight-normal  text-capitalize">{{$item->phone}}</span></h6>
+                                             <h6 class="text-uppercase font-weight-bold">Ngày đặt hàng: <span class=" font-weight-normal  text-capitalize text-black">{{date('d-m-Y',strtotime($item->date_oder))}}</span></h6>
+                                            <h6 class="text-uppercase font-weight-bold">Trạng thái: <span class=" font-weight-normal  text-capitalize text-success">@if($item->status == 0 ) Chờ xác nhận đơn hàng @elseif($item->status == 1) Đang vận chuyển @elseif($item->status == 2) Đang giao hàng @elseif($item->status == 3) Giao hàng thành công @else Đơn hàng này đã bị hủy @endif</span></h6>
+                                            <h6 class="text-uppercase font-weight-bold">Thông tin chi tiết: <a href="/admin/chi-tiet-hoa-don/{{$item->id}}" class=" font-weight-normal  text-capitalize text-red">Xem tại đây !</a></h6>
 
                                           </p>
                                         </td>
                                       </tr>
 
-
+                                      @endforeach
 
                                     </tbody>
                                   </table>
 
                                 <div class="col-12 text-right">
                                     <div class="pagination mt-4 ">
-                                        <a href="#">&laquo;</a>
-                                        <a href="#">1</a>
-                                        <a class="active" href="#">2</a>
-                                        <a href="#">3</a>
-                                        <a href="#">4</a>
-                                        <a href="#">5</a>
-                                        <a href="#">6</a>
-                                        <a href="#">&raquo;</a>
+                                        <div class="row ">
+                                            {{ $order->render("pagination::semantic-ui") }}
+                                            </div>
                                     </div>
                                 </div>
                             </div>

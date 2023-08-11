@@ -6,14 +6,24 @@
         <div class="col-lg-5">
           <div class="card mb-4">
             <div class="card-body text-center">
-              <img src="
-              @if(auth()->user()->img)
-              {{auth()->user()->img}}
-             @else
-             https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp
-             @endif
-             " alt="avatar"
-              class="rounded-circle img-fluid" style="width: 150px;">
+                  @if(auth()->user()->img)
+                  @php
+                      $url = env('APP_LINK_EAMIL').'/img/users/'.auth()->user()->img;
+                  @endphp
+                      @if(auth()->user()->social==0)
+                          <img width="100"   class="rounded-circle img-fluid" style="width: 150px;" src='{{"$url"}}' alt="hình ảnh user">
+                      @else
+                            @if(file_exists(auth()->user()->img))
+                                          <img  src="{{auth()->user()->img}}"alt="hình ảnh user"   class="rounded-circle img-fluid" style="width: 150px;">
+                              @else
+                                          <img src='{{asset("$url")}}'   class="rounded-circle img-fluid" style="width: 150px;" alt="hình ảnh user">
+                              @endif
+                      @endif
+              @else
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"   class="rounded-circle img-fluid" style="width: 150px;" alt="avatar">
+
+              @endif
+            
               <h5 class="my-3">{{auth()->user()->name}}</h5>
                <p class="text-muted mb-4">
                 @if(auth()->user()->level == 0)

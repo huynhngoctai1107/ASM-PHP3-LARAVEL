@@ -23,32 +23,29 @@ class EditUserController extends Controller
    public function editUser($id, Request $request){
     if ($this->validate->validateFormEditUser($request,$id)->fails()) {
         return Redirect::to("/admin/edit-user/$id")->withErrors($this->validate->validateFormEditUser($request,$id))->withInput($request->input());
-    }else{
-
-        if($request->has('uploadfile')){
-            $fileName = time().'-'.'imgUser'.'.'.$request->uploadfile->extension() ;
-            $request->uploadfile->move(public_path("img/users"), $fileName);
-            $request->merge(['image'=>$fileName]);
-        }
-
-
-
-        $dataArray =[
-            "name" => $request->fullName,
-            "birthday" => $request->birthday,
-            "email" => $request->email,
-            "gender" => $request->gender,
-            "phone" => $request->phone,
-            "social" => 0,
-            "token" => strtoupper(Str::random(10)),
-            "img"=> $request->image,
-            "level"=>$request->level,
-            "status"=>$request->status,
-        
-
-        ];
-
-
+    }else{ 
+        $users = new User();
+        $user= $users->getUser($id);
+            if($request->has('uploadfile')){
+                $fileName = time().'-'.'imgUser'.'.'.$request->uploadfile->extension() ;
+                $request->uploadfile->move(public_path("img/users"), $fileName);
+                $request->merge(['image'=>$fileName]);
+                $img = $request->image;
+            }else{
+               
+                $img = $user->img;
+            }
+            $dataArray =[
+                "name" => $request->fullName,
+                "birthday" => $request->birthday,
+                "email" => $request->email,
+                "gender" => $request->gender,
+                "phone" => $request->phone,
+                "social" => $user->social,
+                "img"=> $img,
+                "level"=>$request->level,
+                "status"=>$request->status,
+            ];
         $users = new User();
         $user= $users->editUser($id,$dataArray);
         return redirect('/admin/list-users')->with('edit-user', "Chỉnh sửa tài khoản thành công ");

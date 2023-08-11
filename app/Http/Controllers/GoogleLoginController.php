@@ -32,14 +32,12 @@ class GoogleLoginController extends Controller
     {
        return Socialite::driver('google')->redirect();
     }
-    function check(){
 
-        }
 
     public function callbackFromGoogle(Request $request)
     {
 
-      try {
+      try { 
         $user = Socialite::driver('google')->user();
     } catch (\Exception $e) {
         return redirect()->back();

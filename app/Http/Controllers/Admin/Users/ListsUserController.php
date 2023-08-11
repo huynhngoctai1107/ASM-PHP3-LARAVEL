@@ -14,7 +14,7 @@ class ListsUserController extends Controller
         $data=[
             'getUsers'=>$users->getAllUsers(),
             'numberOderUser'=>$users->numberOderUser(),
-            'urlImg'=> 'img/users/',
+            'urlImg'=>env('APP_LINK_EAMIL').'/img/users/',
         ];
         return view('admin.page.list.user',['data'=>$data]);
     }

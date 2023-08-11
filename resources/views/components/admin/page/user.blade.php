@@ -39,7 +39,7 @@
                             <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
                                 <input type="text"
                                     value="@if (!empty($check)) {{$check->name}}  @else{{ old('fullName') }} @endif"
-                                    class="form-control  " data-target="#reservationdatetime" name="fullName"
+                                    class="form-control" data-target="#reservationdatetime" name="fullName"
                                     placeholder="Tên người dùng" />
                             </div>
                         </div>
@@ -75,9 +75,9 @@
                             <label class="card-header bg-title col-12">Giới tính</label>
 
                             <div class="form-check form-check-inline">
-                                <input class="m-2" type=radio name="gender" value="Nam"  @if (!empty($check)) {{$check->gender =='Nam' ? 'checked':''}}  @else{{ old('gender') =='Nam' ? 'checked':'' }} @endif>Nam</option>
-                                <input class="m-2" type=radio name="gender" value="Nữ"  @if (!empty($check)) {{$check->gender =='Nữ' ? 'checked':''}}  @else{{ old('gender') =='Nữ' ? 'checked':'' }} @endif>Nữ</option>
-                                <input class="m-2" type=radio name="gender" value="0"  @if (!empty($check)) {{$check->gender =='0' ? 'checked':''}}  @else{{ old('gender')=='0' ? 'checked':'' }} @endif>Khác</option>
+                                <input class="m-2" type=radio name="gender" value="Nam"  @if (!empty($check)) {{$check->gender =='Nam' ? 'checked':''}}  @else{{ old('gender') =='Nam' ? 'checked':'' }} @endif>Nam
+                                <input class="m-2" type=radio name="gender" value="Nữ"  @if (!empty($check)) {{$check->gender =='Nữ' ? 'checked':''}}  @else{{ old('gender') =='Nữ' ? 'checked':'' }} @endif>Nữ
+                                <input class="m-2" type=radio name="gender" value="0"  @if (!empty($check)) {{$check->gender =='0' ? 'checked':''}}  @else{{ old('gender')=='0' ? 'checked':'' }} @endif>Khác
 
                             </div>
                         </div>
@@ -98,8 +98,8 @@
                         <div class="form-group">
 
                             <label class="card-header bg-title col-12">Trạng thái hoạt động</label>
-                            <input class="m-2" type=radio name="status" value="1"  @if (!empty($check)) {{$check->status =='1' ? 'checked':''}}  @else{{ old('status')=='1' ? 'checked':'' }} @endif>Đang hoạt động</option>
-                            <input class="m-2" type=radio name="status" value="0"  @if (!empty($check)) {{$check->status =='0' ? 'checked':''}}  @else{{ old('status')=='0' ? 'checked':'' }} @endif>Không hoạt động</option>
+                            <input class="m-2" type=radio name="status" value="1"  @if (!empty($check)) {{$check->status =='1' ? 'checked':''}}  @else{{ old('status')=='1' ? 'checked':'' }} @endif>Đang hoạt động
+                            <input class="m-2" type=radio name="status" value="0"  @if (!empty($check)) {{$check->status =='0' ? 'checked':''}}  @else{{ old('status')=='0' ? 'checked':'' }} @endif>Không hoạt động
 
 
 
@@ -108,8 +108,9 @@
                         <div class="form-group">
                             <label class="card-header bg-title col-12">Loại tài khoản</label>
 
-                            <input class="m-2" type=radio name="level" value="0"  @if (!empty($check)) {{$check->level =='0' ? 'checked':''}}  @else{{ old('level')=='0' ? 'checked':'' }} @endif>Tài khoản khách hàng</option>
-                            <input class="m-2" type=radio name="level" value="1"  @if (!empty($check)) {{$check->level =='1' ? 'checked':''}}  @else{{ old('level')=='1' ? 'checked':'' }} @endif>Tài khoản admin</option>
+                            <input class="m-2" type=radio name="level" value="0"  @if(!empty($check)){{$check->level=='0'?'checked':''}}@else{{old('level')=='0'?'checked':'' }}@endif>Tài khoản khách hàng
+                            <input class="m-2" type=radio name="level" value="1"  @if(!empty($check)){{$check->level=='1'?'checked':''}}@else{{old('level')=='1'?'checked':'' }}@endif>Tài khoản biên tập viên
+                            <input class="m-2" type=radio name="level" value="2"  @if(!empty($check)){{$check->level=='2'?'checked':''}}@else{{old('level')=='2'?'checked':'' }}@endif>Tài Quản trị tối cao
 
                         </div>
                         <div class="form-group">
@@ -117,7 +118,7 @@
 
                             <div class="input-group date" id="reservationdate" data-target-input="nearest">
 
-                                <input type='file'   value="@if(!empty($check)){{asset("img/users/$check->img")}}@else{{old('uploadfile')}} @endif" name="uploadfile" id="imgInp" />
+                                <input type='file'   value="@if(!empty($check))@else{{old('uploadfile')}} @endif" name="APP_LINK_EAMIL" id="imgInp" />
                                 <img width="100" id="blah" src="#" alt="your image" />
                             </div>
                         </div>

@@ -13,8 +13,16 @@ class Oders extends Model
     {
         return $this
             ->where($condition)
-            ->orderBy('oders.id', 'ASC')
+            ->orderBy('oders.id', 'desc')
             ->get();
+
+    }
+    public function getOrdersPaginate($condition)
+    {
+        return $this
+            ->where($condition)
+            ->orderBy('oders.status', 'asc')
+            ->paginate(3);
 
     }
 
