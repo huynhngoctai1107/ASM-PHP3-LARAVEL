@@ -163,6 +163,7 @@
                   </label>
                  
                 </div>
+                
                 <div class="d-flex my-3 justify-content-center">
                   <div class="  ms-4 d-flex align-items-center ">
                     <input class="form-check-input " class="checked" value="3" {{old('pay')==3 ? 'checked':''}} type="radio" name="pay" id="radioNoLabel3"

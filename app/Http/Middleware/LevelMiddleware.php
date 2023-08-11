@@ -22,9 +22,7 @@ class LevelMiddleware
 
                 return $next($request);
             }else{
-                session()->flash('error-delete-user','Tài khoản chưa có quyền chỉnh sửa hoặc xóa tài khoản');
-                $link = str_replace(url('/'), '', url()->previous());
-                return redirect("$link");
+                return redirect()->back()->with('error-delete-user','Tài khoản chưa có quyền chỉnh sửa hoặc xóa, Vui lòng đăng nhập vào tài khoản khác !');
             }
 
     }

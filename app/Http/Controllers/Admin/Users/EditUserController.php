@@ -24,17 +24,21 @@ class EditUserController extends Controller
     if ($this->validate->validateFormEditUser($request,$id)->fails()) {
         return Redirect::to("/admin/edit-user/$id")->withErrors($this->validate->validateFormEditUser($request,$id))->withInput($request->input());
     }else{ 
+      
         $users = new User();
         $user= $users->getUser($id);
-            if($request->has('uploadfile')){
+         
+        if($request->has('uploadfile')){
                 $fileName = time().'-'.'imgUser'.'.'.$request->uploadfile->extension() ;
                 $request->uploadfile->move(public_path("img/users"), $fileName);
                 $request->merge(['image'=>$fileName]);
                 $img = $request->image;
             }else{
-               
+             
                 $img = $user->img;
             }
+
+            
             $dataArray =[
                 "name" => $request->fullName,
                 "birthday" => $request->birthday,

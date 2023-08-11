@@ -118,11 +118,11 @@
 
                             <div class="input-group date" id="reservationdate" data-target-input="nearest">
 
-                                <input type='file'   value="@if(!empty($check))@else{{old('uploadfile')}} @endif" name="APP_LINK_EAMIL" id="imgInp" />
+                                <input type='file'value="@if(!empty($check))@else{{old('uploadfile')}} @endif" name="uploadfile" id="imgInp" />
                                 <img width="100" id="blah" src="#" alt="your image" />
                             </div>
                         </div>
-                        <button class="button-63" type="submit" name="addUser" role="button">Thêm</button>
+                        <button class="button-63" type="submit" name="addUser" role="button"> @if(!empty($check)) Sửa @else Thêm @endif </button>
                         </form>
 
                     </div>

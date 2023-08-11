@@ -36,6 +36,7 @@ use App\Http\Controllers\Admin\Posts\AddPostController;
 use App\Http\Controllers\Admin\Posts\DeletePostController;
 use App\Http\Controllers\Admin\Posts\EditPostController;
 use App\Http\Controllers\Admin\Posts\ListPostController;
+use App\Http\Controllers\Admin\Order\EditOrderController;
 // admin oder 
 use App\Http\Controllers\Admin\Order\ListOrderController;
 use App\Http\Controllers\Admin\Order\DetailOrderController;
@@ -99,6 +100,11 @@ Route::group(['prefix' => 'admin','middleware'=>['adminLogin']],function(){
             Route::post('/edit-user/{id}',[ EditUserController::class,'editUser']);
             Route::post('/add-user',[ AddUserController::class,'addUser']);
             Route::get('/delete-user/{id}',[ DelectUserController::class,'deleteUser']);
+
+            // oder 
+            Route::post('/edit-order/{id}',[ EditOrderController::class,'editOrder']);
+            Route::get('/delete-order/{id}',[ DeleteOrderController::class,'deleteOder']);
+
         });
             Route::get('/add-category-post',[ AddCategoryController::class,'viewCategory']);
             Route::get('/add-category-product',[ AddCategoryProductController::class,'viewCategory']);
@@ -116,6 +122,8 @@ Route::group(['prefix' => 'admin','middleware'=>['adminLogin']],function(){
             Route::post('/edit-category-product/{slug}',[ EditCategoryProductController::class,'editCategoryProduct']);
             Route::post('/edit-product/{slug}',[ EditProductController::class,'editProduct']);
             Route::post('/edit-post/{slug}',[ EditPostController::class,'editPost']);
+         
+            
             // add method post
             Route::post('/add-category-post',[ AddCategoryController::class,'addCategory']);
             Route::post('/add-category-product',[ AddCategoryProductController::class,'addCategory']);
@@ -127,8 +135,8 @@ Route::group(['prefix' => 'admin','middleware'=>['adminLogin']],function(){
             Route::get('/delete-category-product/{slug}',[ DeleteCategoryProductController::class,'deleteCategoryProduct']);
             Route::get('/delete-product/{slug}',[ DeleteProductController::class,'deleteProduct']);
             Route::get('/delete-post/{slug}',[ DeletePostController::class,'deletePost']);
-            Route::get('/delete-order/{id}',[ DeleteOrderController::class,'deleteOder']);
-
+            
+            
             
            //list
            Route::get('/list-categories-post',[ ListCategoryController::class,'listCategoryPost']);
