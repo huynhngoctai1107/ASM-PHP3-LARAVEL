@@ -62,10 +62,13 @@
             <img class="me-2" width="45px"
               src="https://wiki.soulcams.com/images/9/9a/Paypal-logo.png"
               alt="American Express" />
+            
+              <img class="me-2" width="30px"
+              src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png"
+              alt="American Express" />
               <img class="me-2" width="25px"
               src="https://cdn-icons-png.flaticon.com/128/814/814245.png"
               alt="American Express" />
-            
           </div>
         </div>
       </div>
@@ -163,10 +166,26 @@
                   </label>
                  
                 </div>
-                
                 <div class="d-flex my-3 justify-content-center">
                   <div class="  ms-4 d-flex align-items-center ">
                     <input class="form-check-input " class="checked" value="3" {{old('pay')==3 ? 'checked':''}} type="radio" name="pay" id="radioNoLabel3"
+                      value="" aria-label="..."  />
+                  </div>
+                  <label class="form-check-label col-12" for="radioNoLabel3">
+                    <div class="rounded border d-flex w-100 p-3 align-items-center">
+                    <p class="mb-0">
+                      <img class="me-2" width="35px"
+                      src="https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png"
+                      alt="American Express" />
+                      Thanh toán qua MoMo
+                    
+                    </p>
+                   </div>
+                  </label>
+                </div>
+                <div class="d-flex my-3 justify-content-center">
+                  <div class="  ms-4 d-flex align-items-center ">
+                    <input class="form-check-input " class="checked" value="4" {{old('pay')==4 ? 'checked':''}} type="radio" name="pay" id="radioNoLabel3"
                       value="" aria-label="..."  />
                   </div>
                   <label class="form-check-label col-12" for="radioNoLabel3">

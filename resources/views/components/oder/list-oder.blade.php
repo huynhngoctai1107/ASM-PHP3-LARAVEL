@@ -28,9 +28,9 @@
                                                 <td class="text-center">{{$item->phone}}</td>
                                                 <td class="text-center text-danger"><strong>{{number_format($item->total_money)}} VND</strong></td>
                                               
-                                                <td class="text-center">@if($item->pay==3)Thanh toán khi nhận hàng @else Đã thanh toán @endif</td>
+                                                <td class="text-center">@if($item->pay==4)Thanh toán khi nhận hàng @else Đã thanh toán @endif</td>
                                                 <td class="text-center text-danger">@if($item->status == 0 ) Chờ xác nhận đơn hàng @elseif($item->status == 1) Đang vận chuyển @elseif($item->status == 2) Đang giao hàng @elseif($item->status == 3) Giao hàng thành công @else Đơn hàng này đã bị hủy @endif</td>
-                                                 @if($item->pay==3 && $item->status == 0 ) 
+                                                 @if($item->pay==4 && $item->status == 0 ) 
                                                  <td class="text-center"><a class="button-3" href="/delete-order/{{$item->id_user}}/{{$item->id}}">Xóa đơn hàng</a></td>
                                                  @else
                                                  <td class="text-center"></td>

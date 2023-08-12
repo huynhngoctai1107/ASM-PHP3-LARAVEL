@@ -78,13 +78,13 @@
               <div class="d-flex justify-content-between pt-2">
                 <p class="text-muted mb-0">Dự kiến giao hàng: <span style="color: green">{{date("d-m-Y", strtotime('+ 4 day' , strtotime($oder[0]->date_oder)))}}</span></p>
 
-                  <p class="text-muted mb-0"><span class="fw-bold me-2">Phương thức thanh toán</span><b  style="color: green">@if($item->pay==2 )Visa @elseif($item->pay==1)Paypal @else Thanh toán khi nhận hàng @endif</b></p>
+                  <p class="text-muted mb-0"><span class="fw-bold me-2">Phương thức thanh toán</span><b  style="color: green">@if($item->pay==2 )Visa @elseif($item->pay==1)Paypal @elseif($item->pay==3)MoMo @else Thanh toán khi nhận hàng @endif</b></p>
 
               </div>
   
               <div class="d-flex justify-content-between mb-5 pt-2">
                <p></p>
-                             <p class="text-muted mb-0"><span class="fw-bold me-2">Trạng thái thanh toán: </span> <span style="color: brown; font-weight: 600">@if($item->pay==3)Chưa thanh toán @else Đã thanh toán @endif</span></p>
+                             <p class="text-muted mb-0"><span class="fw-bold me-2">Trạng thái thanh toán: </span> <span style="color: brown; font-weight: 600">@if($item->pay==4)Chưa thanh toán @else Đã thanh toán @endif</span></p>
                 </div>
                 
             

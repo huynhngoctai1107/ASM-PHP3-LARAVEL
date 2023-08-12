@@ -81,10 +81,10 @@ Route::group(['middleware'=>'clientAcout'],function(){
 
     Route::get('/delete-cart/{id}',[DeleteCartController::class,'deleteCart']);
     Route::get('/payment-confirmation/{id}/{token}',[ PaymentConfirmationController::class,'paymentConfirmation']);
-    Route::get('/paypal}',[ StatusPaypalController::class,'sussess'])->name('paypal_success');
+    Route::get('/paypal',[ StatusPaypalController::class,'sussess'])->name('paypal_success');
     Route::get('/paypal-cancel',[ StatusPaypalController::class,'cancel'])->name('paypal_canel');
-
-    Route::get('/delete-order/{id_user}/{id_order}',[DeleteOderController::class,'deleteOder']);
+    Route::get('/momo',[ StatusPaypalController::class,'momosussess'])->name('momo_success');
+     Route::get('/delete-order/{id_user}/{id_order}',[DeleteOderController::class,'deleteOder']);
     Route::get('/detail-order/{id_user}/{id_order}',[DetailOderController::class,'detailOder']);
 
 

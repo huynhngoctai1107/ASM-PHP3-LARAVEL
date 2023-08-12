@@ -253,8 +253,10 @@
                                                                                 <strong>Tổng giá trị đơn hàng:</strong> {{number_format($oder[0]->total_money)}}   <br>
                                                                                 <strong>Trạng thái Đơn hàng:</strong> <span class="text-success" style="color: rgb(9, 199, 9) !important">@if($oder[0]->status == 0 ) Đã đặt hàng @elseif($oder[0]->status == 1) Đang vận chuyển @elseif($oder[0]->status == 2) Đang giao hàng @elseif($oder[0]->status == 3) Giao hàng thành công @else Đơn hàng đã bị hủy @endif</span> 
                                                                                 <br>
-                                                                                <strong>Thanh toán:</strong> @if($oder[0]->pay==3) Thanh toán khi nhận hàng @else Đã thanh toán  @endif
-                                                                            
+                                                                                <strong>Thanh toán:</strong> @if($oder[0]->pay==4) Thanh toán khi nhận hàng @else Đã thanh toán  @endif <br>
+                                                                                <strong>Phương thức thanh toán:</strong>  @if($item->pay==2 )Visa @elseif($item->pay==1)Paypal @elseif($item->pay==3)MoMo @else Thanh toán khi nhận hàng @endif
+
+                                                                              
                                                                             
                                                                             </p>
 

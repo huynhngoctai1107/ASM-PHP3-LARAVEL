@@ -67,20 +67,56 @@ class StatusPaypalController extends Controller
                             ];  
                 
                     $this->mail->oder( $this->oder->getAll($getAllOderCondition));
+                        session()->forget('oder');
                         return Redirect('/acout')->with('status','Đặt hàng thành công ');
 
                 }else{
                     return view('client.page.404')  ;
                 }
 
-                session()->forget('oder');
+                
             
-                return Redirect('/acout')->with('status','Đặt hàng thành công ');
-            }
+             }
            
            
         }
+
+
+        public function momosussess(Request $request){
+           
+            $values =$request->session()->get('momo');
+               
+           $condition= [
+               ['id_user','=', $values[0]['id_user']],
+           ]; 
+           if($oder = $this->oder->addOrder($condition,$values[0])){
+               foreach($this->cart->getAllCart($condition) as $item){
+                   $bills[]=[
+                       'id_oder'=> $oder, 
+                       'id_product' => $item->id_product ,
+                       'quantity' => $item->quantity ,
+                       'price'=>$item->price,
+                   ]; 
+
+                   $condition=[  
+                       ['id','=', $item->id],
+                   ];
+                   $this->cart->deleteCart($condition);
+
+               }
+               $this->bill->addBill($bills);
+               
+                   $getAllOderCondition= [
+                       'oders.id'=>$oder,  
+                       ];  
+           
+               $this->mail->oder( $this->oder->getAll($getAllOderCondition));
+                   session()->forget('momo');
+                   return Redirect('/acout')->with('status','Đặt hàng thành công ');
+           }
+       }
         public function canel(){
             return Redirect('/404');
         }
+       
 }
