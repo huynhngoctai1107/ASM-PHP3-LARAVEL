@@ -7,9 +7,9 @@
                 <div class="row">
 
 
-                    <div class="col-md-6">
-                        <div class="images p-3">
-                            <div class="text-center p-4">
+                    <div class="col-md-5">
+                        <div class="images ps-3">
+                            <div class="text-center ">
 
                                     @php
                                     $slider = "active";
@@ -57,7 +57,7 @@
 
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-7" >
                         <div class="product p-4">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center"> <i class="fa fa-long-arrow-left"></i> <span

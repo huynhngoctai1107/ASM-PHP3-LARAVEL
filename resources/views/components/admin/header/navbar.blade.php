@@ -147,12 +147,16 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex  text-center " style="flex-direction: column">
             <div class="image">
-                <img src="https://e7.pngegg.com/pngimages/9/763/png-clipart-computer-icons-login-user-system-administrator-admin-desktop-wallpaper-megaphone.png" class="img-circle elevation-2" alt="User Image">
+                <img width="100"  src="{{env('APP_LINK_EAMIL').'/img/users/'.auth()->user()->img }}" class="img-circle elevation-2" alt="User Image">
+            </div>
+            
+            <div class="info mt-2">
+                <a href="/admin" class="d-block">@if(auth()->user()->level ==2) Quản trị tối cao @else Biên tập viên @endif</a>
             </div>
             <div class="info">
-                <a href="/admin" class="d-block">Xin chào Boss</a>
+                <a href="/admin" class="d-block"> {{auth()->user()->name}}</a>
             </div>
         </div>
 

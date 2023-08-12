@@ -77,7 +77,7 @@ Danh sách đơn hàng
                                       <tr class="expandable-body">
                                         <td colspan="8" class="col-12" style="padding-left: 20px !important; padding-top: 20px !important;">
 
-                                            <h6 class="text-uppercase font-weight-bold">Thanh toán: <span class="text-green font-weight-normal  text-capitalize">@if($item->pay==3)Thanh toán khi nhận hàng @else Đã thanh toán @endif</span></h6>
+                                            <h6 class="text-uppercase font-weight-bold">Thanh toán: <span class="text-green font-weight-normal  text-capitalize">@if($item->pay==4)Thanh toán khi nhận hàng @else Đã thanh toán @endif</span></h6>
                                             <h6 class="text-uppercase font-weight-bold">Địa chỉ: <span class=" font-weight-normal  text-capitalize">{{$item->address}}</span></h6>
                                             <h6 class="text-uppercase font-weight-bold">Số điện thoại: <span class="text-black font-weight-normal  text-capitalize">{{$item->phone}}</span></h6>
                                              <h6 class="text-uppercase font-weight-bold">Ngày đặt hàng: <span class=" font-weight-normal  text-capitalize text-black">{{date('d-m-Y',strtotime($item->date_oder))}}</span></h6>

@@ -61,19 +61,16 @@ class GoogleLoginController extends Controller
         
               if($this->mail->notification($request)==true){
                 return redirect('acout')->with('status', 'Đăng nhập thành công và đã gửi email thông báo!');
-
               }else{
-
                 return redirect('acout')->with('status', 'Đăng nhập thành công email xác nhận đã lỗi!');
-
               }
-          
           }
     } else {
             if($checkUser){
               session()->flash('login', 'Đăng nhập thất bại email này đã tồn tại trong hệ thống. Xin vui lòng nhập Email và Mật khẩu để đăng nhập');
               return redirect()->back();
             }else{
+ 
                 $newUser                    = new User;
                 $newUser->social            = 1;
                 $newUser->password          = Hash::make('11072003Tai@') ;
@@ -83,7 +80,7 @@ class GoogleLoginController extends Controller
                 $newUser->token             =  strtoupper(Str::random(10));
                 $newUser->name              = $user->getName();
                 $newUser->email             = $user->getEmail();
-                $newUser->img               = $user->getAvatar();
+                $newUser->img               ='testimonial-1.jpg';
                 $newUser->save();
 
                 auth()->login($newUser, true);

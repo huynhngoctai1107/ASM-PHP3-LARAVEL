@@ -71,6 +71,7 @@ class User extends Authenticatable
     {
         return $this
     ->select('id', 'name','img','email','social','users.phone','gender','birthday','level','users.status')
+    ->where('status','=',1)
     ->orderBy('users.id', 'desc')
     ->paginate(5);
 
@@ -94,17 +95,7 @@ class User extends Authenticatable
     }
 
 
-
-    public function delectUser($id){
-        $oder = new Oders();
-        $oder= $oder->getOders($id);
-        if($oder->count() > 0){
-                return false;
-        }else{
-            return $this->where('id', '=', $id)->delete();
-
-        }
-    }
+ 
 
     public function editUser($id,$values){
       return $this->where('id','=',$id)->update($values);

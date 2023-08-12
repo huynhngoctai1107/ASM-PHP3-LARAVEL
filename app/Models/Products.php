@@ -38,7 +38,7 @@ class Products extends Model
     }
     public function similarProducts($value){
 
-        return  $this->select('products.id as id_product','products.name as nameproduct','content','describe','price','date_input','products.status as statusproduct',DB::raw("GROUP_CONCAT(categories_product.slug) AS slugcategory"),DB::raw("GROUP_CONCAT(categories_product.id) AS idcategory"))
+        return  $this->select('products.id as id_product','products.slug','products.name as nameproduct','content','describe','price','date_input','products.status as statusproduct',DB::raw("GROUP_CONCAT(categories_product.slug) AS slugcategory"),DB::raw("GROUP_CONCAT(categories_product.id) AS idcategory"))
             ->leftJoin('intermediary_products','products.id','=','intermediary_products.id_product')
             ->join('categories_product','intermediary_products.id_category','=','categories_product.id')
             ->where('categories_product.slug','=',[$value])

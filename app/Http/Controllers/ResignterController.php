@@ -40,6 +40,7 @@ class ResignterController extends Controller
                 return Redirect()->back()->withErrors($this->_validateFormResignter->validateFormResignter($request))->withInput($request->input());
            }
            else {
+
                $dataArray = array(
                    "name" => $request->name,
                    "birthday" => $request->birthday,

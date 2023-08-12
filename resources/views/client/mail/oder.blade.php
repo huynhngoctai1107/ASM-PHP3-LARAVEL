@@ -939,7 +939,7 @@
                                                                         <p
                                                                             style="margin: 0; font-size: 12px; text-align: right; mso-line-height-alt: 14.399999999999999px;">
                                                                             <span style="font-size:22px;"><span
-                                                                                    style="font-size:22px;"><strong>$
+                                                                                    style="font-size:22px;"><strong>
                                                                                         {{number_format($oder[0]->total_money)}} VND</strong></span></span></p>
                                                                     </div>
                                                                 </div>
