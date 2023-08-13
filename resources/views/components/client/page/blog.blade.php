@@ -23,14 +23,7 @@
                  
                     <div class="bg-light p-1 text-justify">
                         <a   class="d-block h5 mb-4" href="/chi-tiet-bai-viet/{{$item->slug ??''}}" style="max-width:1000px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{!!$item->main_title!!}</a>
-                       <a   href="/chi-tiet-bai-viet/{{$item->slug ??''}}" class="text-muted"> <p style="display: -webkit-box;
-                                max-height: 3.2rem;
-                                -webkit-box-orient: vertical;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-                                white-space: normal;
-                                -webkit-line-clamp: 2;
-                                line-height: 1.6rem;">  {!!$item->subtitles!!} </p></a>
+                       <a   href="/chi-tiet-bai-viet/{{$item->slug ??''}}" class="text-muted"> <p>{!! Str::words($item->subtitles, 20, '...')!!}  </p></a>
                         <div class="text-muted border-top pt-4 d-flex justify-content-between">
                             
                             <small class=""><i class="fa fa-user text-primary me-2"></i>{{$item->compolation}}</small>

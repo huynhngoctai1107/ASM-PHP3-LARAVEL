@@ -6,7 +6,7 @@
       </div>
       <div class="mb-3 d-grid">
         {!! RecaptchaV3::field('') !!}
-    <input  type="submit"  class="btn btn-primary" value="Register">
+    <input  type="submit"  class="btn btn-primary" value="Quên mật khẩu">
         {{-- <x-acout.recaptchav3 nameRecaptcha="forgetpassword" class="btn btn-primary" value=" Đặt lại mật khẩu"></x-acout.recaptchav3>    --}}
       </div>
       <span>Tôi có một tài khoản ? <a href="/login"> Sign in</a></span>

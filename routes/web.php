@@ -65,6 +65,9 @@ use App\Http\Controllers\Client\Products\ViewProductController;
 // post 
 use App\Http\Controllers\Client\Pay\StatusPaypalController;
 use App\Http\Controllers\Client\Posts\ViewPostController;
+//pdf 
+ 
+use App\Http\Controllers\Pdf\OrderPdfController;
 
 Route::group(['middleware'=>'clientAcout'],function(){
     Route::get('/acout',[ ViewOderAcoutController::class,'oderAcout']);
@@ -86,7 +89,7 @@ Route::group(['middleware'=>'clientAcout'],function(){
     Route::get('/momo',[ StatusPaypalController::class,'momosussess'])->name('momo_success');
      Route::get('/delete-order/{id_user}/{id_order}',[DeleteOderController::class,'deleteOder']);
     Route::get('/detail-order/{id_user}/{id_order}',[DetailOderController::class,'detailOder']);
-
+    Route::get('/download-order-pdf/{id_user}/{id_order}',[OrderPdfController::class,'downloadPdf']);
 
 });
 

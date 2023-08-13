@@ -17,7 +17,7 @@ class DeleteOrderController extends Controller
             $condition =[
                 ['id','=',$id_order],
                 ['status','=',[0,4]],
-                ['pay','=',3]
+                ['pay','=',4]
                
             ];
             $value = [

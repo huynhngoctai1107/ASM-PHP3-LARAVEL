@@ -23,7 +23,7 @@ class DeleteOderController extends Controller
                 ['id','=',$id_order],
                 ['status','=',[0,4]],
                 [ 'id_user','=',$id_user],
-                ['pay','=',3]
+                ['pay','=',4]
                
             ];
             $value = [

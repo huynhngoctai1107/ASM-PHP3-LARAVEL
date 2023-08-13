@@ -1,0 +1,1 @@
+<x-pdf.order-pdf :order="$order"></x-pdf.order-pdf>

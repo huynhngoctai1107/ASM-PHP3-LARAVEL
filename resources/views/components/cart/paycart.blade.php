@@ -185,10 +185,10 @@
                 </div>
                 <div class="d-flex my-3 justify-content-center">
                   <div class="  ms-4 d-flex align-items-center ">
-                    <input class="form-check-input " class="checked" value="4" {{old('pay')==4 ? 'checked':''}} type="radio" name="pay" id="radioNoLabel3"
+                    <input class="form-check-input " class="checked" value="4" {{old('pay')==4 ? 'checked':''}} type="radio" name="pay" id="radioNoLabel4"
                       value="" aria-label="..."  />
                   </div>
-                  <label class="form-check-label col-12" for="radioNoLabel3">
+                  <label class="form-check-label col-12" for="radioNoLabel4">
                     <div class="rounded border d-flex w-100 p-3 align-items-center">
                     <p class="mb-0">
                       <img class="me-2" width="35px"

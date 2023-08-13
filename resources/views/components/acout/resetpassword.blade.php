@@ -26,7 +26,7 @@
   </div>
   </div>
   {!! RecaptchaV3::field('') !!}
-  <input  type="submit"  class="btn btn-primary btn-lg" value="Register">
+  <input  type="submit"  class="btn btn-primary btn-lg" value="Tạo mật khẩu mới">
   {{-- <x-acout.recaptchav3 nameRecaptcha="resetpassword" class="btn btn-primary btn-lg" value="Tạo lại mật khẩu"></x-acout.recaptchav3>    --}}
 
 </form>

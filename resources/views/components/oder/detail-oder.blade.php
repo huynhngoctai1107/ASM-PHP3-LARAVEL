@@ -60,7 +60,7 @@
                 <p class="text-muted mb-0"><span class="fw-bold me-2">Tổng đơn hàng: </span> {{number_format($item->total_money)}} VND</p>
               </div>
               <div class="d-flex justify-content-between pt-2">
-                <p class="text-muted mb-0">Số điện thoại đặt hàng: <span class="text-yellow" style="color:rgb(184, 184, 78) !important"> {{$oder[0]->phone ?? 'Đang cập nhật'}}</span></p>
+                <p class="text-muted mb-0">Số điện thoại đặt hàng: <span class="text-yellow" style="color:rgb(184, 184, 78) !important"> {{$oder[0]->phone_order ?? 'Đang cập nhật'}}</span></p>
                 <p class="text-muted mb-0"><span class="fw-bold me-2">Giảm giá</span> 0 VND</p>
               </div>
   

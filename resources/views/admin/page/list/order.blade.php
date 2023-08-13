@@ -52,7 +52,7 @@ Danh sách đơn hàng
                                        
                                         <td class="text-center"> {{$item->fullname}}
                                         </td>
-                                        <td class="text-center"> {{$item->phone}}
+                                        <td class="text-center"> {{$item->phone_order}}
                                         </td>
 
                                         <td class="text-center"><strong class="text-danger"  style=" @if($item->status == 4 )  color:white !important @endif">{{number_format($item->total_money)}} VND</strong>
@@ -79,7 +79,7 @@ Danh sách đơn hàng
 
                                             <h6 class="text-uppercase font-weight-bold">Thanh toán: <span class="text-green font-weight-normal  text-capitalize">@if($item->pay==4)Thanh toán khi nhận hàng @else Đã thanh toán @endif</span></h6>
                                             <h6 class="text-uppercase font-weight-bold">Địa chỉ: <span class=" font-weight-normal  text-capitalize">{{$item->address}}</span></h6>
-                                            <h6 class="text-uppercase font-weight-bold">Số điện thoại: <span class="text-black font-weight-normal  text-capitalize">{{$item->phone}}</span></h6>
+                                            <h6 class="text-uppercase font-weight-bold">Số điện thoại: <span class="text-black font-weight-normal  text-capitalize">{{$item->phone_order}}</span></h6>
                                              <h6 class="text-uppercase font-weight-bold">Ngày đặt hàng: <span class=" font-weight-normal  text-capitalize text-black">{{date('d-m-Y',strtotime($item->date_oder))}}</span></h6>
                                             <h6 class="text-uppercase font-weight-bold">Trạng thái: <span class=" font-weight-normal  text-capitalize text-success">@if($item->status == 0 ) Chờ xác nhận đơn hàng @elseif($item->status == 1) Đang vận chuyển @elseif($item->status == 2) Đang giao hàng @elseif($item->status == 3) Giao hàng thành công @else Đơn hàng này đã bị hủy @endif</span></h6>
                                             <h6 class="text-uppercase font-weight-bold">Thông tin chi tiết: <a href="/admin/chi-tiet-hoa-don/{{$item->id}}" class=" font-weight-normal  text-capitalize text-red">Xem tại đây !</a></h6>

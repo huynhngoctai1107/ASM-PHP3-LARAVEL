@@ -46,7 +46,7 @@ class PayOderController extends Controller
                        'fullname'=>$request->name , 
                        'address'=>$request->address,
                        'total_money'=>$request->total, 
-                       'phone'=>$request->phone,
+                       'phone_order'=>$request->phone,
                        'note'=>$request->note,    
                        'pay'=>$request->pay,
                        'date_oder' => date('Y-m-d H:i:s'),
@@ -58,7 +58,7 @@ class PayOderController extends Controller
         
                         if($oder = $this->oder->addOrder($condition,$values)){
                             foreach($this->cart->getAllCart($condition) as $item){
-                                $bills[]=[
+                                $bills=[
                                     'id_oder'=> $oder, 
                                     'id_product' => $item->id_product ,
                                     'quantity' => $item->quantity ,
@@ -69,15 +69,15 @@ class PayOderController extends Controller
                                     ['id','=', $item->id],
                                 ];
                                 $this->cart->deleteCart($condition);
-
+                                $this->bill->addBill($bills);
                             }
-                            $this->bill->addBill($bills);
                             
+                               
                                 $getAllOderCondition= [
                                     'oders.id'=>$oder,  
                                     ];  
-                        
-                            $this->mail->oder( $this->oder->getAll($getAllOderCondition));
+                         $this->mail->oder( $this->oder->getAll($getAllOderCondition));
+                
                                 return Redirect('/acout')->with('status','Đặt hàng thành công ');
         
                         }else{
@@ -86,17 +86,7 @@ class PayOderController extends Controller
 
                       }elseif($request->pay==1 ||$request->pay==2){
                         $request->session()->forget('oder');
-                        
-                            $values =[
-                                'id_user'=>$user->id, 
-                                'fullname'=>$request->name , 
-                                'address'=>$request->address,
-                                'total_money'=>$request->total, 
-                                'phone'=>$request->phone,
-                                'note'=>$request->note,    
-                                'pay'=>$request->pay,
-                                'date_oder' => date('Y-m-d H:i:s'),
-                            ]; 
+                    
                         session()->push('oder', $values);
                         $usd = (round($request->total / 23200,2));
                         $provider = new PayPalClient;
@@ -132,17 +122,6 @@ class PayOderController extends Controller
    
                       }else{
                         $request->session()->forget('momo');
-                        
-                        $values =[
-                            'id_user'=>$user->id, 
-                            'fullname'=>$request->name , 
-                            'address'=>$request->address,
-                            'total_money'=>$request->total, 
-                            'phone'=>$request->phone,
-                            'note'=>$request->note,    
-                            'pay'=>$request->pay,
-                            'date_oder' => date('Y-m-d H:i:s'),
-                        ]; 
                     session()->push('momo', $values);
                         $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
                         $partnerCode = 'MOMOBKUN20180529';

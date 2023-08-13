@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('id_user')->constrained('users');
             $table->integer('pay')->nullable();
             $table->integer('status')->default('0');
-            $table->string('phone',10);
+            $table->string('phone_order',10);
             $table->string('address');
             $table->bigInteger('total_money');
             $table->timestamp('date_oder');

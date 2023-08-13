@@ -254,7 +254,7 @@
                                                                                 <strong>Trạng thái Đơn hàng:</strong> <span class="text-success" style="color: rgb(9, 199, 9) !important">@if($oder[0]->status == 0 ) Đã đặt hàng @elseif($oder[0]->status == 1) Đang vận chuyển @elseif($oder[0]->status == 2) Đang giao hàng @elseif($oder[0]->status == 3) Giao hàng thành công @else Đơn hàng đã bị hủy @endif</span> 
                                                                                 <br>
                                                                                 <strong>Thanh toán:</strong> @if($oder[0]->pay==4) Thanh toán khi nhận hàng @else Đã thanh toán  @endif <br>
-                                                                                <strong>Phương thức thanh toán:</strong>  @if($item->pay==2 )Visa @elseif($item->pay==1)Paypal @elseif($item->pay==3)MoMo @else Thanh toán khi nhận hàng @endif
+                                                                                <strong>Phương thức thanh toán:</strong>  @if($oder[0]->pay==2 )Visa @elseif($oder[0]->pay==1)Paypal @elseif($oder[0]->pay==3)MoMo @else Thanh toán khi nhận hàng @endif
 
                                                                               
                                                                             
@@ -351,10 +351,10 @@
                                                         width="100%">
                                                         <tr>
                                                             <td class="pad">
- 
+
                                                                 <div align="center" class="alignment">
                                                                     <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="#" style="height:46px;width:211px;v-text-anchor:middle;" arcsize="33%" stroke="false" fillcolor="#fc7318"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#ffffff; font-family:Tahoma, Verdana, sans-serif; font-size:18px"><![endif]--><a
-                                                                        href="{{env('APP_LINK_EAMIL').'/detail-order/'.$oder[0]->id_user.'/'.$oder[0]->id_oder}}"
+                                                                        href="{{env('APP_LINK_EAMIL').'/detail-order/'.$oder[0]->id_user.'/'.$oder[0]->id}}"
                                                                         style="text-decoration:none;display:inline-block;color:#ffffff;background-color:#fc7318;border-radius:15px;width:auto;border-top:0px solid transparent;font-weight:undefined;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:5px;padding-bottom:5px;font-family:'Lato', Tahoma, Verdana, Segoe, sans-serif;font-size:18px;text-align:center;mso-border-alt:none;word-break:keep-all;"
                                                                         target="_blank"><span
                                                                             style="padding-left:20px;padding-right:20px;font-size:18px;display:inline-block;letter-spacing:normal;"><span
