@@ -876,7 +876,7 @@
                                                                             style="margin: 0; font-size: 12px; text-align: right; mso-line-height-alt: 14.399999999999999px;">
                                                                             <span style="font-size:16px;"><span
                                                                                     style="font-size:16px;"><strong>
-                                                                                        <strong> @if(empty($oder[0]->pay))Thanh toán khi nhận hàng @else Đã thanh toán  @endif</strong></span></span></p>
+                                                                                        <strong> @if(($oder[0]->pay ==4))Thanh toán khi nhận hàng @else Đã thanh toán  @endif</strong></span></span></p>
                                                                     </div>
                                                                 </div>
                                                             </td>

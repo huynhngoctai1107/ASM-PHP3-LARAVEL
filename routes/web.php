@@ -105,8 +105,10 @@ Route::group(['prefix' => 'admin','middleware'=>['adminLogin']],function(){
             Route::get('/delete-user/{id}',[ DelectUserController::class,'deleteUser']);
 
             // oder 
-            Route::post('/edit-order/{id}',[ EditOrderController::class,'editOrder']);
+            Route::get('/edit-order/{id}',[ EditOrderController::class,'viewOrder']);
             Route::get('/delete-order/{id}',[ DeleteOrderController::class,'deleteOder']);
+            Route::post('/edit-order/{id}',[EditOrderController::class,'editOrder']);
+
 
         });
             Route::get('/add-category-post',[ AddCategoryController::class,'viewCategory']);
@@ -125,7 +127,7 @@ Route::group(['prefix' => 'admin','middleware'=>['adminLogin']],function(){
             Route::post('/edit-category-product/{slug}',[ EditCategoryProductController::class,'editCategoryProduct']);
             Route::post('/edit-product/{slug}',[ EditProductController::class,'editProduct']);
             Route::post('/edit-post/{slug}',[ EditPostController::class,'editPost']);
-         
+
             
             // add method post
             Route::post('/add-category-post',[ AddCategoryController::class,'addCategory']);

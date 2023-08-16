@@ -7,7 +7,7 @@
                         <div class="card">
                             <div class="card-body p-0">
                                 <div class="table-responsive table-scroll" data-mdb-perfect-scrollbar="true"
-                                    style="position: relative; height: auto">
+                                    style="position: relative; height: 500px">
                                     <table class="table table-striped mb-0">
                                         <thead style="background-image: linear-gradient(144deg, #AF40FF, #5B42F3 50%, #00DDEB); border: none; border-radius: 0; z-index:100;">
                                             <tr>

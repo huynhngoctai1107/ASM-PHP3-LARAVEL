@@ -76,7 +76,7 @@ class PayOderController extends Controller
                                 $getAllOderCondition= [
                                     'oders.id'=>$oder,  
                                     ];  
-                         $this->mail->oder( $this->oder->getAll($getAllOderCondition));
+                         $this->mail->oder( $this->oder->getOneOder($getAllOderCondition));
                 
                                 return Redirect('/acout')->with('status','Đặt hàng thành công ');
         

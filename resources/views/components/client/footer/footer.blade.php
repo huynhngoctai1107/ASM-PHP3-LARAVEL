@@ -1,4 +1,4 @@
-<div class="container-fluid bg-dark footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container-fluid bg-dark footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
     <div class="container py-5">
         <div class="row g-5">
             <div class="col-lg-3 col-md-6">
@@ -13,17 +13,18 @@
             </div>
             <div class="col-lg-3 col-md-6">
                 <h4 class="text-light mb-4">Địa chỉ</h4>
-                <p><i class="fa fa-map-marker-alt me-3"></i>ABC Nguyễn Văn Cừ, P. An Khánh, Q. Ninh Kiều, TP. Cần Thơ</p>
-                <p><i class="fa fa-phone-alt me-3"></i>0949 615 859</p>
+                <p><i class="bi bi-geo-alt me-3"></i>ABC Nguyễn Văn Cừ, P. An Khánh, Q. Ninh Kiều, TP. Cần Thơ</p>
+                <p><i class="bi bi-telephone-fill me-3"></i>0949 615 859</p>
                 <p><i class="fa fa-envelope me-3"></i>htai67934@gmail.com</p>
             </div>
             <div class="col-lg-3 col-md-6">
                 <h4 class="text-light mb-4">Liên kết</h4>
-                <a class="btn btn-link" href="/about">Giới thiệu</a>
-                <a class="btn btn-link" href="/contact">Liên hệ với tôi</a>
-                <a class="btn btn-link" href="/">Dịch vụ của chúng tôi</a>          
-
-                <a class="btn btn-link" href="">Hỗ trợ</a>
+                <a class="bi bi-link-45deg" href="/about" style="color: #999999"> Giới thiệu</a>
+                <br>
+                <a class="bi bi-link-45deg" href="/contact" style="color: #999999"> Liên hệ với tôi</a><br>
+                <a class="bi bi-link-45deg" href="/" style="color: #999999"> Dịch vụ của chúng tôi</a>          
+<br>
+                <a class="bi bi-link-45deg" href="" style="color: #999999"> Hỗ trợ</a>
             </div>
             <div class="col-lg-3 col-md-6">
                 <h4 class="text-light mb-4">Tin tức mới nhất</h4>
@@ -39,15 +40,11 @@
     </div>
     <div class="container-fluid copyright">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+            <div class="row text-center">
+                <div class="col-md-12 text-center text-md-start mb-3 mb-md-0">
+                    &copy; <a href="#">Foody - Organic</a>, All Right Reserved.
                 </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                    Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                    <br>Distributed By: <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
-                </div>
+                
             </div>
         </div>
     </div>

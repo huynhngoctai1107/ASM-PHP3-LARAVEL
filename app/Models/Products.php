@@ -53,7 +53,7 @@ class Products extends Model
         }
     public function getAllCategories()
     {
-        return $list = DB::table('Categories_product')
+        return $list = DB::table('categories_product')
             ->where('status',0)
             ->orderBy('id', 'desc')
             ->get();

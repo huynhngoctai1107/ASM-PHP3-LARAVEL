@@ -40,11 +40,10 @@ class Oders extends Model
     public function updateOrder($condition,$value){
         return $this->where($condition)->update($value);
     }
-    public function getAll($condition){
-        return $this->join('users','oders.id_user','=','users.id')->join('bills','bills.id_oder','=','oders.id')->join('products','bills.id_product','=','products.id')->where($condition)->get();
-    }
+  
     public function getOneOder($condition){
-        return $this->join('users','oders.id_user','=','users.id')->join('bills','bills.id_oder','=','oders.id')->join('products','bills.id_product','=','products.id')->where($condition)->get();
+        return $this->select('oders.id','id_user','address','total_money','date_oder','fullname','id_product','products.name','phone_order','oders.status','note','email','quantity','bills.price','id_oder','slug','date_input','pay')
+        ->join('users','oders.id_user','=','users.id')->join('bills','bills.id_oder','=','oders.id')->join('products','bills.id_product','=','products.id')->where($condition)->get();
     }
  
 }

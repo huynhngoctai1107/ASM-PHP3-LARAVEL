@@ -1,8 +1,8 @@
 
     <div class="top-bar row gx-0 align-items-center d-none d-lg-flex">
         <div class="col-lg-6 px-5 text-start">
-            <small><i class="fa fa-map-marker-alt me-2"></i>Phường An Khánh, Quận Ninh Kiều, TP Cần Thơ</small>
-            <small class="ms-4"><i class="fa fa-envelope me-2"></i>htai67934@gmail.com</small>
+            <small><i class="bi bi-geo-alt-fill"></i> Phường An Khánh, Quận Ninh Kiều, TP Cần Thơ</small>
+            <small class="ms-4"><i class="fa fa-envelope me-2"></i> htai67934@gmail.com</small>
         </div>
         <div class="col-lg-6 px-5 text-end">
             <small>Follow us:</small>

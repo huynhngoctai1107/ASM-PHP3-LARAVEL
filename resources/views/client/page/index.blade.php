@@ -39,11 +39,11 @@ active
 
 
 <!-- Testimonial Start -->
-<x-client.page.comment>
+{{-- <x-client.page.comment>
 
-</x-client.page.comment>
+</x-client.page.comment> --}}
 <!-- Testimonial End -->
-
+<br>
 <x-client.page.blog :post="$post ?? ''" class="images-index"  >
     <x-slot name="category">
         <div class="section-header text-center mx-auto mb-5 col-12 wow fadeInUp" data-wow-delay="0.1s" >

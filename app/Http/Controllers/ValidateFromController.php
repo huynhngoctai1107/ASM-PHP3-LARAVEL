@@ -48,7 +48,7 @@ class ValidateFromController extends Controller
             'password.min' => 'Độ dài tối thiểu là 10',
             'password.regex' => 'Mật khẩu phải có Kí tự in hoa, kí tự chữ thường, kí tự đặt biệt và số',
             'password_confirmation.required' => 'Mật khẩu nhập lại không được để trống',
-            'password_confirmation.same:password' => 'Nhập lại mật khẩu chưa khớp với nhau',
+            'password_confirmation.same' => 'Nhập lại mật khẩu chưa khớp với nhau',
 
         ];
         $validator = Validator::make(
@@ -442,6 +442,38 @@ class ValidateFromController extends Controller
 
 
     public function validateFormOder(Request $request){
+        $messages = [
+            'name.required' => 'Tên khách hàng không được bỏ trống ! ',
+            'name.min' => 'Tên khách hàng phải lớn hơn 10 ký tự',
+            'name.max' => 'Tên khách hàng tối đa 255 kí tự ',
+            'email.required' => 'Email không được bỏ trống',
+            'email.email' => 'Email sai định dạng',
+            'phone.required' => 'Số điện thoại không được để trống',
+            'phone.regex' => 'Số điện thoại sai định dạng',
+            'address.regex'=>'Địa chỉ không đúng định dạng', 
+            'address.required'=>'Địa chỉ không được bỏ trống', 
+            'note.required'=>'Ghi chú không được bỏ trống',
+            'pay.required'=>'Phương thức thanh toán không được bỏ trống',
+
+        ];
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name'=>'bail|required|min:10|max:255',
+                'email'=>'bail|required|email',
+                'address' => 'required',
+                'phone'=>'bail|required|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:9',
+                'pay'=>'required',
+                'note'=>'required'
+            ],
+            $messages
+        );
+        return $validator ;
+    }
+
+
+    public function validateFormEditOder(Request $request){
         $messages = [
             'name.required' => 'Tên khách hàng không được bỏ trống ! ',
             'name.min' => 'Tên khách hàng phải lớn hơn 10 ký tự',

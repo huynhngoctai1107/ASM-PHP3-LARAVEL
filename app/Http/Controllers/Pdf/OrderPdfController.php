@@ -23,9 +23,8 @@ class OrderPdfController extends Controller
             $getAllOderCondition= [
                 'oders.id'=>$id_order,  
            ];  
-           $order = $this->oder->getAll($getAllOderCondition);
-           $pdf = PDF::loadView('client.pdf.order',['order'=>$order])->setOptions(['default_font' => 'Be Vietnam Pro']);
-           $pdf->download('order.pdf');
+           $order = $this->oder->getOneOder($getAllOderCondition);
+           $pdf = PDF::loadView('client.pdf.order',['order'=>$order]);
            return $pdf->download('order.pdf');
         }else{
             return Redirect('/404');

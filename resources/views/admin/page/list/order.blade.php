@@ -57,7 +57,10 @@ Danh sách đơn hàng
 
                                         <td class="text-center"><strong class="text-danger"  style=" @if($item->status == 4 )  color:white !important @endif">{{number_format($item->total_money)}} VND</strong>
                                         </td>
-
+                                        @if($item->status ==4)
+                                        <td></td>
+                                        @else
+                                      
                                         <td class="text-center" ><a href="/admin/edit-order/{{$item->id}}"><svg 
                                                     xmlns="http://www.w3.org/2000/svg" width="30px" height="30px"
                                                     fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -73,6 +76,7 @@ Danh sách đơn hàng
                                                     </svg></a>
                                             </a>
                                         </td>
+                                        @endif
                                       </tr>
                                       <tr class="expandable-body">
                                         <td colspan="8" class="col-12" style="padding-left: 20px !important; padding-top: 20px !important;">

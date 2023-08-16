@@ -123,7 +123,7 @@
                                             checked
 
                                             @endif
-                                        @endforeach   name="category[]">{{ $item->name }}
+                                        @endforeach   name="category[]"> {{$item->name }}
 
 
                                         </li>
@@ -144,7 +144,7 @@
                                                 @endif
                                                 @endforeach
                                             @endif
-                                                    name="category[]">{{ $item->name }}
+                                                    name="category[]"> {{$item->name }}
                                             </li>
                                         @endforeach
 

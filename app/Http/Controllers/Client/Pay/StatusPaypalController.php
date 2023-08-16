@@ -66,7 +66,7 @@ class StatusPaypalController extends Controller
                             'oders.id'=>$oder,  
                             ];  
                 
-                    $this->mail->oder( $this->oder->getAll($getAllOderCondition));
+                    $this->mail->oder($this->oder->getOneOder($getAllOderCondition));
                         session()->forget('oder');
                         return Redirect('/acout')->with('status','Đặt hàng thành công ');
 
@@ -110,7 +110,7 @@ class StatusPaypalController extends Controller
                        'oders.id'=>$oder,  
                        ];  
            
-               $this->mail->oder( $this->oder->getAll($getAllOderCondition));
+               $this->mail->oder( $this->oder->getOneOder($getAllOderCondition));
                    session()->forget('momo');
                    return Redirect('/acout')->with('status','Đặt hàng thành công ');
            }
